@@ -1,5 +1,20 @@
 make_dataset <- function(.data, type) {
 
+  checkmate::assert_data_frame(
+    .data#,
+    # col.names = c(
+    #   "month",
+    #   "agegroup",
+    #   "county",
+    #   "ethnicity",
+    #   "health_outcome_id",
+    #   "monthly_count",
+    #   "race",
+    #   "sex",
+    #   "year"
+    # )
+  )
+  checkmate::assert_choice(type, c("hosp", "ed")
   #TODO add validation for the .data variables
   #TODO add validation for the type variable
 
