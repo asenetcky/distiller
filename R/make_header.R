@@ -21,28 +21,13 @@
 #'  submitter_title = "Data Analyst",
 #'  state_fips_code = "06")
 make_header <- function(
-    mcn = NULL,
-    jurisdiction_code = NULL,
-    content_group_id = NULL,
-    submitter_email = NULL,
-    submitter_name = NULL,
-    submitter_title = NULL,
-    state_fips_code = NULL) {
-
-
-  # replace NULLs
-  purrr::walk(
-    c(mcn, jurisdiction_code, content_group_id, submitter_email,
-      submitter_name, submitter_title, state_fips_code),
-    \(arg) {
-      arg <- dplyr::if_else(
-        is.null(arg),
-        true = "TEST",
-        false = arg,
-        missing = "TEST"
-      )
-    }
-  )
+    mcn,
+    jurisdiction_code,
+    content_group_id,
+    submitter_email,
+    submitter_name,
+    submitter_title,
+    state_fips_code) {
 
   # Create the header
   header_node <-
