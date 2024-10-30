@@ -203,7 +203,6 @@ test_that("Additional vars show up in the right order", {
 
 test_that("throws errors for missing vars", {
   data <-
-    data_right_vars <-
     mtcars |>
     dplyr::rename(
       month = mpg,
