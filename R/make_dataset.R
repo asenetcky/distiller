@@ -64,22 +64,7 @@ make_dataset <- function(data, content_group_id) {
   }
 
   checkmate::assert_data_frame(data)
-
-  check_names <-
-    checkmate::check_set_equal(names(data), expected_col_names, ordered = FALSE)
-
-  if(!check_names){
-    missing_cols <-
-      expected_col_names[!expected_col_names %in% names(data)]
-
-    stop(
-      paste0(
-        "The following variables are missing: ",
-        paste(missing_cols, collapse = ", ")
-      )
-    )
-  }
-
+  checkmate::assert_set_equal(names(data), expected_col_names, ordered = FALSE)
   checkmate::assert_choice(
     type,
     c("hosp", "ed", "hosp_add_vars", "ed_add_vars")
