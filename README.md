@@ -10,7 +10,41 @@
 coverage](https://codecov.io/gh/asenetcky/distiller/graph/badge.svg)](https://app.codecov.io/gh/asenetcky/distiller)
 <!-- badges: end -->
 
-The goal of distiller is to …
+Right off the bat I want to say I am in no way affiliated with the CDC.
+As someone who now has to submit data to the CDC’s EPHT program I was
+dismayed to find out that the documentation is highly convoluted and in
+many cases, conflicts with itself. When reaching out to support, they
+tell you to read the documentation, which is not helpful. Also, some of
+the provided tooling *does not* work if you go through the instructions
+provided and do everything in the order as presented. Basically folks
+who have been doing this for a while are fine, or have made their peace
+with this process and then all the newbies, like me are just endlessly
+sending data to the test portal and waiting and waiting and waiting for
+results.
+
+My goal is to make this process easier and reproducible for myself, and
+others.
+
+So who is this highly specific package for?
+
+- Do you submit data to the CDC’s EPHT program?
+- Do you hate documentation that shows variables in the examples that
+  don’t exist in the data dictionary or vice-verse?
+- Do you hate it when the how-to-guides very clearly show the variables
+  in UPPERCASE but then the portal kicks your data back because it
+  expects it to be in lowercase?
+- Are you baffled by the XML design decisions and lack of consistency in
+  the formatting between the different types of facilities?
+- Do you hate it when you follow the directions verbatim when using CDC
+  tooling, but it constantly throws null-pointer exceptions at you
+  because the very first step you were supposed to do was at the end of
+  the instruction guide?  
+- Do you hate it even more when you reach out to support they tell you
+  to read the manual, instead of fixing the manual or even their own
+  bug?
+
+If you answered yes to any of these questions, then this package might
+be for you
 
 ## Installation
 
@@ -30,27 +64,3 @@ This is a basic example which shows you how to solve a common problem:
 library(distiller)
 ## basic example code
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
