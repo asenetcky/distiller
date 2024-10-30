@@ -1,3 +1,29 @@
+#' Make dataset xml node
+#'
+#' @param .data Pre-wrangled dataframe
+#' @param type Type of data: hospital or emergency department
+#'
+#' @return XML node
+#' @export
+#'
+#' @examples
+#'data_right_vars <-
+#' mtcars |>
+#'   dplyr::rename(
+#'     month = mpg,
+#'     agegroup = cyl,
+#'     county = disp,
+#'     ethnicity = hp,
+#'     health_outcome_id = drat,
+#'     monthly_count = wt,
+#'     race = qsec,
+#'     sex = vs,
+#'     year = am
+#'   ) |>
+#'   dplyr::select(-c(gear, carb))
+#'
+#' make_dataset(data_right_vars, "hosp")
+#'
 make_dataset <- function(.data, type) {
 
   col_names <-
