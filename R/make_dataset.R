@@ -39,10 +39,6 @@ make_dataset <- function(data, content_group_id) {
       FALSE
     )
 
-  if (additional_vars) {
-    type <- paste0(type, "_add_vars")
-  }
-
   expected_col_names <-
     c(
       "month",
@@ -57,6 +53,8 @@ make_dataset <- function(data, content_group_id) {
     )
 
   if (additional_vars) {
+    type <- paste0(type, "_add_vars")
+
     expected_col_names <- c(
       expected_col_names,
       "fire_count",
@@ -136,7 +134,7 @@ make_dataset <- function(data, content_group_id) {
     }
   }
 
-  if( type == "ed_ad_vars") {
+  if( type == "ed_add_vars") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 
