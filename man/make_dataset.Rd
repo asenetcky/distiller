@@ -4,10 +4,10 @@
 \alias{make_dataset}
 \title{Make dataset xml node}
 \usage{
-make_dataset(.data, content_group_id)
+make_dataset(data, content_group_id)
 }
 \arguments{
-\item{.data}{Pre-wrangled dataframe}
+\item{data}{Pre-wrangled dataframe}
 
 \item{content_group_id}{Code that identifies the content}
 }
