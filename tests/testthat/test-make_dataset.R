@@ -129,3 +129,74 @@ test_that("right root element and variable order for the right content type", {
 
 
 })
+
+test_that("Additional vars show up in the right order", {
+  data_right_vars <-
+    mtcars |>
+    dplyr::rename(
+      month = mpg,
+      agegroup = cyl,
+      county = disp,
+      ethnicity = hp,
+      health_outcome_id = drat,
+      monthly_count = wt,
+      race = qsec,
+      sex = vs,
+      year = am,
+      fire_count = gear,
+      nonfire_count = carb
+    ) |>
+    dplyr::mutate(unknown_count = 1)
+
+  xml_list_ed_add <-
+    make_dataset(data_right_vars, content_group_id = "CO-ED") |>
+    xml2::as_list()
+
+  xml_list_hosp_add <-
+    make_dataset(data_right_vars, content_group_id = "CO-HOSP") |>
+    xml2::as_list()
+
+  expect_equal(
+    names(xml_list_ed_add$Dataset$Row |> dplyr::as_tibble()),
+    as.character(
+      c(
+        "RowIdentifier",
+        "AgeGroup",
+        "County",
+        "EdVisitYear",
+        "EdVisitMonth",
+        "Ethnicity",
+        "HealthOutcomeID",
+        "MonthlyVisits",
+        "Race",
+        "Sex",
+        "IncidentCountFire",
+        "IncidentCountNonFire",
+        "IncidentCountUnknown"
+      )
+    )
+  )
+
+  expect_equal(
+    names(xml_list_hosp_add$Dataset$Row |> dplyr::as_tibble()),
+    as.character(
+      c(
+        "RowIdentifier",
+        "AdmissionMonth",
+        "AgeGroup",
+        "County",
+        "Ethnicity",
+        "HealthOutcomeID",
+        "MonthlyHosp",
+        "Race",
+        "Sex",
+        "YearAdmitted",
+        "IncidentCountFire",
+        "IncidentCountNonFire",
+        "IncidentCountUnknown"
+      )
+    )
+  )
+
+
+})
