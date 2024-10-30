@@ -1,6 +1,5 @@
-
 parse_content_group_id <- function(content_group_id) {
-  #only allowable values
+  #only allowable values so far
   type <-
     dplyr::case_when(
       content_group_id == "MI-HOSP" ~ "hosp",
