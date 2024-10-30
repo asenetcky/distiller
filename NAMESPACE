@@ -2,6 +2,7 @@
 
 export(make_data)
 export(make_dataset)
+export(make_document)
 export(make_header)
 import(rlang)
 importFrom(glue,glue)
