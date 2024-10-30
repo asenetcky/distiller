@@ -1,4 +1,4 @@
-#' Title
+#' Make Header node for XML Document
 #'
 #' @param mcn Metadata Control Number provided by epht
 #' @param jurisdiction_code Two-letter state abbreviation

@@ -1,7 +1,7 @@
 #' Make dataset xml node
 #'
-#' @param .data Pre-wrangled dataframe
-#' @param type Type of data: hospital or emergency department
+#' @param data Pre-wrangled dataframe
+#' @param content_group_id Code that identifies the content
 #'
 #' @return XML node
 #' @export
@@ -22,11 +22,24 @@
 #'   ) |>
 #'   dplyr::select(-c(gear, carb))
 #'
-#' make_dataset(data_right_vars, "hosp")
+#' make_dataset(data_right_vars, "AS-HOSP")
 #'
-make_dataset <- function(.data, type) {
+make_dataset <- function(data, content_group_id) {
 
-  col_names <-
+  type <- parse_content_group_id(content_group_id)
+
+  #adding this extra infrastructure in case there are other
+  #future edge cases with more/different vars
+  #otherwise I'd just if() off of content_group_id & type
+  additional_vars <-
+    dplyr::if_else(
+      content_group_id %in% c("CO-ED", "CO-HOSP"),
+      TRUE,
+      FALSE,
+      FALSE
+    )
+
+  expected_col_names <-
     c(
       "month",
       "agegroup",
@@ -39,29 +52,109 @@ make_dataset <- function(.data, type) {
       "year"
     )
 
-  checkmate::assert_data_frame(.data)
-  checkmate::assert_subset(names(.data), col_names)
+  if (additional_vars) {
+    type <- paste0(type, "_add_vars")
 
-  checkmate::assert_choice(type, c("hosp", "ed"))
+    expected_col_names <- c(
+      expected_col_names,
+      "fire_count",
+      "nonfire_count",
+      "unknown_count"
+    )
+  }
+
+  checkmate::assert_data_frame(data)
+
+  check_names <-
+    checkmate::check_set_equal(names(data), expected_col_names, ordered = FALSE)
+
+  if(!check_names){
+    missing_cols <-
+      expected_col_names[!expected_col_names %in% names(data)]
+
+    stop(
+      paste0(
+        "The following variables are missing: ",
+        paste(missing_cols, collapse = ", ")
+      )
+    )
+  }
+
+  checkmate::assert_choice(
+    type,
+    c("hosp", "ed", "hosp_add_vars", "ed_add_vars")
+  )
 
   if (type == "hosp") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 
     # Add the data
-    for (i in seq_len(nrow(.data))) {
+    for (i in seq_len(nrow(data))) {
       row_node <- xml2::read_xml("<Row></Row>")
 
       xml2::xml_add_child(row_node, "RowIdentifier", i)
-      xml2::xml_add_child(row_node, "AdmissionMonth", .data$month[i])
-      xml2::xml_add_child(row_node, "AgeGroup", .data$agegroup[i])
-      xml2::xml_add_child(row_node, "County", .data$county[i])
-      xml2::xml_add_child(row_node, "Ethnicity", .data$ethnicity[i])
-      xml2::xml_add_child(row_node, "HealthOutcomeID", .data$health_outcome_id[i])
-      xml2::xml_add_child(row_node, "MonthlyHosp", .data$monthly_count[i])
-      xml2::xml_add_child(row_node, "Race", .data$race[i])
-      xml2::xml_add_child(row_node, "Sex", .data$sex[i])
-      xml2::xml_add_child(row_node, "YearAdmitted", .data$year[i])
+      xml2::xml_add_child(row_node, "AdmissionMonth", data$month[i])
+      xml2::xml_add_child(row_node, "AgeGroup", data$agegroup[i])
+      xml2::xml_add_child(row_node, "County", data$county[i])
+      xml2::xml_add_child(row_node, "Ethnicity", data$ethnicity[i])
+      xml2::xml_add_child(row_node, "HealthOutcomeID", data$health_outcome_id[i])
+      xml2::xml_add_child(row_node, "MonthlyHosp", data$monthly_count[i])
+      xml2::xml_add_child(row_node, "Race", data$race[i])
+      xml2::xml_add_child(row_node, "Sex", data$sex[i])
+      xml2::xml_add_child(row_node, "YearAdmitted", data$year[i])
+
+      xml2::xml_add_child(dataset_node, row_node)
+    }
+  }
+
+  if (type == "hosp_add_vars") {
+    # Create the data node
+    dataset_node <- xml2::read_xml("<Dataset></Dataset>")
+
+    # Add the data
+    for (i in seq_len(nrow(data))) {
+      row_node <- xml2::read_xml("<Row></Row>")
+
+      xml2::xml_add_child(row_node, "RowIdentifier", i)
+      xml2::xml_add_child(row_node, "AdmissionMonth", data$month[i])
+      xml2::xml_add_child(row_node, "AgeGroup", data$agegroup[i])
+      xml2::xml_add_child(row_node, "County", data$county[i])
+      xml2::xml_add_child(row_node, "Ethnicity", data$ethnicity[i])
+      xml2::xml_add_child(row_node, "HealthOutcomeID", data$health_outcome_id[i])
+      xml2::xml_add_child(row_node, "MonthlyHosp", data$monthly_count[i])
+      xml2::xml_add_child(row_node, "Race", data$race[i])
+      xml2::xml_add_child(row_node, "Sex", data$sex[i])
+      xml2::xml_add_child(row_node, "YearAdmitted", data$year[i])
+      xml2::xml_add_child(row_node, "IncidentCountFire", data$fire_count[i])
+      xml2::xml_add_child(row_node, "IncidentCountNonFire", data$nonfire_count[i])
+      xml2::xml_add_child(row_node, "IncidentCountUnknown", data$unknown_count[i])
+
+      xml2::xml_add_child(dataset_node, row_node)
+    }
+  }
+
+  if( type == "ed_add_vars") {
+    # Create the data node
+    dataset_node <- xml2::read_xml("<Dataset></Dataset>")
+
+    # Add the data
+    for (i in seq_len(nrow(data))) {
+      row_node <- xml2::read_xml("<Row></Row>")
+
+      xml2::xml_add_child(row_node, "RowIdentifier", i)
+      xml2::xml_add_child(row_node, "AgeGroup", data$agegroup[i])
+      xml2::xml_add_child(row_node, "County", data$county[i])
+      xml2::xml_add_child(row_node, "EdVisitYear", data$year[i])
+      xml2::xml_add_child(row_node, "EdVisitMonth", data$month[i])
+      xml2::xml_add_child(row_node, "Ethnicity", data$ethnicity[i])
+      xml2::xml_add_child(row_node, "HealthOutcomeID", data$health_outcome_id[i])
+      xml2::xml_add_child(row_node, "MonthlyVisits", data$monthly_count[i])
+      xml2::xml_add_child(row_node, "Race", data$race[i])
+      xml2::xml_add_child(row_node, "Sex", data$sex[i])
+      xml2::xml_add_child(row_node, "IncidentCountFire", data$fire_count[i])
+      xml2::xml_add_child(row_node, "IncidentCountNonFire", data$nonfire_count[i])
+      xml2::xml_add_child(row_node, "IncidentCountUnknown", data$unknown_count[i])
 
       xml2::xml_add_child(dataset_node, row_node)
     }
@@ -72,22 +165,23 @@ make_dataset <- function(.data, type) {
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 
     # Add the data
-    for (i in seq_len(nrow(.data))) {
+    for (i in seq_len(nrow(data))) {
       row_node <- xml2::read_xml("<Row></Row>")
 
       xml2::xml_add_child(row_node, "RowIdentifier", i)
-      xml2::xml_add_child(row_node, "AgeGroup", .data$agegroup[i])
-      xml2::xml_add_child(row_node, "County", .data$county[i])
-      xml2::xml_add_child(row_node, "EdVisitYear", .data$year[i])
-      xml2::xml_add_child(row_node, "EdVisitMonth", .data$month[i])
-      xml2::xml_add_child(row_node, "Ethnicity", .data$ethnicity[i])
-      xml2::xml_add_child(row_node, "HealthOutcomeID", .data$health_outcome_id[i])
-      xml2::xml_add_child(row_node, "MonthlyVisits", .data$monthly_count[i])
-      xml2::xml_add_child(row_node, "Race", .data$race[i])
-      xml2::xml_add_child(row_node, "Sex", .data$sex[i])
+      xml2::xml_add_child(row_node, "AgeGroup", data$agegroup[i])
+      xml2::xml_add_child(row_node, "County", data$county[i])
+      xml2::xml_add_child(row_node, "EdVisitYear", data$year[i])
+      xml2::xml_add_child(row_node, "EdVisitMonth", data$month[i])
+      xml2::xml_add_child(row_node, "Ethnicity", data$ethnicity[i])
+      xml2::xml_add_child(row_node, "HealthOutcomeID", data$health_outcome_id[i])
+      xml2::xml_add_child(row_node, "MonthlyVisits", data$monthly_count[i])
+      xml2::xml_add_child(row_node, "Race", data$race[i])
+      xml2::xml_add_child(row_node, "Sex", data$sex[i])
 
       xml2::xml_add_child(dataset_node, row_node)
     }
   }
+
   dataset_node
 }

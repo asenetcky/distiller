@@ -4,12 +4,12 @@
 \alias{make_dataset}
 \title{Make dataset xml node}
 \usage{
-make_dataset(.data, type)
+make_dataset(data, content_group_id)
 }
 \arguments{
-\item{.data}{Pre-wrangled dataframe}
+\item{data}{Pre-wrangled dataframe}
 
-\item{type}{Type of data: hospital or emergency department}
+\item{content_group_id}{Code that identifies the content}
 }
 \value{
 XML node
@@ -33,6 +33,6 @@ mtcars |>
   ) |>
   dplyr::select(-c(gear, carb))
 
-make_dataset(data_right_vars, "hosp")
+make_dataset(data_right_vars, "AS-HOSP")
 
 }

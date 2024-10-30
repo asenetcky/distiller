@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_header.R
 \name{make_header}
 \alias{make_header}
-\title{Title}
+\title{Make Header node for XML Document}
 \usage{
 make_header(
   mcn,
@@ -33,7 +33,7 @@ make_header(
 XML node
 }
 \description{
-Title
+Make Header node for XML Document
 }
 \examples{
 make_header(
