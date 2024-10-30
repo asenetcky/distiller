@@ -1,4 +1,4 @@
-#' Make the root element
+#' Make the root element: HospitalizationData or EmergencyDepartmentData
 #'
 #' @param content_group_id Code that identifies the content
 #'

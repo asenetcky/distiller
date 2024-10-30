@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_data.R
 \name{make_data}
 \alias{make_data}
-\title{Make the root element}
+\title{Make the root element: HospitalizationData or EmergencyDepartmentData}
 \usage{
 make_data(content_group_id)
 }
@@ -13,7 +13,7 @@ make_data(content_group_id)
 XML node
 }
 \description{
-Make the root element
+Make the root element: HospitalizationData or EmergencyDepartmentData
 }
 \examples{
 make_data("MI-HOSP")
