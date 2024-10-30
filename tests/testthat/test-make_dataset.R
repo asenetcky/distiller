@@ -1,7 +1,7 @@
 test_that("throws errors on improper arguments", {
   expect_error(make_dataset())
-  expect_error(make_dataset(.data = "huh", content_group_id = "AS-HOSP"))
-  expect_error(make_dataset(.data = "huh", content_group_id = "AS-ED"))
+  expect_error(make_dataset(data = "huh", content_group_id = "AS-HOSP"))
+  expect_error(make_dataset(data = "huh", content_group_id = "AS-ED"))
   expect_error(make_dataset(123))
   expect_error(make_dataset(lubridate::now()))
 
@@ -21,9 +21,9 @@ test_that("throws errors on improper arguments", {
     ) |>
     dplyr::select(-c(gear, carb))
 
-  expect_error(make_dataset(.data = data_wrong_vars, content_group_id = "AS-HOSP"))
-  expect_error(make_dataset(.data = data_wrong_vars, content_group_id = "AS-ED"))
-  expect_error(make_dataset(.data = data_right_vars, content_group_id = "huh"))
+  expect_error(make_dataset(data = data_wrong_vars, content_group_id = "AS-HOSP"))
+  expect_error(make_dataset(data = data_wrong_vars, content_group_id = "AS-ED"))
+  expect_error(make_dataset(data = data_right_vars, content_group_id = "huh"))
 })
 
 test_that("returns XML node", {
@@ -43,16 +43,16 @@ test_that("returns XML node", {
     dplyr::select(-c(gear, carb))
 
   expect_s3_class(
-    make_dataset(.data = data_right_vars, content_group_id = "AS-HOSP"), "xml_node"
+    make_dataset(data = data_right_vars, content_group_id = "AS-HOSP"), "xml_node"
   )
   expect_s3_class(
-    make_dataset(.data = data_right_vars, content_group_id = "AS-ED"), "xml_node"
+    make_dataset(data = data_right_vars, content_group_id = "AS-ED"), "xml_node"
   )
   expect_s3_class(
-    make_dataset(.data = data_right_vars, content_group_id = "AS-HOSP"), "xml_document"
+    make_dataset(data = data_right_vars, content_group_id = "AS-HOSP"), "xml_document"
   )
   expect_s3_class(
-    make_dataset(.data = data_right_vars, content_group_id = "AS-ED"), "xml_document"
+    make_dataset(data = data_right_vars, content_group_id = "AS-ED"), "xml_document"
   )
 })
 
@@ -75,19 +75,19 @@ test_that("right root element and variable order for the right content type", {
 
 
   xml_list_hosp <-
-    make_dataset(.data = data_right_vars, content_group_id = "AS-HOSP") |>
+    make_dataset(data = data_right_vars, content_group_id = "AS-HOSP") |>
     xml2::as_list()
 
   xml_list_ed <-
-    make_dataset(.data = data_right_vars, content_group_id = "AS-ED") |>
+    make_dataset(data = data_right_vars, content_group_id = "AS-ED") |>
     xml2::as_list()
 
   expect_equal(
-    make_dataset(.data = data_right_vars, content_group_id = "AS-HOSP") |>xml2::xml_name(),
+    make_dataset(data = data_right_vars, content_group_id = "AS-HOSP") |>xml2::xml_name(),
     "Dataset"
   )
   expect_equal(
-    make_dataset(.data = data_right_vars, content_group_id = "AS-ED") |>  xml2::xml_name(),
+    make_dataset(data = data_right_vars, content_group_id = "AS-ED") |>  xml2::xml_name(),
     "Dataset"
   )
 
