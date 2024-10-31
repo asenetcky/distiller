@@ -2,7 +2,7 @@ test_that("unknown content group id throws error", {
   expect_error(make_root_element("unknown"))
   expect_error(make_root_element("CO_HOSP"))
   expect_error(make_root_element(123))
-  expect_error(make_root_element(lubridate::now()))
+  expect_error(make_root_element(Sys.time()))
 })
 
 test_that("known content group id returns XML node", {

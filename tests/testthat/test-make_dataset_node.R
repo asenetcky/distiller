@@ -3,7 +3,7 @@ test_that("throws errors on improper arguments", {
   expect_error(make_dataset_node(data = "huh", content_group_id = "AS-HOSP"))
   expect_error(make_dataset_node(data = "huh", content_group_id = "AS-ED"))
   expect_error(make_dataset_node(123))
-  expect_error(make_dataset_node(lubridate::now()))
+  expect_error(make_dataset_node(Sys.time()))
 
   data_wrong_vars <- mtcars
   data_right_vars <-

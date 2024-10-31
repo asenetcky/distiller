@@ -11,16 +11,10 @@ Description: EPHT data submission has alot documentation, much of it
     `distiller` aims to make it easier to created the desired XML.
 License: MIT + file LICENSE
 Imports: 
-    cli,
     dplyr (>= 1.1.4),
-    fs (>= 1.6.4),
     glue,
-    lubridate (>= 1.9.3),
-    purrr (>= 1.0.2),
     rlang (>= 1.1.4),
-    withr,
     stringr (>= 1.5.1),
-    tibble (>= 3.2.1),
     lifecycle,
     xml2,
     checkmate (>= 2.3.2)

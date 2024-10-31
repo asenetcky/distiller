@@ -35,7 +35,7 @@ test_that("right health outcome id returned", {
 test_that("errors correctly thrown", {
   expect_error(parse_content_group_id("TESTING123"))
   expect_error(parse_content_group_id(123))
-  expect_error(parse_content_group_id(lubridate::now()))
+  expect_error(parse_content_group_id(Sys.time()))
   expect_error(parse_health_outcome_id("AS-HOSP-ED"))
 })
 
@@ -65,7 +65,7 @@ test_that("warnings/errors are thrown for non-month integers", {
   expect_warning(make_months_worse(-1))
   expect_warning(make_months_worse(100))
   expect_error(make_months_worse("test"))
-  expect_error(make_months_worse(lubridate::now()))
+  expect_error(make_months_worse(Sys.time()))
   expect_error(make_months_worse(NA))
   expect_error(make_months_worse(NULL))
   expect_error(make_months_worse(Inf))
