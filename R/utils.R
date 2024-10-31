@@ -34,18 +34,22 @@ parse_health_outcome_id <- function(content_group_id) {
       content_group_id == "HEAT-HOSP" ~ 4,
       content_group_id == "COPD-ED" ~ 5,
       content_group_id == "COPD-HOSP" ~ 5,
-      .default = "Unknown"
+      .default = NA
     )
 
-  if (health_outcome_id == "Unknown") {
-    stop("Unknown content_group_id")
+  if (is.na(health_outcome_id)) {
+    stop(paste("Unknown content_group_id: ", content_group_id))
   } else {
     health_outcome_id
   }
 }
 
 make_months_worse <- function(month_integer) {
-  checkmate::assert_integer(month_integer)
+  checkmate::assert_integerish(month_integer)
+
+  if (month_integer < 1 | month_integer > 12) {
+    rlang::warn(paste("Month integer is out of range: ", month_integer))
+  }
 
   month_integer |>
     as.character() |>
