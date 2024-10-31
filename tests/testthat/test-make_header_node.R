@@ -1,11 +1,11 @@
 test_that("require all elements", {
-  expect_error(make_header())
+  expect_error(make_header_node())
 })
 
 
 test_that("makes the same xml", {
   expect_equal(
-    make_header(
+    make_header_node(
       mcn = "test",
       jurisdiction_code = "test",
       content_group_id = "test",
