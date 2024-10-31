@@ -87,11 +87,140 @@ check_length <-
 }
 
 
-# TODO check content_group_id
-# TODO check jurisidction_code
-# TODO check state_fips_code
-# TODO check submitter_email
-# TODO check submitter_name
+check_content_group_id <- function(content_group_id) {
+  checkmate::assert_character(
+    content_group_id, null.ok = FALSE, any.missing = FALSE
+  )
+
+  allowable_values <- c(
+    "AS-ED",
+    "AS-HOSP",
+    "MI-HOSP",
+    "CO-ED",
+    "CO-HOSP",
+    "HEAT-ED",
+    "HEAT-HOSP",
+    "COPD-ED",
+    "COPD-HOSP"
+  )
+  allowable_id <- content_group_id %in% allowable_values
+
+  if (!allowable_id) {
+    cli::cli_alert_danger("Not an allowable content group id")
+  }
+
+  invisible(TRUE)
+}
+
+check_jurisdiction_code <- function(jurisdiction_code) {
+  checkmate::assert_character(jurisdiction_code)
+
+  check_length <-
+    checkmate::checkTRUE(
+      stringr::str_length(jurisdiction_code) == 2,
+    )
+
+  check_format <-
+    stringr::str_detect(
+      string = jurisdiction_code,
+      pattern = "^[A-Z]{2}$"
+    )
+
+  if (!check_length) {
+    cli::cli_alert_warning("The length of the jurisdiction code is not 2 characters")
+  }
+
+  if (!check_format) {
+    cli::cli_alert_warning("The format of the jurisdiction code is not correct")
+  }
+
+  invisible(TRUE)
+}
+
+check_state_fips_code <- function(state_fips_code) {
+  checkmate::assert_character(state_fips_code)
+
+  check_length <-
+    checkmate::checkTRUE(
+      stringr::str_length(state_fips_code) == 2,
+    )
+
+  check_format <-
+    stringr::str_detect(
+      string = state_fips_code,
+      pattern = "^[0-9]{2}$"
+    )
+
+  if (!check_length) {
+    cli::cli_alert_warning("The length of the state fips code is not 2 characters")
+  }
+
+  if (!check_format) {
+    cli::cli_alert_warning("The format of the state fips code is not correct")
+  }
+
+  invisible(TRUE)
+}
+
+check_submitter_email <- function(submitter_email) {
+  checkmate::assert_character(submitter_email)
+
+  check_format <-
+    stringr::str_detect(
+      string = submitter_email,
+      pattern = "^SOMEPATTERN$"
+    )
+
+  if (!check_format) {
+    cli::cli_alert_warning("The format of the submitter email is not correct")
+  }
+
+  invisible(TRUE)
+}
+
+check_submitter_name <- function(submitter_name) {
+  checkmate::assert_character(submitter_name)
+
+  #reasonably check if it is a first and last name
+ check_format <-
+    stringr::str_detect(
+      string = submitter_name,
+      pattern = "^[A-Z][a-z]+ [A-Z][a-z]+$"
+    )
+
+  if (!check_format) {
+    cli::cli_alert_warning("The format of the submitter name is not correct")
+  }
+
+  invisible(TRUE)
+}
+
+check_submitter_title <- function(submitter_title) {
+  checkmate::assert_character(submitter_title)
+
+  #check that it isnt an empty string
+  check_length <-
+    checkmate::checkTRUE(
+      stringr::str_length(submitter_title) > 0,
+    )
+
+  check_format <-
+    stringr::str_detect(
+      string = submitter_title,
+      pattern = "^[A-Z][a-z]+$"
+    )
+
+  if (!check_format) {
+    cli::cli_alert_warning("The format of the submitter title is not correct")
+  }
+
+  if (!check_length) {
+    cli::cli_alert_warning("The submitter title is an empty string")
+  }
+
+  invisible(TRUE)
+}
+
 # TODO check submitter_title
 # TODO check variables inside of data
 
