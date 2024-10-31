@@ -1,4 +1,13 @@
-
+#' Collapse Ethnicity based on EPHT logic
+#'
+#' @param ethnicity Ethnicity string
+#' @param na_is_unknown Convert NAs to "U" or leave as-is
+#'
+#' @return Ethnicity string or NA_character_
+#' @export
+#'
+#' @examples
+#' collapse_ethnicity("Hispanic")
 collapse_ethnicity <- function(ethnicity, na_is_unknown = TRUE) {
   std_eth <- NULL
   std_eth <-
@@ -29,6 +38,16 @@ collapse_ethnicity <- function(ethnicity, na_is_unknown = TRUE) {
 
 }
 
+#' Collapse Race based on EPHT logic
+#'
+#' @param race Race string
+#' @param na_is_unknown Convert NAs to "U" or leave as-is
+#'
+#' @return Race string or NA_character_
+#' @export
+#'
+#' @examples
+#' collapse_race("Asian")
 collapse_race <- function(race, na_is_unknown = TRUE) {
   std_race <- NULL
   std_race <-
