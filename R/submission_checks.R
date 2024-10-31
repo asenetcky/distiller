@@ -96,3 +96,21 @@ check_length <-
 # TODO check variables inside of data
 
 
+# TODO something like this:
+# see: https://cli.r-lib.org/reference/cli_progress_step.html
+# f <- function() {
+# msg <- ""
+# cli_progress_step("Downloading data{msg}", spinner = TRUE)
+# for (i in 1:100) {
+#   Sys.sleep(2/100)
+#   msg <- glue::glue(", got file {i}/100")
+#   cli_progress_update()
+# }
+# cli_progress_step("Importing data")
+# Sys.sleep(1)
+# cli_progress_step("Cleaning data")
+# Sys.sleep(2)
+# cli_progress_step("Fitting model", spinner = TRUE)
+# for (i in 1:100) { Sys.sleep(3/100); cli_progress_update() }
+# }
+# f()
