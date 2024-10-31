@@ -92,7 +92,7 @@ data <-
   submitter_title <- "Submitter Title"
 
 # And then make your xml document
-  make_document(
+  make_xml_document(
     data,
     content_group_id,
     mcn,
