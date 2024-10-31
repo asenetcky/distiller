@@ -34,7 +34,7 @@
 #' submitter_email <- "submitter@email.com"
 #' submitter_name <- "Submitter Name"
 #' submitter_title <- "Submitter Title"
-#'doc <- make_document(
+#'doc <- make_xml_document(
 #'  data,
 #'  content_group_id,
 #'  mcn,
@@ -44,7 +44,7 @@
 #'  submitter_name,
 #'  submitter_title
 #')
-make_document <-
+make_xml_document <-
   function(data,
            content_group_id,
            mcn,
@@ -56,9 +56,9 @@ make_document <-
 
   xml_document <- xml2::xml_new_document()
 
-  root_element <- make_data(content_group_id)
+  root_element <- make_root_element(content_group_id)
   header_node <-
-    make_header(
+    make_header_node(
       mcn,
       jurisdiction_code,
       content_group_id,
@@ -68,7 +68,7 @@ make_document <-
       state_fips_code
   )
 
-  dataset_node <- make_dataset(data, content_group_id)
+  dataset_node <- make_dataset_node(data, content_group_id)
 
 
   xml2::xml_add_child(root_element, header_node)

@@ -22,9 +22,9 @@
 #'   ) |>
 #'   dplyr::select(-c(gear, carb))
 #'
-#' make_dataset(data_right_vars, "AS-HOSP")
+#' make_dataset_node(data_right_vars, "AS-HOSP")
 #'
-make_dataset <- function(data, content_group_id) {
+make_dataset_node <- function(data, content_group_id) {
 
   type <- parse_content_group_id(content_group_id)
 
@@ -119,7 +119,7 @@ make_dataset <- function(data, content_group_id) {
     }
   }
 
-  if( type == "ed_add_vars") {
+  if ( type == "ed_add_vars") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 
@@ -145,7 +145,7 @@ make_dataset <- function(data, content_group_id) {
     }
   }
 
-  if( type == "ed") {
+  if ( type == "ed") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 

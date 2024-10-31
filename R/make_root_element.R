@@ -6,8 +6,8 @@
 #' @export
 #'
 #' @examples
-#' make_data("MI-HOSP")
-make_data <- function(content_group_id) {
+#' make_root_element("MI-HOSP")
+make_root_element <- function(content_group_id) {
 
 type <- parse_content_group_id(content_group_id)
 
