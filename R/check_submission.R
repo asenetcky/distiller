@@ -1,13 +1,4 @@
 
-
-
-
-
-
-
-
-
-
 #TODO turn this into a nice little cli check list
 
 check_data <- function(data, content_group_id) {
@@ -57,60 +48,75 @@ check_data <- function(data, content_group_id) {
 }
 
 
+check_content_group_id <- function(content_group_id) {
+  allowable_values <-
+    c(
+      "AS-ED",
+      "AS-HOSP",
+      "MI-HOSP",
+      "CO-ED",
+      "CO-HOSP",
+      "HEAT-ED",
+      "HEAT-HOSP",
+      "COPD-ED",
+      "COPD-HOSP"
+    )
+
+  has_character <-
+    checkmate::check_character(
+      content_group_id, null.ok = FALSE, any.missing = FALSE
+    )
+
+  has_allowable_id <- content_group_id %in% allowable_values
+
+  if (has_character & has_allowable_id) {
+    exit_status <- 0
+  } else {
+    exit_status <- 1
+  }
+}
+
+
+
 
 check_mcn <- function(mcn) {
-  checkmate::assert_character(mcn)
+  has_character <-
+    checkmate::assert_character(
+      mcn, null.ok = FALSE, any.missing = FALSE
+    )
 
-# I don't know if this is always true
-check_length <-
-  checkmate::checkTRUE(
-    stringr::str_length(mcn) == 36,
-  )
+  # I don't know if this is always true
+  has_length <-
+    checkmate::checkTRUE(
+      stringr::str_length(mcn) == 36,
+    )
 
-# I don't know if this is always true
- check_format <-
-  stringr::str_detect(
-    string = mcn,
-    pattern = "^[0-9\\w]{8}(-[0-9\\w]{4}){3}-[0-9\\w]{12}$"
-  )
+  # I don't know if this is always true
+  has_format <-
+    stringr::str_detect(
+      string = mcn,
+      pattern = "^[0-9\\w]{8}(-[0-9\\w]{4}){3}-[0-9\\w]{12}$"
+    )
 
- #for now just warn about mcn characteristics
- if (!check_length) {
-   cli::cli_alert_warning("The length of the mcn is not 36 characters")
- }
-
- if (!check_format) {
-   cli::cli_alert_warning("The format of the mcn is not correct")
- }
-
- invisible(TRUE)
-}
-
-
-check_content_group_id <- function(content_group_id) {
-  checkmate::assert_character(
-    content_group_id, null.ok = FALSE, any.missing = FALSE
-  )
-
-  allowable_values <- c(
-    "AS-ED",
-    "AS-HOSP",
-    "MI-HOSP",
-    "CO-ED",
-    "CO-HOSP",
-    "HEAT-ED",
-    "HEAT-HOSP",
-    "COPD-ED",
-    "COPD-HOSP"
-  )
-  allowable_id <- content_group_id %in% allowable_values
-
-  if (!allowable_id) {
-    cli::cli_alert_danger("Not an allowable content group id")
+  if (has_character) {
+    exit_status <- 0
+  } else {
+    exit_status <- 1
   }
 
-  invisible(TRUE)
+  if (has_length & has_format) {
+    exit_status <- 0
+  } else {
+    exit_status <- 1
+  }
+
+
+
+
 }
+
+
+
 
 check_jurisdiction_code <- function(jurisdiction_code) {
   checkmate::assert_character(jurisdiction_code)
@@ -221,7 +227,6 @@ check_submitter_title <- function(submitter_title) {
   invisible(TRUE)
 }
 
-# TODO check submitter_title
 # TODO check variables inside of data
 
 
