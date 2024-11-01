@@ -56,6 +56,8 @@ make_months_worse <- function(month_integer) {
     stringr::str_pad(width = 2, side = "left", pad = "0")
 }
 
+
+#TODO: for target variable name, use both the object name and the value in glue
 create_exit_status <- function(
     target_variable_name,
     warn_variables = NULL,
@@ -64,7 +66,7 @@ create_exit_status <- function(
   exit_status <-
     dplyr::lst(
       code = 0,
-      message = glue::glue("Success: {target_variable_name}")
+      message = glue::glue("Success")
     )
 
   if (!is.null(warn_variables)) {
