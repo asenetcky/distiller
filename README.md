@@ -10,17 +10,26 @@
 coverage](https://codecov.io/gh/asenetcky/distiller/graph/badge.svg)](https://app.codecov.io/gh/asenetcky/distiller)
 <!-- badges: end -->
 
-Right off the bat I want to say I am in no way affiliated with the CDC.
-As someone who now has to submit data to the CDC’s EPHT program I was
-dismayed to find out that the documentation is highly convoluted and in
-many cases, conflicts with itself. When reaching out to support, they
-tell you to read the documentation, which is not helpful. Also, some of
-the provided tooling *does not* work if you go through the instructions
-provided and do everything in the order as presented. Basically folks
-who have been doing this for a while are fine, or have made their peace
-with this process and then all the newbies, like me are just endlessly
-sending data to the test portal and waiting and waiting and waiting for
-results.
+## Disclaimer
+
+The author of this package is in no away affiliated with the CDC. This
+package was created without their input or approval and is only meant to
+soften some of the sharp edges of the EPHT submission process. Users
+will still need to wrangle their data into the format this package
+requires, and will still need to implement much of the CDC logic in
+their wrangle. This package also does *not* submit your data to the
+CDC’s portal. It *only* creates the XML document that the CDC’s tooling
+requires. There will be *no* guarantees that this package will work for
+your specific use-case, and if their are changes to the submission
+process or required formats this package may not be updated to reflect
+those changes. Use at your own risk.
+
+## Motivation
+
+As a newbie who has to submit data to the CDC’s EPHT program, I was
+dismayed to find out that the documentation is buried under many layers
+inside their SharePoint. It is also highly fragmented, convoluted and in
+many cases, conflicts with itself.
 
 My goal is to make this process easier and reproducible for myself, and
 others.
@@ -28,23 +37,12 @@ others.
 So who is this highly specific package for?
 
 - Do you submit data to the CDC’s EPHT program?
-- Do you hate documentation that shows variables in the examples that
-  don’t exist in the data dictionary or vice-verse?
-- Do you hate it when the how-to-guides very clearly show the variables
-  in UPPERCASE but then the portal kicks your data back because it
-  expects it to be in lowercase?
-- Are you baffled by the XML design decisions and lack of consistency in
-  the formatting between the different types of facilities?
-- Do you hate it when you follow the directions verbatim when using CDC
-  tooling, but it constantly throws null-pointer exceptions at you
-  because the very first step you were supposed to do was at the end of
-  the instruction guide?  
-- Do you hate it even more when you reach out to support they tell you
-  to read the manual, instead of fixing the manual or even their own
-  bug?
+- Do you use R? Or are interested in incorporating R into your workflow?
+- Do you struggle with the CDC’s EPHT documenation and/or tooling?
+- Do you want to make your submission process more reproducible?
 
-If you answered yes to any of these questions, then this package might
-be for you
+If you answered yes to the first question and any of the others, then
+this package might be for you.
 
 ## Installation
 
@@ -58,12 +56,10 @@ pak::pak("asenetcky/distiller")
 
 ## Example
 
-For the six or so people this package applies to, here is a basic
-example of how to use it:
+Here is a basic example of how to use it:
 
 ``` r
 library(distiller)
-
 
 # Take you already-wrangled data
 # note the specific variable names
