@@ -18,17 +18,21 @@ check_submission <-
     submitter_title_status <- check_submitter_title(submitter_title)
 
 
-    exit_status <- list(
-      data_status,
-      content_group_id_status,
-      mcn_status,
-      jurisdiction_code_status,
-      state_fips_code_status,
-      submitter_email_status,
-      submitter_name_status,
-      submitter_title_status
+    exit_status <-
+      dplyr::lst(
+        data_status,
+        content_group_id_status,
+        mcn_status,
+        jurisdiction_code_status,
+        state_fips_code_status,
+        submitter_email_status,
+        submitter_name_status,
+        submitter_title_status
+      )
+
+    cli::cli_alert_info("Checking submission")
+    purrr::walk(
+      exit_status,
+      message_cli
     )
-
-
-
   }
