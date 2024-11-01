@@ -68,10 +68,9 @@ check_content_group_id <- function(content_group_id) {
     ) |>
     is.logical()
 
+  has_allowable_id <- FALSE
   if (has_character) {
     has_allowable_id <- content_group_id %in% allowable_values
-  } else {
-    has_allowable_id <- FALSE
   }
 
   create_exit_status(
@@ -88,23 +87,20 @@ check_mcn <- function(mcn) {
     ) |>
     is.logical()
 
-  # I don't know if this is always true
-  has_length <-
-    checkmate::check_true(
-      stringr::str_length(mcn) == 36,
-    ) |>
-    is.logical()
-
-  # I don't know if this is always true
-
+  has_length <- FALSE
+  has_format <- FALSE
   if (has_character) {
+
+    # I don't know if this is always true
+    has_length <-
+      stringr::str_length(mcn) == 36
+
+    # I don't know if this is always true
     has_format <-
       stringr::str_detect(
         string = mcn,
         pattern = "^[0-9\\w]{8}(-[0-9\\w]{4}){3}-[0-9\\w]{12}$"
       )
-  } else {
-    has_format <- FALSE
   }
 
   create_exit_status(
@@ -121,129 +117,131 @@ check_jurisdiction_code <- function(jurisdiction_code) {
       jurisdiction_code,
       null.ok = FALSE,
       any.missing = FALSE
-    )
+    ) |>
+    is.logical()
 
-  has_length <-
-    checkmate::checkTRUE(
-      stringr::str_length(jurisdiction_code) == 2,
-    )
+  has_length <- FALSE
+  has_format <- FALSE
+  if (has_character) {
+    has_length <-
+      stringr::str_length(jurisdiction_code) == 2
 
-  has_format <-
-    stringr::str_detect(
-      string = jurisdiction_code,
-      pattern = "^[A-Z]{2}$"
-    )
-
-  exit_status <-
-    dplyr::lst(
-      code = 0,
-      message = "Success"
-    )
-
-  # until 100% confirmed, warn on format
-  if (any(!c(has_length, has_format))) {
-    exit_status <-
-      dplyr::lst(
-        code = 2,
-        message = "The jurisdiction code may not have the correct format"
+    has_format <-
+      stringr::str_detect(
+        string = jurisdiction_code,
+        pattern = "^[A-Z]{2}$"
       )
   }
 
-  # danger on not a character though
-  if (!has_character) {
-    exit_status <-
-      dplyr::lst(
-        code = 1,
-        message = "The jurisdiction code is not a character"
-      )
-  }
-
-  exit_status
-
+  create_exit_status(
+    "jurisdiction_code",
+    warn_variables = c(has_length, has_format),
+    danger_variables = has_character
+  )
 }
 
 check_state_fips_code <- function(state_fips_code) {
-  checkmate::assert_character(state_fips_code)
+  has_character <-
+    checkmate::check_character(
+      state_fips_code,
+      null.ok = FALSE,
+      any.missing = FALSE
+    ) |>
+    is.logical()
 
-  check_length <-
-    checkmate::checkTRUE(
-      stringr::str_length(state_fips_code) == 2,
-    )
+  has_length <- FALSE
+  has_format <- FALSE
+  if (has_character) {
+    has_length <-
+      stringr::str_length(state_fips_code) == 2
 
-  check_format <-
-    stringr::str_detect(
-      string = state_fips_code,
-      pattern = "^[0-9]{2}$"
-    )
-
-  if (!check_length) {
-    cli::cli_alert_warning("The length of the state fips code is not 2 characters")
+    has_format <-
+      stringr::str_detect(
+        string = state_fips_code,
+        pattern = "^[0-9]{2}$"
+      )
   }
 
-  if (!check_format) {
-    cli::cli_alert_warning("The format of the state fips code is not correct")
-  }
-
-  invisible(TRUE)
+  create_exit_status(
+    "state_fips_code",
+    warn_variables = c(has_length, has_format),
+    danger_variables = has_character
+  )
 }
 
 check_submitter_email <- function(submitter_email) {
-  checkmate::assert_character(submitter_email)
+  has_character <-
+    checkmate::check_character(
+      submitter_email,
+      null.ok = FALSE,
+      any.missing = FALSE
+    ) |>
+    is.logical()
 
-  check_format <-
+  has_format <- FALSE
+  if (has_character) {
+#this is a simple check, not meant to be exhaustive
+  has_format <-
     stringr::str_detect(
       string = submitter_email,
-      pattern = "^SOMEPATTERN$"
-    )
-
-  if (!check_format) {
-    cli::cli_alert_warning("The format of the submitter email is not correct")
+      pattern =
+        "^\\S+@\\S+$"
+      )
   }
 
-  invisible(TRUE)
+  create_exit_status(
+    "submitter_email",
+    warn_variables = has_format,
+    danger_variables = has_character
+  )
 }
 
 check_submitter_name <- function(submitter_name) {
-  checkmate::assert_character(submitter_name)
+  has_character <-
+    checkmate::check_character(
+      submitter_name,
+      null.ok = FALSE,
+      any.missing = FALSE
+    ) |>
+    is.logical()
 
+  has_format <- FALSE
+  if (has_character) {
   #reasonably check if it is a first and last name
- check_format <-
-    stringr::str_detect(
-      string = submitter_name,
-      pattern = "^[A-Z][a-z]+ [A-Z][a-z]+$"
-    )
-
-  if (!check_format) {
-    cli::cli_alert_warning("The format of the submitter name is not correct")
+    has_format <-
+      stringr::str_detect(
+        string = submitter_name,
+        pattern = "^[A-Z][a-z]+ [A-Z][a-z]+$"
+      )
   }
 
-  invisible(TRUE)
+  create_exit_status(
+    "submitter_name",
+    warn_variables = has_format,
+    danger_variables = has_character
+  )
 }
 
 check_submitter_title <- function(submitter_title) {
-  checkmate::assert_character(submitter_title)
+  has_character <-
+    checkmate::check_character(
+      submitter_title,
+      null.ok = FALSE,
+      any.missing = FALSE
+    ) |>
+    is.logical()
 
-  #check that it isnt an empty string
-  check_length <-
-    checkmate::checkTRUE(
-      stringr::str_length(submitter_title) > 0,
-    )
-
-  check_format <-
-    stringr::str_detect(
-      string = submitter_title,
-      pattern = "^[A-Z][a-z]+$"
-    )
-
-  if (!check_format) {
-    cli::cli_alert_warning("The format of the submitter title is not correct")
+  has_length <- FALSE
+  if (has_character) {
+    has_length <-
+      stringr::str_length(submitter_title) > 0
   }
 
-  if (!check_length) {
-    cli::cli_alert_warning("The submitter title is an empty string")
-  }
-
-  invisible(TRUE)
+  create_exit_status(
+    "submitter_title",
+    warn_variables = has_length,
+    danger_variables = has_character
+  )
 }
 
 # TODO check variables inside of data
