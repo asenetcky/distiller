@@ -65,82 +65,101 @@ check_content_group_id <- function(content_group_id) {
   has_character <-
     checkmate::check_character(
       content_group_id, null.ok = FALSE, any.missing = FALSE
-    )
+    ) |>
+    is.logical()
 
-  has_allowable_id <- content_group_id %in% allowable_values
-
-  if (has_character & has_allowable_id) {
-    exit_status <- 0
+  if (has_character) {
+    has_allowable_id <- content_group_id %in% allowable_values
   } else {
-    exit_status <- 1
+    has_allowable_id <- FALSE
   }
+
+  create_exit_status(
+    "content_group_id",
+    danger_variables = c(has_character, has_allowable_id)
+  )
 }
-
-
 
 
 check_mcn <- function(mcn) {
   has_character <-
-    checkmate::assert_character(
+    checkmate::check_character(
       mcn, null.ok = FALSE, any.missing = FALSE
-    )
+    ) |>
+    is.logical()
 
   # I don't know if this is always true
   has_length <-
-    checkmate::checkTRUE(
+    checkmate::check_true(
       stringr::str_length(mcn) == 36,
-    )
+    ) |>
+    is.logical()
 
   # I don't know if this is always true
-  has_format <-
-    stringr::str_detect(
-      string = mcn,
-      pattern = "^[0-9\\w]{8}(-[0-9\\w]{4}){3}-[0-9\\w]{12}$"
-    )
 
   if (has_character) {
-    exit_status <- 0
+    has_format <-
+      stringr::str_detect(
+        string = mcn,
+        pattern = "^[0-9\\w]{8}(-[0-9\\w]{4}){3}-[0-9\\w]{12}$"
+      )
   } else {
-    exit_status <- 1
+    has_format <- FALSE
   }
 
-  if (has_length & has_format) {
-    exit_status <- 0
-  } else {
-    exit_status <- 1
-  }
-
-
-
-
+  create_exit_status(
+    "mcn",
+    warn_variables = c(has_length, has_format),
+    danger_variables = has_character
+  )
 }
 
 
-
-
 check_jurisdiction_code <- function(jurisdiction_code) {
-  checkmate::assert_character(jurisdiction_code)
+  has_character <-
+    checkmate::check_character(
+      jurisdiction_code,
+      null.ok = FALSE,
+      any.missing = FALSE
+    )
 
-  check_length <-
+  has_length <-
     checkmate::checkTRUE(
       stringr::str_length(jurisdiction_code) == 2,
     )
 
-  check_format <-
+  has_format <-
     stringr::str_detect(
       string = jurisdiction_code,
       pattern = "^[A-Z]{2}$"
     )
 
-  if (!check_length) {
-    cli::cli_alert_warning("The length of the jurisdiction code is not 2 characters")
+  exit_status <-
+    dplyr::lst(
+      code = 0,
+      message = "Success"
+    )
+
+  # until 100% confirmed, warn on format
+  if (any(!c(has_length, has_format))) {
+    exit_status <-
+      dplyr::lst(
+        code = 2,
+        message = "The jurisdiction code may not have the correct format"
+      )
   }
 
-  if (!check_format) {
-    cli::cli_alert_warning("The format of the jurisdiction code is not correct")
+  # danger on not a character though
+  if (!has_character) {
+    exit_status <-
+      dplyr::lst(
+        code = 1,
+        message = "The jurisdiction code is not a character"
+      )
   }
 
-  invisible(TRUE)
+  exit_status
+
 }
 
 check_state_fips_code <- function(state_fips_code) {
@@ -228,23 +247,3 @@ check_submitter_title <- function(submitter_title) {
 }
 
 # TODO check variables inside of data
-
-
-# TODO something like this:
-# see: https://cli.r-lib.org/reference/cli_progress_step.html
-# f <- function() {
-# msg <- ""
-# cli_progress_step("Downloading data{msg}", spinner = TRUE)
-# for (i in 1:100) {
-#   Sys.sleep(2/100)
-#   msg <- glue::glue(", got file {i}/100")
-#   cli_progress_update()
-# }
-# cli_progress_step("Importing data")
-# Sys.sleep(1)
-# cli_progress_step("Cleaning data")
-# Sys.sleep(2)
-# cli_progress_step("Fitting model", spinner = TRUE)
-# for (i in 1:100) { Sys.sleep(3/100); cli_progress_update() }
-# }
-# f()
