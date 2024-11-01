@@ -55,3 +55,42 @@ make_months_worse <- function(month_integer) {
     as.character() |>
     stringr::str_pad(width = 2, side = "left", pad = "0")
 }
+
+create_exit_status <- function(
+    target_variable_name,
+    warn_variables = NULL,
+    danger_variables = NULL) {
+
+  exit_status <-
+    dplyr::lst(
+      code = 0,
+      message = glue::glue("Success: {target_variable_name}")
+    )
+
+  if (!is.null(warn_variables)) {
+
+    warn <- any(!warn_variables)
+
+    if (warn) {
+    exit_status <-
+      dplyr::lst(
+        code = 2,
+        message = glue::glue("Warning: {target_variable_name} may not have correct format")
+      )
+    }
+  }
+
+  if (!is.null(danger_variables)) {
+
+    danger <- any(!danger_variables)
+
+    if (danger) {
+    exit_status <-
+      dplyr::lst(
+        code = 1,
+        message = glue::glue("Danger: {target_variable_name} is not allowable value")
+      )
+    }
+  }
+  exit_status
+}
