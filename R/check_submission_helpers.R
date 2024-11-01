@@ -1,6 +1,4 @@
 
-#TODO turn this into a nice little cli check list
-
 check_data <- function(data, content_group_id) {
 
   expected_col_names <-
@@ -26,25 +24,25 @@ check_data <- function(data, content_group_id) {
   requires_additional_vars <-
     content_group_id %in% c("CO-ED", "CO-HOSP")
 
-  checkmate::assert_data_frame(data)
-  has_minimum_vars <- checkmate::check_subset(expected_col_names, names(data))
-  has_additional_vars <- checkmate::check_subset(additional_vars, names(data))
+  has_dataframe <-
+    checkmate::check_data_frame(data) |> is.logical()
 
-  if (!is.logical(has_minimum_vars)) {
-    cli::cli_alert_danger(
-      "The data does not have the minimum required variables"
-    )
-    rlang::warn(has_minimum_vars)
+
+  if (requires_additional_vars) {
+    expected_col_names <- c(expected_col_names, additional_vars)
   }
 
-  if (requires_additional_vars & !is.logical(has_additional_vars)) {
-    cli::cli_alert_warning(
-      "The data does not have the additional required variables"
-    )
-    rlang::warn(has_additional_vars)
+  has_vars <- FALSE
+  if (has_dataframe) {
+    has_vars <-
+      checkmate::check_subset(expected_col_names, names(data)) |> is.logical()
   }
 
-  invisible(TRUE)
+  create_exit_status(
+    "data",
+    danger_variables = c(has_dataframe, has_vars)
+  )
+
 }
 
 
