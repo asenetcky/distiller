@@ -83,7 +83,8 @@ check_mcn <- function(mcn) {
     checkmate::check_character(
       mcn, null.ok = FALSE, any.missing = FALSE
     ) |>
-    is.logical()
+    is.logical() |>
+    purrr::set_names("type")
 
   has_length <- FALSE
   has_format <- FALSE
@@ -91,14 +92,16 @@ check_mcn <- function(mcn) {
 
     # I don't know if this is always true
     has_length <-
-      stringr::str_length(mcn) == 36
+      stringr::str_length(mcn) == 36 |>
+      purrr::set_names("length")
 
     # I don't know if this is always true
     has_format <-
       stringr::str_detect(
         string = mcn,
         pattern = "^[0-9\\w]{8}(-[0-9\\w]{4}){3}-[0-9\\w]{12}$"
-      )
+      ) |>
+      purrr::set_names("format")
   }
 
   create_exit_status(
