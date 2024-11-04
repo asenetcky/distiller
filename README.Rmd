@@ -105,6 +105,7 @@ data <-
     state_fips_code,
     submitter_email,
     submitter_name,
-    submitter_title
+    submitter_title,
+    check_first = TRUE #optional sanity check on your data and metadata
     )
 ```

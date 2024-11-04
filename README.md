@@ -100,8 +100,21 @@ data <-
     state_fips_code,
     submitter_email,
     submitter_name,
-    submitter_title
+    submitter_title,
+    check_first = TRUE #optional sanity check on your data and metadata
     )
+#> ℹ Checking submission
+#> ✔ Success: data
+#> ✔ Success: content_group_id
+#> ! Warning: mcn may not have correct format
+#> Troublemakers: length, format
+#> ! Warning: jurisdiction_code may not have correct format
+#> Troublemakers: length, format
+#> ! Warning: state_fips_code may not have correct format
+#> Troublemakers: length, format
+#> ✔ Success: submitter_email
+#> ✔ Success: submitter_name
+#> ✔ Success: submitter_title
 #> {xml_document}
 #> <HospitalizationData schemaLocation="http://www.ephtn.org/NCDM/PH/HospitalizationData ephtn-ph-HospitalizationData.xsd" xmlns="http://www.ephtn.org/NCDM/PH/HospitalizationData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 #> [1] <Header>\n  <MCN>1234-1234-1234-1234-1234</MCN>\n  <JurisdictionCode>two_ ...
