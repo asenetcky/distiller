@@ -70,7 +70,7 @@ create_exit_status <- function(
           dplyr::lst(
             code = 1,
             message = glue::glue(
-              "Warning: {target_variable_name} does not have allowable value/s
+              "Danger: {target_variable_name} does not have allowable value/s
                 Troublemakers: {troublemakers}"
             )
           )
