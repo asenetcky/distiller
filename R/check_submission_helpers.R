@@ -37,7 +37,7 @@ check_data <- function(data, content_group_id) {
   has_vars <- FALSE
   if (has_dataframe) {
     has_vars <-
-      checkmate::check_subset(expected_col_names, names(data))|>
+      checkmate::check_subset(expected_col_names, names(data)) |>
       is.logical() |>
       purrr::set_names("variables")
   }
@@ -46,7 +46,6 @@ check_data <- function(data, content_group_id) {
     "data",
     danger_variables = c(has_dataframe, has_vars)
   )
-
 }
 
 
