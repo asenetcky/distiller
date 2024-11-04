@@ -1,6 +1,14 @@
-
+#' Check the validity of the data structure
+#'
+#' @param data dataframe
+#' @param content_group_id Code that identifies the content
+#'
+#' @return list containing exit status code and success/failure message
+#' @export
+#'
+#' @examples
+#' check_data(mtcars, "AS-HOSP")
 check_data <- function(data, content_group_id) {
-
   expected_col_names <-
     c(
       "month",
@@ -49,6 +57,15 @@ check_data <- function(data, content_group_id) {
 }
 
 
+#' Check the  validity of a Content Group Identifier
+#'
+#' @param content_group_id Code that identifies the content
+#'
+#' @return list containing exit status code and success/failure message
+#' @export
+#'
+#' @examples
+#' check_content_group_id("AS-HOSP")
 check_content_group_id <- function(content_group_id) {
   allowable_values <-
     c(
@@ -84,6 +101,15 @@ check_content_group_id <- function(content_group_id) {
 }
 
 
+#' Check validity of a Metadata Control Number
+#'
+#' @param mcn Metadata Control Number provided by EPHT
+#'
+#' @return list containing exit status code and success/failure message
+#' @export
+#'
+#' @examples
+#' check_mcn("12345678-1234-1234-1234-123456789012")
 check_mcn <- function(mcn) {
   has_character <-
     checkmate::check_character(
@@ -118,6 +144,15 @@ check_mcn <- function(mcn) {
 }
 
 
+#' Check the validity of a jurisdiction code
+#'
+#' @param jurisdiction_code Two-letter state code
+#'
+#' @return list containing exit status code and success/failure message
+#' @export
+#'
+#' @examples
+#' check_jurisdiction_code("CA")
 check_jurisdiction_code <- function(jurisdiction_code) {
   has_character <-
     checkmate::check_character(
@@ -150,6 +185,15 @@ check_jurisdiction_code <- function(jurisdiction_code) {
   )
 }
 
+#' Check the validity of a state FIPS code
+#'
+#' @param state_fips_code FIPS code of the state
+#'
+#' @return list containing exit status code and success/failure message
+#' @export
+#'
+#' @examples
+#' check_state_fips_code("06")
 check_state_fips_code <- function(state_fips_code) {
   has_character <-
     checkmate::check_character(
@@ -182,6 +226,15 @@ check_state_fips_code <- function(state_fips_code) {
   )
 }
 
+#' Check the validity of a submitter email
+#'
+#' @param submitter_email email address string
+#'
+#' @return list containing exit status code and success/failure message
+#' @export
+#'
+#' @examples
+#' check_submitter_email("myemail@email.com")
 check_submitter_email <- function(submitter_email) {
   has_character <-
     checkmate::check_character(
@@ -211,6 +264,15 @@ check_submitter_email <- function(submitter_email) {
   )
 }
 
+#' Check the validity of a submitter name
+#'
+#' @param submitter_name First and last name of person submitting data
+#'
+#' @return list containing exit status code and success/failure message
+#' @export
+#'
+#' @examples
+#' check_submitter_name("Firstname Lastname")
 check_submitter_name <- function(submitter_name) {
   has_character <-
     checkmate::check_character(
@@ -240,6 +302,15 @@ check_submitter_name <- function(submitter_name) {
   )
 }
 
+#' Check the validity of a submitter title
+#'
+#' @param submitter_title Job title of person submitting data
+#'
+#' @return list containing exit status code and success/failure message
+#' @export
+#'
+#' @examples
+#' check_submitter_title("Data Scientist")
 check_submitter_title <- function(submitter_title) {
   has_character <-
     checkmate::check_character(
