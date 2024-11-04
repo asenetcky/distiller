@@ -8,6 +8,7 @@
 #' @param submitter_email Email of person submitting data to epht
 #' @param submitter_name First and last name of person submitting data
 #' @param submitter_title Title of person submitting data
+#' @param check_first Quickly checks the validity of your submission
 #'
 #' @return XML document
 #' @export
@@ -52,7 +53,19 @@ make_xml_document <-
            state_fips_code,
            submitter_email,
            submitter_name,
-           submitter_title) {
+           submitter_title,
+           check_first = FALSE) {
+
+    if (check_first) {
+      check_submission(data,
+                       content_group_id,
+                       mcn,
+                       jurisdiction_code,
+                       state_fips_code,
+                       submitter_email,
+                       submitter_name,
+                       submitter_title)
+    }
 
   xml_document <- xml2::xml_new_document()
 

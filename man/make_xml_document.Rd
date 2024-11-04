@@ -12,7 +12,8 @@ make_xml_document(
   state_fips_code,
   submitter_email,
   submitter_name,
-  submitter_title
+  submitter_title,
+  check_first = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ make_xml_document(
 \item{submitter_name}{First and last name of person submitting data}
 
 \item{submitter_title}{Title of person submitting data}
+
+\item{check_first}{Quickly checks the validity of your submission}
 }
 \value{
 XML document

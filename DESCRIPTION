@@ -1,11 +1,13 @@
 Type: Package
 Package: distiller
-Title: Distill EPHT Data Down To XML
-Version: 0.1.0
+Title: Distill EPHT Data Down to XML
+Version: 0.2.0
 Authors@R: 
     person("Alexander", "Senetcky", , "asenetcky@gmail.com.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0009-3730-5397"))
-Description: EPHT data submission has alot documentation, much of it
+Description: Centers for Disease Control and Prevention's (CDC) Environmental
+    Public Health Tracking Network (EPHT) data 
+    submission process has a lot documentation.  Much of it
     is buried and out of date, making it difficult for new users to
     decipher the exact specifications of the data submissions' XML.
     `distiller` aims to make it easier to created the desired XML.
@@ -17,7 +19,9 @@ Imports:
     stringr (>= 1.5.1),
     lifecycle,
     xml2,
-    checkmate (>= 2.3.2)
+    checkmate (>= 2.3.2),
+    cli,
+    purrr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2

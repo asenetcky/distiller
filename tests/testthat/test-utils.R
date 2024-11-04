@@ -39,7 +39,7 @@ test_that("errors correctly thrown", {
   expect_error(parse_health_outcome_id("AS-HOSP-ED"))
 })
 
-test_that("months are made worse", {
+test_that("months are made worse successfully", {
   expect_equal(
     make_months_worse(1),
     "01"
