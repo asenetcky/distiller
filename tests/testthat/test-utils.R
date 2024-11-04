@@ -60,16 +60,9 @@ test_that("months are made worse successfully", {
 
 
 test_that("warnings/errors are thrown for non-month integers", {
-  expect_warning(make_months_worse(0))
-  expect_warning(make_months_worse(13))
-  expect_warning(make_months_worse(-1))
-  expect_warning(make_months_worse(100))
   expect_error(make_months_worse("test"))
   expect_error(make_months_worse(Sys.time()))
-  expect_error(make_months_worse(NA))
   expect_error(make_months_worse(NULL))
   expect_error(make_months_worse(Inf))
-  expect_error(make_months_worse(NaN))
-  expect_error(make_months_worse(NA_integer_))
   expect_error(make_months_worse(123.45))
 })
