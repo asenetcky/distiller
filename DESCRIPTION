@@ -3,7 +3,7 @@ Package: distiller
 Title: Distill EPHT Data Down To XML
 Version: 0.1.0
 Authors@R: 
-    person("Alexander", "Senetcky", , "asenetcky@gmail.com.com", role = c("aut", "cre"),
+    person("Alexander", "Senetcky", , "asenetcky@gmail.com.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0009-3730-5397"))
 Description: EPHT data submission has alot documentation, much of it
     is buried and out of date, making it difficult for new users to
