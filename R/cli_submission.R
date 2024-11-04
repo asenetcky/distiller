@@ -16,8 +16,6 @@ message_cli <- function(status_list) {
   }
 }
 
-
-#TODO: for target variable name, use both the object name and the value in glue
 create_exit_status <- function(
     target_variable_name,
     warn_variables = NULL,
