@@ -44,6 +44,15 @@ parse_health_outcome_id <- function(content_group_id) {
   }
 }
 
+#' Convert integer month to string month with leading zero
+#'
+#' @param month_integer Integer month
+#'
+#' @return String month with leading zero
+#' @export
+#'
+#' @examples
+#' make_months_worse(1)
 make_months_worse <- function(month_integer) {
   checkmate::assert_integerish(month_integer)
 
