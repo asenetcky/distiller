@@ -29,12 +29,11 @@ create_exit_status <- function(
       message = glue::glue("Success: {target_variable_name}")
     )
 
-  #TODO apply this maybe?
-  # checkmate::check_named()
-
   if (!is.null(warn_variables)) {
     warn <- any(!warn_variables)
-    is_named <- checkmate::check_names(names(warn_variables), type = "named") |> is.logical()
+    is_named <-
+      checkmate::check_names(names(warn_variables), type = "named") |>
+      is.logical()
 
     if (warn) {
       if (is_named) {
@@ -61,20 +60,32 @@ create_exit_status <- function(
 
 
   if (!is.null(danger_variables)) {
-    danger_vars <- set_names(danger_variables, names(danger_variables))
     danger <- any(!danger_variables)
-
-
-
-    #maybe something like this:
-    #{tar var} has restricted values in: {danger_variables}
+    is_named <-
+      checkmate::check_names(names(danger_variables), type = "named") |>
+      is.logical()
 
     if (danger) {
-      exit_status <-
+      if (is_named) {
+        troublemakers <- list_troublemakers(danger_variables)
+        exit_status <-
+          dplyr::lst(
+            code = 2,
+            message = glue::glue(
+              "Warning: {target_variable_name} does not have allowable value/s
+                Troublemakers: {troublemakers}"
+            )
+          )
+
+      } else {
+       exit_status <-
         dplyr::lst(
           code = 1,
-          message = glue::glue("Danger: {target_variable_name} is not allowable value")
+          message = glue::glue(
+            "Danger: {target_variable_name} does not have allowable value/s"
+          )
         )
+      }
     }
   }
   exit_status
