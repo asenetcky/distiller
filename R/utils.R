@@ -56,10 +56,6 @@ parse_health_outcome_id <- function(content_group_id) {
 make_months_worse <- function(month_integer) {
   checkmate::assert_integerish(month_integer)
 
-  if (month_integer < 1 | month_integer > 12) {
-    rlang::warn(paste("Month integer is out of range: ", month_integer))
-  }
-
   month_integer |>
     as.character() |>
     stringr::str_pad(width = 2, side = "left", pad = "0")
