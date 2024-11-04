@@ -4,9 +4,9 @@
 \name{distiller-package}
 \alias{distiller}
 \alias{distiller-package}
-\title{distiller: Distill EPHT Data Down To XML}
+\title{distiller: Distill EPHT Data Down to XML}
 \description{
-EPHT data submission has alot documentation, much of it is buried and out of date, making it difficult for new users to decipher the exact specifications of the data submissions' XML. `distiller` aims to make it easier to created the desired XML.
+Centers for Disease Control and Prevention's (CDC) Environmental Public Health Tracking Network (EPHT) data submission process has a lot documentation. Much of it is buried and out of date, making it difficult for new users to decipher the exact specifications of the data submissions' XML. `distiller` aims to make it easier to created the desired XML.
 }
 \seealso{
 Useful links:
