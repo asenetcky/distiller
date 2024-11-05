@@ -21,6 +21,15 @@ parse_content_group_id <- function(content_group_id) {
   }
 }
 
+#' Return the health outcome id based on the content group id
+#'
+#' @param content_group_id Code that identifies the content
+#'
+#' @return Integer health outcome id
+#' @export
+#'
+#' @examples
+#' parse_health_outcome_id("AS-HOSP")
 parse_health_outcome_id <- function(content_group_id) {
   #only allowable values so far
   health_outcome_id <-
