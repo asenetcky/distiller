@@ -85,7 +85,7 @@ check_content_group_id <- function(content_group_id) {
       content_group_id, null.ok = FALSE, any.missing = FALSE
     ) |>
     is.logical() |>
-    purrr::set_names("variable class")
+    purrr::set_names("class")
 
   has_allowable_id <- FALSE
   if (has_character) {
