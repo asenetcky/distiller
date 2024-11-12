@@ -10,20 +10,6 @@
 coverage](https://codecov.io/gh/asenetcky/distiller/graph/badge.svg)](https://app.codecov.io/gh/asenetcky/distiller)
 <!-- badges: end -->
 
-## Disclaimer
-
-The author of this package is in no away affiliated with the CDC. This
-package was created without their input or approval and is only meant to
-soften some of the sharp edges of the EPHT submission process. Users
-will still need to wrangle their data into the format this package
-requires, and will still need to implement much of the CDC logic in
-their wrangle. This package also does *not* submit your data to the
-CDC’s portal. It *only* creates the XML document that the CDC’s tooling
-requires. There will be *no* guarantees that this package will work for
-your specific use-case, and if their are changes to the submission
-process or required formats this package may not be updated to reflect
-those changes. Use at your own risk.
-
 ## Motivation
 
 As a newbie who has to submit data to the CDC’s EPHT program, I was
@@ -86,9 +72,9 @@ data <-
   submitter_email <- "submitter@email.com"
   submitter_name <- "Submitter Name"
   submitter_title <- "Submitter Title"
-
-# And then make your xml document
-  make_xml_document(
+  
+# Optionally check your submission data structure and metadata
+  check_submission(
     data,
     content_group_id,
     mcn,
@@ -96,8 +82,7 @@ data <-
     state_fips_code,
     submitter_email,
     submitter_name,
-    submitter_title,
-    check_first = TRUE #optional sanity check on your data and metadata
+    submitter_title
     )
 #> ℹ Checking submission
 #> ✔ Success: data
@@ -111,6 +96,20 @@ data <-
 #> ✔ Success: submitter_email
 #> ✔ Success: submitter_name
 #> ✔ Success: submitter_title
+# This can also be checked with `check_first = TRUE` in `make_xml_document()`
+  
+
+# And then make your xml document
+make_xml_document(
+    data,
+    content_group_id,
+    mcn,
+    jurisdiction_code,
+    state_fips_code,
+    submitter_email,
+    submitter_name,
+    submitter_title
+    )
 #> {xml_document}
 #> <HospitalizationData schemaLocation="http://www.ephtn.org/NCDM/PH/HospitalizationData ephtn-ph-HospitalizationData.xsd" xmlns="http://www.ephtn.org/NCDM/PH/HospitalizationData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 #> [1] <Header>\n  <MCN>1234-1234-1234-1234-1234</MCN>\n  <JurisdictionCode>two_ ...
