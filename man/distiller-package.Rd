@@ -12,6 +12,7 @@ Centers for Disease Control and Prevention's (CDC) Environmental Public Health T
 Useful links:
 \itemize{
   \item \url{https://github.com/asenetcky/distiller}
+  \item \url{https://asenetcky.github.io/distiller/}
   \item Report bugs at \url{https://github.com/asenetcky/distiller/issues}
 }
 
