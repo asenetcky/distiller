@@ -1,20 +1,28 @@
-# expected_col_names <-
-#   c(
-#     "month",
-#     "agegroup",
-#     "county",
-#     "ethnicity",
-#     "health_outcome_id",
-#     "monthly_count",
-#     "race",
-#     "sex",
-#     "year",
-#     "fire_count",
-#     "nonfire_count",
-#     "unknown_count"
-#   )
-
-# going to be the big wrapper for all these
+#' Check the content of your data's variables
+#'
+#' @param data dataframe of wrangled data
+#' @param content_group_id Code that identifies the content
+#'
+#' @return list of exit statuses for each variable
+#' @export
+#'
+#' @examples
+#' data <-
+#'  mtcars |>
+#'   dplyr::rename(
+#'     month = mpg,
+#'     agegroup = cyl,
+#'     county = disp,
+#'     ethnicity = hp,
+#'     health_outcome_id = drat,
+#'     monthly_count = wt,
+#'     race = qsec,
+#'     sex = vs,
+#'     year = am
+#'   ) |>
+#'   dplyr::select(-c(gear, carb))
+#'
+#' check_data_content(data, "AS-HOSP")
 check_data_content <- function(data, content_group_id){
   additional_vars <-
     dplyr::if_else(

@@ -334,5 +334,3 @@ check_submitter_title <- function(submitter_title) {
     danger_variables = has_character
   )
 }
-
-# TODO check variables inside of data
