@@ -25,7 +25,7 @@ check_data_content <- function(data, content_group_id){
     )
 
   non_count_functions <-
-    list(
+    dplyr::lst(
       check_month_var,
       check_agegroup_var,
       check_county_var,
@@ -38,7 +38,7 @@ check_data_content <- function(data, content_group_id){
   count_functions <- NULL
   if (additional_vars) {
     count_functions <-
-      list(
+      dplyr::lst(
         check_monthly_count_var,
         check_fire_count_var,
         check_nonfire_count_var,
@@ -46,7 +46,7 @@ check_data_content <- function(data, content_group_id){
       )
   } else {
     count_functions <-
-      list(check_monthly_count_var)
+      dplyr::lst(check_monthly_count_var)
   }
 
 
@@ -57,13 +57,8 @@ check_data_content <- function(data, content_group_id){
   count_exit_status <-
     purrr::map(count_functions, \(fun) fun(data))
 
-  exit_status <-
-    c(non_count_exit_status, count_exit_status)
+  c(non_count_exit_status, count_exit_status)
 
-  purrr::walk(
-    exit_status,
-    message_cli
-  )
 }
 
 check_month_var <- function(data) {
