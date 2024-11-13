@@ -192,3 +192,35 @@ check_health_outcome_id_var <- function(data) {
     danger_variables = has_allowed_values
   )
 }
+
+check_monthly_count_var <- function(data) {
+  monthly_count <- NULL
+  has_class <- FALSE
+  has_allowed_values <- FALSE
+
+  has_class <-
+    is.numeric(data$monthly_count) ||
+    is.integer(data$monthly_count) ||
+    is.character(data$monthly_count)
+
+  if (has_class) {
+    data <-
+      data |>
+      dplyr::mutate(monthly_count = as.integer(monthly_count))
+
+    has_allowed_values <-
+      checkmate::check_count(
+        data$monthly_count,
+        na.ok = FALSE,
+        null.ok = FALSE
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
+
+  create_exit_status(
+    "monthly_count",
+    warn_variables = has_class,
+    danger_variables  = has_allowed_values
+  )
+}
