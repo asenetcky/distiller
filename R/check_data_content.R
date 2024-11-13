@@ -193,37 +193,6 @@ check_health_outcome_id_var <- function(data) {
   )
 }
 
-check_monthly_count_var <- function(data) {
-  monthly_count <- NULL
-  has_class <- FALSE
-  has_allowed_values <- FALSE
-
-  has_class <-
-    is.numeric(data$monthly_count) ||
-    is.integer(data$monthly_count) ||
-    is.character(data$monthly_count)
-
-  if (has_class) {
-    data <-
-      data |>
-      dplyr::mutate(monthly_count = as.integer(monthly_count))
-
-    has_allowed_values <-
-      checkmate::check_count(
-        data$monthly_count,
-        na.ok = FALSE,
-        null.ok = FALSE
-      ) |>
-      is.logical() |>
-      purrr::set_names("allowed_values")
-  }
-
-  create_exit_status(
-    "monthly_count",
-    warn_variables = has_class,
-    danger_variables  = has_allowed_values
-  )
-}
 
 check_sex_var <- function(data) {
   has_character <- NULL
@@ -281,4 +250,57 @@ check_year_var <- function(data) {
     warn_variables = has_class,
     danger_variables = has_allowed_values
   )
+}
+
+
+check_count_var <- function(data, var_name) {
+  has_class <- FALSE
+  has_allowed_values <- FALSE
+
+  count_var <-
+    data |>
+    dplyr::pull(var_name)
+
+  has_class <-
+    is.numeric(count_var) ||
+    is.integer(count_var) ||
+    is.character(count_var)
+
+  if (has_class) {
+    count_var <- as.integer(count_var)
+
+    has_allowed_values <-
+      checkmate::check_integer(
+        count_var,
+        lower = 0,
+        any.missing = FALSE,
+        all.missing = FALSE
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
+
+  create_exit_status(
+    var_name,
+    warn_variables = has_class,
+    danger_variables  = has_allowed_values
+  )
+}
+
+
+
+check_monthly_count_var <- function(data) {
+  check_count_var(data, "monthly_count")
+}
+
+check_fire_count_var <- function(data) {
+  check_count_var(data, "fire_count")
+}
+
+check_nonfire_count_var <- function(data) {
+  check_count_var(data, "nonfire_count")
+}
+
+check_unknown_count_var <- function(data) {
+  check_count_var(data, "unknown_count")
 }
