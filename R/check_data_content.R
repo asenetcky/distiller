@@ -224,3 +224,28 @@ check_monthly_count_var <- function(data) {
     danger_variables  = has_allowed_values
   )
 }
+
+check_sex_var <- function(data) {
+  has_character <- NULL
+  has_allowed_values <- NULL
+
+  has_character <-
+    checkmate::check_character(data$sex) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+  if (has_character) {
+    has_allowed_values <-
+      checkmate::check_subset(
+        data$sex,
+        c("M", "F", "U")
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
+
+  create_exit_status(
+    "sex",
+    danger_variables = c(has_character, has_allowed_values)
+  )
+}
