@@ -162,3 +162,33 @@ check_race_var <- function(data) {
     danger_variables = c(has_character, has_allowed_values)
   )
 }
+
+check_health_outcome_id_var <- function(data) {
+  health_outcome_id <- NULL
+  has_class <- FALSE
+  has_allowed_values <- FALSE
+
+  has_class <-
+    is.character(data$health_outcome_id) || is.integer(data$health_outcome_id)
+
+  #coerce to integer
+  if (has_class) {
+    data <-
+      data |>
+      dplyr::mutate(health_outcome_id = as.integer(health_outcome_id))
+
+    has_allowed_values <-
+      checkmate::check_subset(
+        data$health_outcome_id,
+        c(1:5),
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
+
+  create_exit_status(
+    "health_outcome_id",
+    warn_variables = has_class,
+    danger_variables = has_allowed_values
+  )
+}
