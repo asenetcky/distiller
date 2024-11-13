@@ -15,7 +15,7 @@
 #   )
 
 # going to be the big wrapper for all these
-check_data_content <- function(){
+check_data_content <- function(data){
 
 }
 
@@ -247,5 +247,38 @@ check_sex_var <- function(data) {
   create_exit_status(
     "sex",
     danger_variables = c(has_character, has_allowed_values)
+  )
+}
+
+check_year_var <- function(data) {
+  year <- NULL
+  has_allowed_values <- FALSE
+  has_class <- FALSE
+
+  has_class <-
+    is.numeric(data$year) ||
+    is.integer(data$year) ||
+    is.character(data$year)
+
+  if (has_class) {
+    data <-
+      data |>
+      dplyr::mutate(year = as.integer(year))
+
+    has_allowed_values <-
+      checkmate::check_integer(
+        data$year,
+        #EPHT founded in 2002
+        lower = 2001,
+        upper = 9999
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
+
+  create_exit_status(
+    "year",
+    warn_variables = has_class,
+    danger_variables = has_allowed_values
   )
 }
