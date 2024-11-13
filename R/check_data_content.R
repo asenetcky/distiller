@@ -15,8 +15,55 @@
 #   )
 
 # going to be the big wrapper for all these
-check_data_content <- function(data){
+check_data_content <- function(data, content_group_id){
+  additional_vars <-
+    dplyr::if_else(
+      content_group_id %in% c("CO-ED", "CO-HOSP"),
+      TRUE,
+      FALSE,
+      FALSE
+    )
 
+  non_count_functions <-
+    list(
+      check_month_var,
+      check_agegroup_var,
+      check_county_var,
+      check_ethnicity_var,
+      check_health_outcome_id_var,
+      check_sex_var,
+      check_year_var
+    )
+
+  count_functions <- NULL
+  if (additional_vars) {
+    count_functions <-
+      list(
+        check_monthly_count_var,
+        check_fire_count_var,
+        check_nonfire_count_var,
+        check_unknown_count_var
+      )
+  } else {
+    count_functions <-
+      list(check_monthly_count_var)
+  }
+
+
+
+  non_count_exit_status <-
+    purrr::map(non_count_functions, \(fun) fun(data))
+
+  count_exit_status <-
+    purrr::map(count_functions, \(fun) fun(data))
+
+  exit_status <-
+    c(non_count_exit_status, count_exit_status)
+
+  purrr::walk(
+    exit_status,
+    message_cli
+  )
 }
 
 check_month_var <- function(data) {
