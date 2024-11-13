@@ -112,3 +112,53 @@ check_county_var <- function(data) {
     danger_variables = c(has_length, has_character)
   )
 }
+
+check_ethnicity_var <- function(data) {
+  has_character <- NULL
+  has_allowed_values <- NULL
+
+  has_character <-
+    checkmate::check_character(data$ethnicity) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+  if (has_character) {
+    has_allowed_values <-
+      checkmate::check_subset(
+        data$ethnicity,
+        c("H", "NH", "U")
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
+
+  create_exit_status(
+    "ethnicity",
+    danger_variables = c(has_character, has_allowed_values)
+  )
+}
+
+check_race_var <- function(data) {
+  has_character <- NULL
+  has_allowed_values <- NULL
+
+  has_character <-
+    checkmate::check_character(data$race) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+  if (has_character) {
+    has_allowed_values <-
+      checkmate::check_subset(
+        data$race,
+        c("W", "B", "O", "U")
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
+
+  create_exit_status(
+    "race",
+    danger_variables = c(has_character, has_allowed_values)
+  )
+}
