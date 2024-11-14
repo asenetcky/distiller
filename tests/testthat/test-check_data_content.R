@@ -30,7 +30,28 @@ test_that("check_data_content works", {
       unknown_count = rep(1,12)
     ) |>
     dplyr::bind_cols(good_data_min_vars)
-  #purrr::map(purrr::pluck("code")) |> purrr::list_c()
+
+  bad_data_min_vars <-
+    dplyr::tibble(
+      month = rep("bad_data", 12),
+      agegroup = rep("bad_data", 12),
+      county = rep("bad_data", 12),
+      ethnicity = rep("8",12),
+      race = rep("00",12),
+      health_outcome_id = rep(99,12),
+      monthly_count = rep(-1,12),
+      year = rep(1990, 12),
+      sex = rep("Q", 12)
+    )
+
+  bad_data_max_vars <-
+    dplyr::tibble(
+      fire_count = rep("bad_data", 12),
+      nonfire_count = rep("bad_data", 12),
+      unknown_count = rep("bad_data", 12)
+    ) |>
+    dplyr::bind_cols(bad_data_min_vars)
+
   # good data is good
   expect_equal(
     check_data_content(good_data_min_vars, "AS-HOSP") |>
@@ -39,4 +60,30 @@ test_that("check_data_content works", {
       sum(),
     0
   )
+  expect_equal(
+    check_data_content(good_data_max_vars, "CO-HOSP") |>
+      purrr::map(purrr::pluck("code")) |>
+      purrr::list_c() |>
+      sum(),
+    0
+  )
+
+  #bad data is bad
+ #TODO not all messages and codes being printed
+  expect_true(
+    check_data_content(bad_data_min_vars, "AS-HOSP") |>
+      purrr::map(purrr::pluck("code")) |>
+      purrr::list_c() |>
+      sum() >= 8
+  )
+
+  expect_true(
+    check_data_content(bad_data_max_vars, "AS-HOSP") |>
+      purrr::map(purrr::pluck("code")) |>
+      purrr::list_c() |>
+      sum() >= 11
+  )
+
+
+
 })
