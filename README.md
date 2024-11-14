@@ -101,7 +101,7 @@ data <-
 #> Troublemakers: allowed_values
 #> ✔ Success: agegroup
 #> ✖ Danger: county does not have allowable value/s
-#> Troublemakers: length, class
+#> Troublemakers: length
 #> ✖ Danger: ethnicity does not have allowable value/s
 #> Troublemakers: allowed_values
 #> ✖ Danger: health_outcome_id does not have allowable value/s
@@ -113,9 +113,6 @@ data <-
 #> ✖ Danger: race does not have allowable value/s
 #> Troublemakers: allowed_values
 #> ✔ Success: monthly_count
-```
-
-``` r
 # This can also be checked with `check_first = TRUE` in `make_xml_document()`
   
 
