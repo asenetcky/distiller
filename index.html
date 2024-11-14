@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">distiller</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,55 @@
 <li>Do you want to make your submission process more reproducible?</li>
 </ul>
 <p>If you answered yes to the first question and any of the others, then this package might be for you.</p>
+</div>
+<div class="section level2">
+<h2 id="what-does-this-package-do">What does this package do?<a class="anchor" aria-label="anchor" href="#what-does-this-package-do"></a>
+</h2>
+<p>I think it’s important to state up front what this package <em>doesn’t</em> do - and that is, it will not wrangle your data for you. There are a few helpers, and and a whole slew of checks <code>distiller</code> will run on your data and metadata to ensure that everything is reasonably close to the correct format for submission to the CDC’s EPHT program.</p>
+<p><code>distiller</code> still expects your data to have specific variable names, and to have the required variables for each type of data. However, if you’ve ever wondered why the epht requires different <em>variable names</em> in a <em>different order</em> for the same types of data, even for the <em>same disease</em> you’ll be pleased to know that distiller takes care of the facility-type-specific naming conventions and the ordering for you. Users just need to bring the data and now they can spend less time worrying about XML semantics and more time polishing their data products.</p>
+<p><code>disitller</code> is <strong>no</strong> replacement for the CDC EPHPT Test Submission portal, however, creating the XML, and shuffling files around and then dropping them into the portal and waiting an indeterminate amount of time for feedback eats up time and is a pain. <code>distiller</code> aims to provide feedback on your data and metadata before you send it off to the CDC. This way, you can fix any obvious issues before you sink 20+ minutes waiting to find out you forgot to replace your <code>NA</code>’s with “U”.</p>
+</div>
+<div class="section level2">
+<h2 id="whats-in-the-box">What’s in the box?<a class="anchor" aria-label="anchor" href="#whats-in-the-box"></a>
+</h2>
+<p><code>distiller</code> contains the following core functions: * <code><a href="reference/check_submission.html">check_submission()</a></code> - a function that checks your data and metadata and provides quick feedback * <code><a href="reference/make_xml_document.html">make_xml_document()</a></code> - a function that creates an xml document for submission based on your data and the metadata your provide it</p>
+<p><code>distiller</code> also contains functions for: * collapsing race and ethnicity values into the CDC’s required format * converting month integers to 0-padded character strings * return the proper health outcome identifier for a given content group identifier * Starting from scratch? Most of the mini-functions that make up the two core ones are exposed to the user, so you can check your work in pieces as you make progress with your data wrangling</p>
+</div>
+<div class="section level2">
+<h2 id="distiller-expectations-and-scope">
+<code>distiller</code> expectations and scope<a class="anchor" aria-label="anchor" href="#distiller-expectations-and-scope"></a>
+</h2>
+<p><code>distiller</code> works for the following content group identifiers:</p>
+<ul>
+<li>AS-HOSP</li>
+<li>AS-ED</li>
+<li>CO-HOSP</li>
+<li>CO-ED</li>
+<li>MI-HOSP</li>
+<li>HEAT-HOSP</li>
+<li>HEAT-ED</li>
+<li>COPD-HOSP</li>
+<li>COPD-ED</li>
+</ul>
+<p><code>distiller</code> expects the following variables in your data:</p>
+<p>For every content group identifier:</p>
+<ul>
+<li>agegroup</li>
+<li>county</li>
+<li>sex</li>
+<li>ethnicity</li>
+<li>race</li>
+<li>health_outcome_id,</li>
+<li>monthly_count</li>
+<li>month</li>
+<li>year</li>
+</ul>
+<p>For content group identifiers CO-HOSP and CO-ED, the above plus the following:</p>
+<ul>
+<li>fire_count</li>
+<li>nonfire_count</li>
+<li>unknown_count</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
