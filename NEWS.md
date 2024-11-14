@@ -1,3 +1,8 @@
+# distiller 0.3.2
+
+- Update README.md with more details on how best to use the package, its
+scope, expectations and what it can and can't do
+
 # distiller 0.3.1
 
 - fix check_county_var not labelling county codes of the correct length a success
