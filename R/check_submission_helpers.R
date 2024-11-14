@@ -51,7 +51,7 @@ check_data <- function(data, content_group_id) {
   }
 
   create_exit_status(
-    "data",
+    "dataframe_structure",
     danger_variables = c(has_dataframe, has_vars)
   )
 }
@@ -85,7 +85,7 @@ check_content_group_id <- function(content_group_id) {
       content_group_id, null.ok = FALSE, any.missing = FALSE
     ) |>
     is.logical() |>
-    purrr::set_names("variable class")
+    purrr::set_names("class")
 
   has_allowable_id <- FALSE
   if (has_character) {
@@ -334,5 +334,3 @@ check_submitter_title <- function(submitter_title) {
     danger_variables = has_character
   )
 }
-
-# TODO check variables inside of data

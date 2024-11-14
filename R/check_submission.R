@@ -54,8 +54,9 @@ check_submission <-
            submitter_name,
            submitter_title) {
 
-    data_status <- check_data(data, content_group_id)
     content_group_id_status <- check_content_group_id(content_group_id)
+    data_status <- check_data(data, content_group_id)
+    data_content_status <- check_data_content(data, content_group_id)
     mcn_status <- check_mcn(mcn)
     jurisdiction_code_status <- check_jurisdiction_code(jurisdiction_code)
     state_fips_code_status <- check_state_fips_code(state_fips_code)
@@ -63,10 +64,8 @@ check_submission <-
     submitter_name_status <- check_submitter_name(submitter_name)
     submitter_title_status <- check_submitter_title(submitter_title)
 
-
-    exit_status <-
+    metadata_exit_status <-
       dplyr::lst(
-        data_status,
         content_group_id_status,
         mcn_status,
         jurisdiction_code_status,
@@ -76,9 +75,21 @@ check_submission <-
         submitter_title_status
       )
 
-    cli::cli_alert_info("Checking submission")
+    cli::cli_alert_info("Checking submission metadata")
     purrr::walk(
-      exit_status,
+      metadata_exit_status,
+      message_cli
+    )
+
+    cli::cli_alert_info("Checking data structure and content")
+    data_exit_status <-
+      c(
+        dplyr::lst(data_status),
+        data_content_status
+      )
+
+    purrr::walk(
+      data_exit_status,
       message_cli
     )
   }

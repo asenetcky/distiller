@@ -1,7 +1,7 @@
 Type: Package
 Package: distiller
 Title: Distill EPHT Data Down to XML
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: 
     person("Alexander", "Senetcky", , "asenetcky@gmail.com.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0009-3730-5397"))
@@ -13,15 +13,15 @@ Description: Centers for Disease Control and Prevention's (CDC) Environmental
     `distiller` aims to make it easier to created the desired XML.
 License: MIT + file LICENSE
 Imports: 
-    dplyr (>= 1.1.4),
-    glue,
+    dplyr (>= 1.1.0),
+    glue (>= 1.8.0),
     rlang (>= 1.1.4),
     stringr (>= 1.5.1),
-    lifecycle,
-    xml2,
+    lifecycle (>= 1.0.0),
+    xml2 (>= 1.3.6),
     checkmate (>= 2.3.2),
-    cli,
-    purrr
+    cli (>= 3.6.0),
+    purrr (>= 1.0.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2

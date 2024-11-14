@@ -1,3 +1,7 @@
+# distiller 0.3.0
+
+- Added basic submission checks on the content of the data variables 
+
 # distiller 0.2.1
 
 - Export `check_submission` function
