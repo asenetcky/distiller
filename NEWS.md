@@ -1,3 +1,7 @@
+# distiller 0.3.1
+
+- fix check_county_var not labelling county codes of the correct length a success
+
 # distiller 0.3.0
 
 - Added basic submission checks on the content of the data variables 

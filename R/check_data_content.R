@@ -142,8 +142,7 @@ check_county_var <- function(data) {
 
   if (has_character) {
     has_unknown <-
-      checkmate::check_subset(data$county, "U") |>
-      is.logical()
+      any("U" %in% data$county)
 
     if (has_unknown) {
       data <-
@@ -160,7 +159,8 @@ check_county_var <- function(data) {
 
   create_exit_status(
     "county",
-    danger_variables = c(has_length, has_character)
+    warn_variables = has_character,
+    danger_variables = has_length
   )
 }
 
