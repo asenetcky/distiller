@@ -48,7 +48,7 @@ Users just need to bring the data and now they can spend less time
 worrying about XML semantics and more time polishing their data
 products.
 
-`disitller` is **no** replacement for the CDC EPHPT Test Submission
+`distiller` is **no** replacement for the CDC EPHPT Test Submission
 portal, however, creating the XML, and shuffling files around and then
 dropping them into the portal and waiting an indeterminate amount of
 time for feedback eats up time and is a pain. `distiller` aims to
