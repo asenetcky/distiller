@@ -146,7 +146,7 @@ test_that("check_* functions return a message", {
 
   expect_equal(check_data(
     data_min_vars, content_group_id)$message,
-    "Success: data"
+    "Success: dataframe_structure"
   )
   expect_equal(check_content_group_id(
     content_group_id)$message,

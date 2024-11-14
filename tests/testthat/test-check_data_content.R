@@ -48,6 +48,7 @@ test_that("check_data_content works", {
       sum(),
     0
   )
+
   expect_equal(
     check_data_content(good_data_max_vars, "CO-HOSP") |>
       purrr::map_int(purrr::pluck("code")) |>
