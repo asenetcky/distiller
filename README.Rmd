@@ -39,6 +39,80 @@ So who is this highly specific package for?
   then this package might be for you.
   
 
+## What does this package do?
+I think it's important to state up front what this package _doesn't_ do - and
+that is, it will not wrangle your data for you.  There are a few helpers, and
+and a whole slew of checks `distiller` will run on your data and metadata to
+ensure that everything is reasonably close to the  correct format 
+for submission to the CDC's EPHT program.  
+
+`distiller` still expects your data to have specific variable names, and
+to have the required variables for each type of data.  However, if you've
+ever wondered why the epht requires different _variable names_ 
+in a _different order_ for the same types of data, even for the _same disease_
+you'll be pleased to know that distiller takes care of the 
+facility-type-specific naming conventions and the ordering for you. Users just
+need to bring the data and now they can spend less time worrying about 
+XML semantics and more time polishing their data products.
+
+`disitller` is __no__ replacement for the CDC EPHPT Test Submission portal, 
+however, creating the XML, and shuffling files around and then 
+dropping them into the portal and waiting an indeterminate amount of time for 
+feedback eats up time and is a pain. 
+`distiller` aims to provide feedback on your data and metadata
+before you send it off to the CDC.  This way, you can fix any obvious issues 
+before you sink 20+ minutes waiting to find out you forgot to replace your `NA`'s
+with "U".
+
+## What's in the box?
+`distiller` contains the following core functions:
+  *  `check_submission()` - a function that checks your data and metadata and
+  provides quick feedback
+  *  `make_xml_document()` - a function that creates an xml document for 
+  submission based on your data and the metadata your provide it
+  
+  `distiller` also contains functions for:
+  * collapsing race and ethnicity values into the CDC's required format
+  * converting month integers to 0-padded character strings
+  * return the proper health outcome identifier for a given content group identifier
+  * Starting from scratch? Most of the mini-functions that make up the two core 
+  ones are exposed to the user, so you can check your work in pieces as you make
+  progress with your data wrangling
+
+## `distiller` expectations and scope
+
+`distiller` works for the following content group identifiers:
+
+  -  AS-HOSP
+  -  AS-ED
+  -  CO-HOSP
+  -  CO-ED
+  -  MI-HOSP
+  -  HEAT-HOSP
+  -  HEAT-ED
+  -  COPD-HOSP
+  -  COPD-ED
+  
+  `distiller` expects the following variables in your data:
+  
+  For every content group identifier:
+  
+  -  agegroup
+  -  county
+  -  sex
+  -  ethnicity
+  -  race
+  -  health_outcome_id,
+  -  monthly_count
+  -  month
+  -  year
+
+  For content group identifiers CO-HOSP and CO-ED, the above plus the following:
+  
+  -  fire_count
+  -  nonfire_count
+  -  unknown_count
+  
 ## Installation
 
 You can install the development version of distiller from [GitHub](https://github.com/) with:
