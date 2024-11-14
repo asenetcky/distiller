@@ -81,7 +81,6 @@ check_submission <-
       message_cli
     )
 
-    #TODO troublemakers don't always print out
     cli::cli_alert_info("Checking data structure and content")
     data_exit_status <-
       c(
