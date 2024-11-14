@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">distiller</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,8 +117,7 @@
 <span>    <span class="va">submitter_name</span>,</span>
 <span>    <span class="va">submitter_title</span></span>
 <span>    <span class="op">)</span></span>
-<span><span class="co">#&gt; ℹ Checking submission</span></span>
-<span><span class="co">#&gt; ✔ Success: data</span></span>
+<span><span class="co">#&gt; ℹ Checking submission metadata</span></span>
 <span><span class="co">#&gt; ✔ Success: content_group_id</span></span>
 <span><span class="co">#&gt; ! Warning: mcn may not have correct format</span></span>
 <span><span class="co">#&gt; Troublemakers: length, format</span></span>
@@ -129,7 +128,26 @@
 <span><span class="co">#&gt; ✔ Success: submitter_email</span></span>
 <span><span class="co">#&gt; ✔ Success: submitter_name</span></span>
 <span><span class="co">#&gt; ✔ Success: submitter_title</span></span>
-<span><span class="co"># This can also be checked with `check_first = TRUE` in `make_xml_document()`</span></span>
+<span><span class="co">#&gt; ℹ Checking data structure and content</span></span>
+<span><span class="co">#&gt; ✔ Success: dataframe_structure</span></span>
+<span><span class="co">#&gt; ✖ Danger: month does not have allowable value/s</span></span>
+<span><span class="co">#&gt; Troublemakers: allowed_values</span></span>
+<span><span class="co">#&gt; ✔ Success: agegroup</span></span>
+<span><span class="co">#&gt; ✖ Danger: county does not have allowable value/s</span></span>
+<span><span class="co">#&gt; Troublemakers: length, class</span></span>
+<span><span class="co">#&gt; ✖ Danger: ethnicity does not have allowable value/s</span></span>
+<span><span class="co">#&gt; Troublemakers: allowed_values</span></span>
+<span><span class="co">#&gt; ✖ Danger: health_outcome_id does not have allowable value/s</span></span>
+<span><span class="co">#&gt; Troublemakers: allowed_values</span></span>
+<span><span class="co">#&gt; ✖ Danger: sex does not have allowable value/s</span></span>
+<span><span class="co">#&gt; Troublemakers: allowed_values</span></span>
+<span><span class="co">#&gt; ✖ Danger: year does not have allowable value/s</span></span>
+<span><span class="co">#&gt; Troublemakers: allowed_values</span></span>
+<span><span class="co">#&gt; ✖ Danger: race does not have allowable value/s</span></span>
+<span><span class="co">#&gt; Troublemakers: allowed_values</span></span>
+<span><span class="co">#&gt; ✔ Success: monthly_count</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># This can also be checked with `check_first = TRUE` in `make_xml_document()`</span></span>
 <span>  </span>
 <span></span>
 <span><span class="co"># And then make your xml document</span></span>
