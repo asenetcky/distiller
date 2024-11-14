@@ -1,15 +1,4 @@
 test_that("check_data_content works", {
-
-  # month = mpg,
-  # agegroup = cyl,
-  # county = disp,
-  # ethnicity = hp,
-  # health_outcome_id = drat,
-  # monthly_count = wt,
-  # race = qsec,
-  # sex = vs,
-  # year = am
-
   good_data_min_vars <-
     dplyr::tibble(
       month = rep("12", 12),
@@ -55,35 +44,27 @@ test_that("check_data_content works", {
   # good data is good
   expect_equal(
     check_data_content(good_data_min_vars, "AS-HOSP") |>
-      purrr::map(purrr::pluck("code")) |>
-      purrr::list_c() |>
+      purrr::map_int(purrr::pluck("code")) |>
       sum(),
     0
   )
   expect_equal(
     check_data_content(good_data_max_vars, "CO-HOSP") |>
-      purrr::map(purrr::pluck("code")) |>
-      purrr::list_c() |>
+      purrr::map_int(purrr::pluck("code")) |>
       sum(),
     0
   )
 
   #bad data is bad
- #TODO not all messages and codes being printed
   expect_true(
     check_data_content(bad_data_min_vars, "AS-HOSP") |>
-      purrr::map(purrr::pluck("code")) |>
-      purrr::list_c() |>
+      purrr::map_int(purrr::pluck("code")) |>
       sum() >= 9
   )
 
   expect_true(
-    check_data_content(bad_data_max_vars, "AS-HOSP") |>
-      purrr::map(purrr::pluck("code")) |>
-      purrr::list_c() |>
+    check_data_content(bad_data_max_vars, "CO-HOSP") |>
+      purrr::map_int(purrr::pluck("code")) |>
       sum() >= 12
   )
-
-
-
 })
