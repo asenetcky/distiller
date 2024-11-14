@@ -103,7 +103,9 @@ check_agegroup_var <- function(data) {
   has_allowed_values <- FALSE
 
   has_class <-
-    is.character(data$agegroup) || is.integer(data$agegroup)
+    is.character(data$agegroup) ||
+    is.integer(data$agegroup) ||
+    is.numeric(data$agegroup)
 
   #coerce to integer
   if (has_class) {
@@ -219,7 +221,9 @@ check_health_outcome_id_var <- function(data) {
   has_allowed_values <- FALSE
 
   has_class <-
-    is.character(data$health_outcome_id) || is.integer(data$health_outcome_id)
+    is.character(data$health_outcome_id) ||
+    is.integer(data$health_outcome_id) ||
+    is.numeric(data$health_outcome_id)
 
   #coerce to integer
   if (has_class) {
