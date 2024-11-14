@@ -1,3 +1,7 @@
+# distiller 0.3.3
+
+- fix bulleted lists in README.md
+
 # distiller 0.3.2
 
 - Update README.md with more details on how best to use the package, its
