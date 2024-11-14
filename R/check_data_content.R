@@ -142,8 +142,7 @@ check_county_var <- function(data) {
 
   if (has_character) {
     has_unknown <-
-      checkmate::check_subset(data$county, "U") |>
-      is.logical()
+      any("U" %in% data$county)
 
     if (has_unknown) {
       data <-
