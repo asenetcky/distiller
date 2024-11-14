@@ -159,7 +159,8 @@ check_county_var <- function(data) {
 
   create_exit_status(
     "county",
-    danger_variables = c(has_length, has_character)
+    warn_variables = has_character,
+    danger_variables = has_length
   )
 }
 
