@@ -58,8 +58,6 @@ check_data_content <- function(data, content_group_id){
       dplyr::lst(check_monthly_count_var)
   }
 
-
-
   non_count_exit_status <-
     purrr::map(non_count_functions, \(fun) fun(data))
 
@@ -71,6 +69,8 @@ check_data_content <- function(data, content_group_id){
 }
 
 check_month_var <- function(data) {
+  month <- NULL
+
   allowable_values <-
     c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
@@ -79,7 +79,8 @@ check_month_var <- function(data) {
     is.logical() |>
     purrr::set_names("class")
 
-  has_allowed_values <- FALSE
+  has_allowed_values <- FALSE |>
+    purrr::set_names("allowed_values")
 
   if (has_character) {
     has_allowed_values <-
@@ -93,18 +94,22 @@ check_month_var <- function(data) {
 
   create_exit_status(
     "month",
-    danger_variables = c(has_allowed_values, has_character)
+    warn_variables = has_character,
+    danger_variables = has_allowed_values
   )
 
 }
 
 check_agegroup_var <- function(data) {
-  agegroup <- NULL
-  has_class <- FALSE
-  has_allowed_values <- FALSE
+  agegrouop <- NULL
+
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
 
   has_class <-
-    is.numeric(data$agegroup)
+    is.numeric(data$agegroup) |>
+    purrr::set_names("class")
 
   if (has_class) {
   has_allowed_values <-
@@ -125,9 +130,10 @@ check_agegroup_var <- function(data) {
 
 check_county_var <- function(data) {
   county <- NULL
-  has_length <- FALSE
-  has_character <- FALSE
-  has_unknown <- FALSE
+
+  has_length <-
+    FALSE |>
+    purrr::set_names("length")
 
   has_character <-
     checkmate::check_character(data$county) |>
@@ -137,8 +143,7 @@ check_county_var <- function(data) {
   if (has_character) {
     has_unknown <-
       checkmate::check_subset(data$county, "U") |>
-      is.logical() |>
-      purrr::set_names("unknown")
+      is.logical()
 
     if (has_unknown) {
       data <-
@@ -160,8 +165,11 @@ check_county_var <- function(data) {
 }
 
 check_ethnicity_var <- function(data) {
-  has_character <- NULL
-  has_allowed_values <- NULL
+  ethnicity <- NULL
+
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
 
   has_character <-
     checkmate::check_character(data$ethnicity) |>
@@ -180,13 +188,17 @@ check_ethnicity_var <- function(data) {
 
   create_exit_status(
     "ethnicity",
-    danger_variables = c(has_character, has_allowed_values)
+    warn_variables = has_character,
+    danger_variables = has_allowed_values
   )
 }
 
 check_race_var <- function(data) {
-  has_character <- NULL
-  has_allowed_values <- NULL
+  race <- NULL
+
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
 
   has_character <-
     checkmate::check_character(data$race) |>
@@ -205,17 +217,21 @@ check_race_var <- function(data) {
 
   create_exit_status(
     "race",
-    danger_variables = c(has_character, has_allowed_values)
+    warn_variables = has_character,
+    danger_variables = has_allowed_values
   )
 }
 
 check_health_outcome_id_var <- function(data) {
   health_outcome_id <- NULL
-  has_class <- FALSE
-  has_allowed_values <- FALSE
+
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
 
   has_class <-
-    is.numeric(data$health_outcome_id)
+    is.numeric(data$health_outcome_id) |>
+    purrr::set_names("class")
 
   if (has_class) {
     has_allowed_values <-
@@ -236,8 +252,11 @@ check_health_outcome_id_var <- function(data) {
 
 
 check_sex_var <- function(data) {
-  has_character <- NULL
-  has_allowed_values <- NULL
+  sex <- NULL
+
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
 
   has_character <-
     checkmate::check_character(data$sex) |>
@@ -256,17 +275,21 @@ check_sex_var <- function(data) {
 
   create_exit_status(
     "sex",
-    danger_variables = c(has_character, has_allowed_values)
+    warn_variables = has_character,
+    danger_variables = has_allowed_values
   )
 }
 
 check_year_var <- function(data) {
   year <- NULL
-  has_allowed_values <- FALSE
-  has_class <- FALSE
+
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
 
   has_class <-
-    is.numeric(data$year)
+    is.numeric(data$year) |>
+    purrr::set_names("class")
 
   if (has_class) {
     has_allowed_values <-
@@ -289,15 +312,17 @@ check_year_var <- function(data) {
 
 
 check_count_var <- function(data, var_name) {
-  has_class <- FALSE
-  has_allowed_values <- FALSE
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
 
   count_var <-
     data |>
     dplyr::pull(var_name)
 
   has_class <-
-    is.numeric(count_var)
+    is.numeric(count_var) |>
+    purrr::set_names("class")
 
   if (has_class) {
     has_allowed_values <-
