@@ -51,7 +51,7 @@ check_data <- function(data, content_group_id) {
   }
 
   create_exit_status(
-    "data",
+    "dataframe_structure",
     danger_variables = c(has_dataframe, has_vars)
   )
 }
