@@ -84,8 +84,7 @@ data <-
     submitter_name,
     submitter_title
     )
-#> ℹ Checking submission
-#> ✔ Success: data
+#> ℹ Checking submission metadata
 #> ✔ Success: content_group_id
 #> ! Warning: mcn may not have correct format
 #> Troublemakers: length, format
@@ -96,6 +95,27 @@ data <-
 #> ✔ Success: submitter_email
 #> ✔ Success: submitter_name
 #> ✔ Success: submitter_title
+#> ℹ Checking data structure and content
+#> ✔ Success: dataframe_structure
+#> ✖ Danger: month does not have allowable value/s
+#> Troublemakers: allowed_values
+#> ✔ Success: agegroup
+#> ✖ Danger: county does not have allowable value/s
+#> Troublemakers: length, class
+#> ✖ Danger: ethnicity does not have allowable value/s
+#> Troublemakers: allowed_values
+#> ✖ Danger: health_outcome_id does not have allowable value/s
+#> Troublemakers: allowed_values
+#> ✖ Danger: sex does not have allowable value/s
+#> Troublemakers: allowed_values
+#> ✖ Danger: year does not have allowable value/s
+#> Troublemakers: allowed_values
+#> ✖ Danger: race does not have allowable value/s
+#> Troublemakers: allowed_values
+#> ✔ Success: monthly_count
+```
+
+``` r
 # This can also be checked with `check_first = TRUE` in `make_xml_document()`
   
 
