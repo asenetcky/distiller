@@ -58,19 +58,22 @@ minutes waiting to find out you forgot to replace your `NA`’s with “U”.
 
 ## What’s in the box?
 
-`distiller` contains the following core functions: \*
-`check_submission()` - a function that checks your data and metadata and
-provides quick feedback \* `make_xml_document()` - a function that
-creates an xml document for submission based on your data and the
-metadata your provide it
+`distiller` contains the following core functions:
 
-`distiller` also contains functions for: \* collapsing race and
-ethnicity values into the CDC’s required format \* converting month
-integers to 0-padded character strings \* return the proper health
-outcome identifier for a given content group identifier \* Starting from
-scratch? Most of the mini-functions that make up the two core ones are
-exposed to the user, so you can check your work in pieces as you make
-progress with your data wrangling
+- `check_submission()` - a function that checks your data and metadata
+  and provides quick feedback
+- `make_xml_document()` - a function that creates an xml document for
+  submission based on your data and the metadata your provide it
+
+`distiller` also contains functions for:
+
+- collapsing race and ethnicity values into the CDC’s required format
+- converting month integers to 0-padded character strings
+- return the proper health outcome identifier for a given content group
+  identifier
+- Starting from scratch? Most of the mini-functions that make up the two
+  core ones are exposed to the user, so you can check your work in
+  pieces as you make progress with your data wrangling
 
 ## `distiller` expectations and scope
 
