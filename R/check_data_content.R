@@ -103,16 +103,9 @@ check_agegroup_var <- function(data) {
   has_allowed_values <- FALSE
 
   has_class <-
-    is.character(data$agegroup) ||
-    is.integer(data$agegroup) ||
     is.numeric(data$agegroup)
 
-  #coerce to integer
   if (has_class) {
-    data <-
-      data |>
-      dplyr::mutate(agegroup = as.integer(agegroup))
-
   has_allowed_values <-
     checkmate::check_subset(
       data$agegroup,
@@ -221,16 +214,9 @@ check_health_outcome_id_var <- function(data) {
   has_allowed_values <- FALSE
 
   has_class <-
-    is.character(data$health_outcome_id) ||
-    is.integer(data$health_outcome_id) ||
     is.numeric(data$health_outcome_id)
 
-  #coerce to integer
   if (has_class) {
-    data <-
-      data |>
-      dplyr::mutate(health_outcome_id = as.integer(health_outcome_id))
-
     has_allowed_values <-
       checkmate::check_subset(
         data$health_outcome_id,
@@ -279,17 +265,11 @@ check_year_var <- function(data) {
   has_class <- FALSE
 
   has_class <-
-    is.numeric(data$year) ||
-    is.integer(data$year) ||
-    is.character(data$year)
+    is.numeric(data$year)
 
   if (has_class) {
-    data <-
-      data |>
-      dplyr::mutate(year = as.integer(year))
-
     has_allowed_values <-
-      checkmate::check_integer(
+      checkmate::check_numeric(
         data$year,
         #EPHT founded in 2002
         lower = 2001,
@@ -316,15 +296,11 @@ check_count_var <- function(data, var_name) {
     dplyr::pull(var_name)
 
   has_class <-
-    is.numeric(count_var) ||
-    is.integer(count_var) ||
-    is.character(count_var)
+    is.numeric(count_var)
 
   if (has_class) {
-    count_var <- as.integer(count_var)
-
     has_allowed_values <-
-      checkmate::check_integer(
+      checkmate::check_numeric(
         count_var,
         lower = 0,
         any.missing = FALSE,
