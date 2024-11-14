@@ -74,14 +74,14 @@ test_that("check_data_content works", {
     check_data_content(bad_data_min_vars, "AS-HOSP") |>
       purrr::map(purrr::pluck("code")) |>
       purrr::list_c() |>
-      sum() >= 8
+      sum() >= 9
   )
 
   expect_true(
     check_data_content(bad_data_max_vars, "AS-HOSP") |>
       purrr::map(purrr::pluck("code")) |>
       purrr::list_c() |>
-      sum() >= 11
+      sum() >= 12
   )
 
 
