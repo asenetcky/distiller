@@ -40,7 +40,8 @@ check_data_content <- function(data, content_group_id){
       check_ethnicity_var,
       check_health_outcome_id_var,
       check_sex_var,
-      check_year_var
+      check_year_var,
+      check_race_var,
     )
 
   count_functions <- NULL
