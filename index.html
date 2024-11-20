@@ -8,11 +8,11 @@
 <title>Distill EPHT Data Down to XML • distiller</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Distill EPHT Data Down to XML">
-<meta name="description" content="Centers for Disease Control and Preventions (CDC) Environmental Public Health Tracking Network (EPHT) data submission process has a lot documentation. Much of it is buried and out of date, making it difficult for new users to decipher the exact specifications of the data submissions XML. `distiller` aims to make it easier to created the desired XML.">
-<meta property="og:description" content="Centers for Disease Control and Preventions (CDC) Environmental Public Health Tracking Network (EPHT) data submission process has a lot documentation. Much of it is buried and out of date, making it difficult for new users to decipher the exact specifications of the data submissions XML. `distiller` aims to make it easier to created the desired XML.">
+<meta name="description" content="Centers for Disease Control and Preventions (CDC) Environmental Public Health Tracking Network (EPHT) data submission process has a lot documentation. Much of it is buried and out of date, making it difficult for new users to decipher the exact specifications of the data submissions XML. `distiller` makes it easier to create the intended XML data products.">
+<meta property="og:description" content="Centers for Disease Control and Preventions (CDC) Environmental Public Health Tracking Network (EPHT) data submission process has a lot documentation. Much of it is buried and out of date, making it difficult for new users to decipher the exact specifications of the data submissions XML. `distiller` makes it easier to create the intended XML data products.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">distiller</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,7 @@
 </h2>
 <p>I think it’s important to state up front what this package <em>doesn’t</em> do - and that is, it will not wrangle your data for you. There are a few helpers, and and a whole slew of checks <code>distiller</code> will run on your data and metadata to ensure that everything is reasonably close to the correct format for submission to the CDC’s EPHT program.</p>
 <p><code>distiller</code> still expects your data to have specific variable names, and to have the required variables for each type of data. However, if you’ve ever wondered why the epht requires different <em>variable names</em> in a <em>different order</em> for the same types of data, even for the <em>same disease</em> you’ll be pleased to know that distiller takes care of the facility-type-specific naming conventions and the ordering for you. Users just need to bring the data and now they can spend less time worrying about XML semantics and more time polishing their data products.</p>
-<p><code>distiller</code> is <strong>no</strong> replacement for the CDC EPHPT Test Submission portal, however, creating the XML, and shuffling files around and then dropping them into the portal and waiting an indeterminate amount of time for feedback eats up time and is a pain. <code>distiller</code> aims to provide feedback on your data and metadata before you send it off to the CDC. This way, you can fix any obvious issues before you sink 20+ minutes waiting to find out you forgot to replace your <code>NA</code>’s with “U”.</p>
+<p><code>disitller</code> is <strong>no</strong> replacement for the CDC EPHPT Test Submission portal, however, creating the XML, and shuffling files around and then dropping them into the portal and waiting an indeterminate amount of time for feedback eats up time and is a pain. <code>distiller</code> aims to provide feedback on your data and metadata before you send it off to the CDC. This way, you can fix any obvious issues before you sink 20+ minutes waiting to find out you forgot to replace your <code>NA</code>’s with “U”.</p>
 </div>
 <div class="section level2">
 <h2 id="whats-in-the-box">What’s in the box?<a class="anchor" aria-label="anchor" href="#whats-in-the-box"></a>
@@ -144,40 +144,40 @@
 <span><span class="co"># Take you already-wrangled data</span></span>
 <span><span class="co"># note the specific variable names</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span></span>
-<span>    <span class="va">mtcars</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span></span>
-<span>      month <span class="op">=</span> <span class="va">mpg</span>,</span>
-<span>      agegroup <span class="op">=</span> <span class="va">cyl</span>,</span>
-<span>      county <span class="op">=</span> <span class="va">disp</span>,</span>
-<span>      ethnicity <span class="op">=</span> <span class="va">hp</span>,</span>
-<span>      health_outcome_id <span class="op">=</span> <span class="va">drat</span>,</span>
-<span>      monthly_count <span class="op">=</span> <span class="va">wt</span>,</span>
-<span>      race <span class="op">=</span> <span class="va">qsec</span>,</span>
-<span>      sex <span class="op">=</span> <span class="va">vs</span>,</span>
-<span>      year <span class="op">=</span> <span class="va">am</span></span>
-<span>    <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">gear</span>, <span class="va">carb</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">mtcars</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span></span>
+<span>    month <span class="op">=</span> <span class="va">mpg</span>,</span>
+<span>    agegroup <span class="op">=</span> <span class="va">cyl</span>,</span>
+<span>    county <span class="op">=</span> <span class="va">disp</span>,</span>
+<span>    ethnicity <span class="op">=</span> <span class="va">hp</span>,</span>
+<span>    health_outcome_id <span class="op">=</span> <span class="va">drat</span>,</span>
+<span>    monthly_count <span class="op">=</span> <span class="va">wt</span>,</span>
+<span>    race <span class="op">=</span> <span class="va">qsec</span>,</span>
+<span>    sex <span class="op">=</span> <span class="va">vs</span>,</span>
+<span>    year <span class="op">=</span> <span class="va">am</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">gear</span>, <span class="va">carb</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># And your metadata</span></span>
-<span>  <span class="va">content_group_id</span> <span class="op">&lt;-</span> <span class="st">"AS-HOSP"</span></span>
-<span>  <span class="va">mcn</span> <span class="op">&lt;-</span> <span class="st">"1234-1234-1234-1234-1234"</span></span>
-<span>  <span class="va">jurisdiction_code</span> <span class="op">&lt;-</span> <span class="st">"two_letter_code"</span></span>
-<span>  <span class="va">state_fips_code</span> <span class="op">&lt;-</span> <span class="st">"1234"</span></span>
-<span>  <span class="va">submitter_email</span> <span class="op">&lt;-</span> <span class="st">"submitter@email.com"</span></span>
-<span>  <span class="va">submitter_name</span> <span class="op">&lt;-</span> <span class="st">"Submitter Name"</span></span>
-<span>  <span class="va">submitter_title</span> <span class="op">&lt;-</span> <span class="st">"Submitter Title"</span></span>
-<span>  </span>
+<span><span class="va">content_group_id</span> <span class="op">&lt;-</span> <span class="st">"AS-HOSP"</span></span>
+<span><span class="va">mcn</span> <span class="op">&lt;-</span> <span class="st">"1234-1234-1234-1234-1234"</span></span>
+<span><span class="va">jurisdiction_code</span> <span class="op">&lt;-</span> <span class="st">"two_letter_code"</span></span>
+<span><span class="va">state_fips_code</span> <span class="op">&lt;-</span> <span class="st">"1234"</span></span>
+<span><span class="va">submitter_email</span> <span class="op">&lt;-</span> <span class="st">"submitter@email.com"</span></span>
+<span><span class="va">submitter_name</span> <span class="op">&lt;-</span> <span class="st">"Submitter Name"</span></span>
+<span><span class="va">submitter_title</span> <span class="op">&lt;-</span> <span class="st">"Submitter Title"</span></span>
+<span></span>
 <span><span class="co"># Optionally check your submission data structure and metadata</span></span>
-<span>  <span class="fu"><a href="reference/check_submission.html">check_submission</a></span><span class="op">(</span></span>
-<span>    <span class="va">data</span>,</span>
-<span>    <span class="va">content_group_id</span>,</span>
-<span>    <span class="va">mcn</span>,</span>
-<span>    <span class="va">jurisdiction_code</span>,</span>
-<span>    <span class="va">state_fips_code</span>,</span>
-<span>    <span class="va">submitter_email</span>,</span>
-<span>    <span class="va">submitter_name</span>,</span>
-<span>    <span class="va">submitter_title</span></span>
-<span>    <span class="op">)</span></span>
+<span><span class="fu"><a href="reference/check_submission.html">check_submission</a></span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">content_group_id</span>,</span>
+<span>  <span class="va">mcn</span>,</span>
+<span>  <span class="va">jurisdiction_code</span>,</span>
+<span>  <span class="va">state_fips_code</span>,</span>
+<span>  <span class="va">submitter_email</span>,</span>
+<span>  <span class="va">submitter_name</span>,</span>
+<span>  <span class="va">submitter_title</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Checking submission metadata</span></span>
 <span><span class="co">#&gt; ✔ Success: content_group_id</span></span>
 <span><span class="co">#&gt; ! Warning: mcn may not have correct format</span></span>
@@ -206,21 +206,22 @@
 <span><span class="co">#&gt; Troublemakers: allowed_values</span></span>
 <span><span class="co">#&gt; ✖ Danger: race does not have allowable value/s</span></span>
 <span><span class="co">#&gt; Troublemakers: allowed_values</span></span>
-<span><span class="co">#&gt; ✔ Success: monthly_count</span></span>
-<span><span class="co"># This can also be checked with `check_first = TRUE` in `make_xml_document()`</span></span>
-<span>  </span>
+<span><span class="co">#&gt; ✔ Success: monthly_count</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># This can also be checked with `check_first = TRUE` in `make_xml_document()`</span></span>
+<span></span>
 <span></span>
 <span><span class="co"># And then make your xml document</span></span>
 <span><span class="fu"><a href="reference/make_xml_document.html">make_xml_document</a></span><span class="op">(</span></span>
-<span>    <span class="va">data</span>,</span>
-<span>    <span class="va">content_group_id</span>,</span>
-<span>    <span class="va">mcn</span>,</span>
-<span>    <span class="va">jurisdiction_code</span>,</span>
-<span>    <span class="va">state_fips_code</span>,</span>
-<span>    <span class="va">submitter_email</span>,</span>
-<span>    <span class="va">submitter_name</span>,</span>
-<span>    <span class="va">submitter_title</span></span>
-<span>    <span class="op">)</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">content_group_id</span>,</span>
+<span>  <span class="va">mcn</span>,</span>
+<span>  <span class="va">jurisdiction_code</span>,</span>
+<span>  <span class="va">state_fips_code</span>,</span>
+<span>  <span class="va">submitter_email</span>,</span>
+<span>  <span class="va">submitter_name</span>,</span>
+<span>  <span class="va">submitter_title</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; {xml_document}</span></span>
 <span><span class="co">#&gt; &lt;HospitalizationData schemaLocation="http://www.ephtn.org/NCDM/PH/HospitalizationData ephtn-ph-HospitalizationData.xsd" xmlns="http://www.ephtn.org/NCDM/PH/HospitalizationData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;</span></span>
 <span><span class="co">#&gt; [1] &lt;Header&gt;\n  &lt;MCN&gt;1234-1234-1234-1234-1234&lt;/MCN&gt;\n  &lt;JurisdictionCode&gt;two_ ...</span></span>
