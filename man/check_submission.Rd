@@ -78,8 +78,8 @@ portal. The test submission portal will have the final say.
 \section{Data}{
 Users are expected to wrangle, aggregate and otherwise implement the logic
 expected by EPHT themselves. \code{distiller} will not handle that step, though it
-does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \link{collapse_ethnicity}, and
-\link{make_months_worse}.
+does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \code{\link[=collapse_ethnicity]{collapse_ethnicity()}}, and
+\code{\link[=make_months_worse]{make_months_worse()}}.
 
 In order for \code{distiller} to work properly there are some expectations about
 the data that must be met:
@@ -131,23 +131,23 @@ have a set of these.
 
 \section{Submission Check}{
 If users set \code{check_first} = \code{TRUE} in \code{\link[=make_xml_document]{make_xml_document()}} or runs
-\link{check_submission} or any of the other \code{check_* functions} then the a suite
+\code{\link[=check_submission]{check_submission()}} or any of the other \code{check_* functions} then the a suite
 of checks is run against the metadata, data structure and data content.
 Please note that users do not need to run the whole suite of checks, they can
 run each function piecemeal on their data as it is being prepared.
 
-\link{check_submission} is called which is a wrapper around
+\code{\link[=check_submission]{check_submission()}} is called which is a wrapper around
 the following functions:
 \itemize{
-\item \link{check_content_group_id}
-\item \link{check_data}
-\item \link{check_data_content}
-\item \link{check_jurisdiction_code}
-\item \link{check_mcn}
-\item \link{check_state_fips_code}
-\item \link{check_submitter_email}
-\item \link{check_submitter_name}
-\item \link{check_submitter_title}
+\item \code{\link[=check_content_group_id]{check_content_group_id()}}
+\item \code{\link[=check_data]{check_data()}}
+\item \code{\link[=check_data_content]{check_data_content()}}
+\item \code{\link[=check_jurisdiction_code]{check_jurisdiction_code()}}
+\item \code{\link[=check_mcn]{check_mcn()}}
+\item \code{\link[=check_state_fips_code]{check_state_fips_code()}}
+\item \code{\link[=check_submitter_email]{check_submitter_email()}}
+\item \code{\link[=check_submitter_name]{check_submitter_name()}}
+\item \code{\link[=check_submitter_title]{check_submitter_title()}}
 }
 }
 

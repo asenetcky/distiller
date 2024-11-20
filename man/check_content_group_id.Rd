@@ -20,8 +20,8 @@ one of nine currently accepted content group identifiers.
 \section{Data}{
 Users are expected to wrangle, aggregate and otherwise implement the logic
 expected by EPHT themselves. \code{distiller} will not handle that step, though it
-does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \link{collapse_ethnicity}, and
-\link{make_months_worse}.
+does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \code{\link[=collapse_ethnicity]{collapse_ethnicity()}}, and
+\code{\link[=make_months_worse]{make_months_worse()}}.
 
 In order for \code{distiller} to work properly there are some expectations about
 the data that must be met:

@@ -28,8 +28,8 @@
 #' # Data
 #' Users are expected to wrangle, aggregate and otherwise implement the logic
 #' expected by EPHT themselves. `distiller` will not handle that step, though it
-#' does provides some helpers: [collapse_race()], [collapse_ethnicity], and
-#' [make_months_worse].
+#' does provides some helpers: [collapse_race()], [collapse_ethnicity()], and
+#' [make_months_worse()].
 #'
 #' In order for `distiller` to work properly there are some expectations about
 #' the data that must be met:
@@ -71,22 +71,22 @@
 #'
 #' # Submission Check
 #' If users set `check_first` = `TRUE` in [make_xml_document()] or runs
-#' [check_submission] or any of the other `check_* functions` then the a suite
+#' [check_submission()] or any of the other `check_* functions` then the a suite
 #' of checks is run against the metadata, data structure and data content.
 #' Please note that users do not need to run the whole suite of checks, they can
 #' run each function piecemeal on their data as it is being prepared.
 #'
-#' [check_submission] is called which is a wrapper around
+#' [check_submission()] is called which is a wrapper around
 #' the following functions:
-#' * [check_content_group_id]
-#' * [check_data]
-#' * [check_data_content]
-#' * [check_jurisdiction_code]
-#' * [check_mcn]
-#' * [check_state_fips_code]
-#' * [check_submitter_email]
-#' * [check_submitter_name]
-#' * [check_submitter_title]
+#' * [check_content_group_id()]
+#' * [check_data()]
+#' * [check_data_content()]
+#' * [check_jurisdiction_code()]
+#' * [check_mcn()]
+#' * [check_state_fips_code()]
+#' * [check_submitter_email()]
+#' * [check_submitter_name()]
+#' * [check_submitter_title()]
 #'
 #' @param data Pre-wrangled Dataframe.
 #' @param content_group_id Code that identifies the content found in EPHT
