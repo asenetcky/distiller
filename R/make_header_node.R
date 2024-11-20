@@ -1,13 +1,8 @@
 #' Make Header node for XML Document
 #'
-#' @param mcn Metadata Control Number provided by epht
-#' @param jurisdiction_code Two-letter state abbreviation
-#' @param content_group_id Code that identifies the content
-#' @param submitter_email Email of person submitting data to epht
-#' @param submitter_name First and last name of person submitting data
-#' @param submitter_title Title of person submitting data
-#' @param state_fips_code FIPS code of the state
+#' @inheritParams make_xml_document
 #'
+#' @family xml
 #' @return XML node
 #' @export
 #'

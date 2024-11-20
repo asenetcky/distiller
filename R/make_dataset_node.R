@@ -1,9 +1,10 @@
 #' Make dataset xml node
 #'
-#' @param data Pre-wrangled dataframe
-#' @param content_group_id Code that identifies the content
 #'
-#' @return XML node
+#' @inheritParams make_xml_document
+#'
+#' @family xml
+#' @inherit make_header_node return
 #' @export
 #'
 #' @examples

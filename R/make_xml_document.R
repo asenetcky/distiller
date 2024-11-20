@@ -102,6 +102,7 @@
 #' Default is `FALSE`, if set to `TRUE` then `distiller` will run through its
 #' suite of metadata and data checks.
 #'
+#' @family xml
 #' @return XML document object
 #' @export
 #'
