@@ -6,7 +6,7 @@
 \alias{distiller-package}
 \title{distiller: Distill EPHT Data Down to XML}
 \description{
-Centers for Disease Control and Prevention's (CDC) Environmental Public Health Tracking Network (EPHT) data submission process has a lot documentation. Much of it is buried and out of date, making it difficult for new users to decipher the exact specifications of the data submissions' XML. `distiller` aims to make it easier to created the desired XML.
+Centers for Disease Control and Prevention's (CDC) Environmental Public Health Tracking Network (EPHT) data submission process has a lot documentation. Much of it is buried and out of date, making it difficult for new users to decipher the exact specifications of the data submissions' XML. `distiller` makes it easier to create the intended XML data products.
 }
 \seealso{
 Useful links:
@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Alexander Senetcky \email{asenetcky@gmail.com.com} (\href{https://orcid.org/0009-0009-3730-5397}{ORCID}) [copyright holder]
+\strong{Maintainer}: Alexander Senetcky \email{asenetcky@gmail.com} (\href{https://orcid.org/0009-0009-3730-5397}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

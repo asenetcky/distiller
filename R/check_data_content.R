@@ -1,14 +1,29 @@
-#' Check the content of your data's variables
+#' Check the validity of data content
 #'
-#' @param data dataframe of wrangled data
-#' @param content_group_id Code that identifies the content
+#' @description
+#' There are finite values that are allowable in any one of the
+#' variables that CDC want in a submission.  It is up to the user
+#' to implement the correct logic as defined in the data dictionaries
+#' and how-to-guides.
+#'
+#' However if your logic is sound `check_data_content` will shoulder some
+#' of the heavy lifting and provide users with its best guess about each
+#' variable's formatting as to whether it is correct or not.  This is
+#' a good way to quickly check your data before submitting it to the CDC.
+#' This is _not_ a replacement for the CDC's EPHT Test Submission portal.
+#'
+#' @inheritSection make_xml_document Data
+#' @inheritSection make_xml_document Submission Check
+#'
+#' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list of exit statuses for each variable
 #' @export
 #'
 #' @examples
 #' data <-
-#'  mtcars |>
+#'   mtcars |>
 #'   dplyr::rename(
 #'     month = mpg,
 #'     agegroup = cyl,
@@ -23,7 +38,7 @@
 #'   dplyr::select(-c(gear, carb))
 #'
 #' check_data_content(data, "AS-HOSP")
-check_data_content <- function(data, content_group_id){
+check_data_content <- function(data, content_group_id) {
   additional_vars <-
     dplyr::if_else(
       content_group_id %in% c("CO-ED", "CO-HOSP"),
@@ -65,7 +80,6 @@ check_data_content <- function(data, content_group_id){
     purrr::map(count_functions, \(fun) fun(data))
 
   c(non_count_exit_status, count_exit_status)
-
 }
 
 check_month_var <- function(data) {
@@ -97,7 +111,6 @@ check_month_var <- function(data) {
     warn_variables = has_character,
     danger_variables = has_allowed_values
   )
-
 }
 
 check_agegroup_var <- function(data) {
@@ -112,13 +125,13 @@ check_agegroup_var <- function(data) {
     purrr::set_names("class")
 
   if (has_class) {
-  has_allowed_values <-
-    checkmate::check_subset(
-      data$agegroup,
-      c(1:19),
-    ) |>
-    is.logical() |>
-    purrr::set_names("allowed_values")
+    has_allowed_values <-
+      checkmate::check_subset(
+        data$agegroup,
+        c(1:19),
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
   }
 
   create_exit_status(
@@ -295,7 +308,7 @@ check_year_var <- function(data) {
     has_allowed_values <-
       checkmate::check_numeric(
         data$year,
-        #EPHT founded in 2002
+        # EPHT founded in 2002
         lower = 2001,
         upper = 9999
       ) |>
@@ -339,7 +352,7 @@ check_count_var <- function(data, var_name) {
   create_exit_status(
     var_name,
     warn_variables = has_class,
-    danger_variables  = has_allowed_values
+    danger_variables = has_allowed_values
   )
 }
 

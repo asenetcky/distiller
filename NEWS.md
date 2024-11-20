@@ -1,3 +1,8 @@
+# distiller 0.4.0
+
+- Add github action: style
+- Updated package and function documentation
+
 # distiller 0.3.3
 
 - fix bulleted lists in README.md

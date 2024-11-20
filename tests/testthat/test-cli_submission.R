@@ -13,7 +13,7 @@ test_that("create_exit_status creates right code and message", {
   mixed_all_true <- c(true_named, true_named, true_unnamed)
   mixed_all_false <- c(false_named, false_named, false_unnamed)
 
-  #danger vars
+  # danger vars
   expect_equal(
     create_exit_status(target_variable_name, danger_variables = named_all_trues),
     list(code = 0, message = "Success: test_variable")
@@ -46,7 +46,7 @@ test_that("create_exit_status creates right code and message", {
     create_exit_status(target_variable_name, danger_variables = mixed_all_false),
     list(code = 1, message = "Danger: test_variable does not have allowable value/s")
   )
-  #warn vars
+  # warn vars
   expect_equal(
     create_exit_status(target_variable_name, warn_variables = named_all_trues),
     list(code = 0, message = "Success: test_variable")
@@ -81,7 +81,7 @@ test_that("create_exit_status creates right code and message", {
   )
 })
 
-test_that("message_cli runs without error",{
+test_that("message_cli runs without error", {
   status_list_success <- list(code = 0, message = "Success: test_variable")
   status_list_danger <- list(code = 1, message = "Danger: test_variable does not have allowable value/s")
   status_list_warn <- list(code = 2, message = "Warning: test_variable may not have correct format")

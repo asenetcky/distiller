@@ -7,19 +7,23 @@
 make_dataset_node(data, content_group_id)
 }
 \arguments{
-\item{data}{Pre-wrangled dataframe}
+\item{data}{Pre-wrangled Dataframe.}
 
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation.}
 }
 \value{
 XML node
 }
 \description{
-Make dataset xml node
+Create the Dataset Node of the XML document using the provided data and
+content group identifier.  The data variables are converted to row-based
+XML child nodes and the elements ordered and named according to the content
+group identifer.
 }
 \examples{
 data_right_vars <-
-mtcars |>
+  mtcars |>
   dplyr::rename(
     month = mpg,
     agegroup = cyl,
@@ -36,3 +40,10 @@ mtcars |>
 make_dataset_node(data_right_vars, "AS-HOSP")
 
 }
+\seealso{
+Other xml: 
+\code{\link{make_header_node}()},
+\code{\link{make_root_element}()},
+\code{\link{make_xml_document}()}
+}
+\concept{xml}

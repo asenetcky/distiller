@@ -35,5 +35,4 @@ test_that("check_submission runs without error", {
       submitter_title
     )
   )
-
 })

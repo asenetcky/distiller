@@ -2,24 +2,89 @@
 % Please edit documentation in R/check_data_content.R
 \name{check_data_content}
 \alias{check_data_content}
-\title{Check the content of your data's variables}
+\title{Check the validity of data content}
 \usage{
 check_data_content(data, content_group_id)
 }
 \arguments{
-\item{data}{dataframe of wrangled data}
+\item{data}{Pre-wrangled Dataframe.}
 
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation.}
 }
 \value{
 list of exit statuses for each variable
 }
 \description{
-Check the content of your data's variables
+There are finite values that are allowable in any one of the
+variables that CDC want in a submission.  It is up to the user
+to implement the correct logic as defined in the data dictionaries
+and how-to-guides.
+
+However if your logic is sound \code{check_data_content} will shoulder some
+of the heavy lifting and provide users with its best guess about each
+variable's formatting as to whether it is correct or not.  This is
+a good way to quickly check your data before submitting it to the CDC.
+This is \emph{not} a replacement for the CDC's EPHT Test Submission portal.
 }
+\section{Data}{
+Users are expected to wrangle, aggregate and otherwise implement the logic
+expected by EPHT themselves. \code{distiller} will not handle that step, though it
+does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \link{collapse_ethnicity}, and
+\link{make_months_worse}.
+
+In order for \code{distiller} to work properly there are some expectations about
+the data that must be met:
+\itemize{
+\item The data must be a dataframe or tibble
+\item For all \code{content_group_id} The data must have the following columns:
+(in any order):
+\itemize{
+\item month: character - acceptable values: "01", "02", "03" ... "12"
+\item agegroup: numeric - acceptable values: 1-19
+\item county: character - string length of 5, unless unknown, then county = "U"
+\item ethnicity: character - acceptable values: "H", "NH", "U"
+\item race: character - acceptable values: "W", "B", "O", "U"
+\item health_outcome_id: numeric - acceptable values: 1-5
+\item sex: character - acceptable values: "M", "F", "U"
+\item year: numeric - acceptable values: 2001-9999
+\item monthly_count: numeric - acceptable values: >0 and \emph{no} missing values
+}
+\item For \code{content_group_id} "CO-ED" and "CO-HOSP" the data must have the
+additional columns:
+\itemize{
+\item fire_count: numeric - acceptable values: >0 and \emph{no} missing values
+\item nonfire_count: numeric - acceptable values: >0 and \emph{no} missing values
+\item unknown_count: numeric - acceptable values: >0 and \emph{no} missing values
+}
+}
+}
+
+\section{Submission Check}{
+If users set \code{check_first} = \code{TRUE} in \code{\link[=make_xml_document]{make_xml_document()}} or runs
+\link{check_submission} or any of the other \code{check_* functions} then the a suite
+of checks is run against the metadata, data structure and data content.
+Please note that users do not need to run the whole suite of checks, they can
+run each function piecemeal on their data as it is being prepared.
+
+\link{check_submission} is called which is a wrapper around
+the following functions:
+\itemize{
+\item \link{check_content_group_id}
+\item \link{check_data}
+\item \link{check_data_content}
+\item \link{check_jurisdiction_code}
+\item \link{check_mcn}
+\item \link{check_state_fips_code}
+\item \link{check_submitter_email}
+\item \link{check_submitter_name}
+\item \link{check_submitter_title}
+}
+}
+
 \examples{
 data <-
- mtcars |>
+  mtcars |>
   dplyr::rename(
     month = mpg,
     agegroup = cyl,
@@ -35,3 +100,16 @@ data <-
 
 check_data_content(data, "AS-HOSP")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submission}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

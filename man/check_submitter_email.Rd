@@ -7,14 +7,32 @@
 check_submitter_email(submitter_email)
 }
 \arguments{
-\item{submitter_email}{email address string}
+\item{submitter_email}{Email of person submitting data to EPHT.}
 }
 \value{
 list containing exit status code and success/failure message
 }
 \description{
-Check the validity of a submitter email
+Check that the provided value is a character string and can reasonably
+be assumed to an email.  This is a simple, non-comprehensive check and is
+in no way meant to be the final say of whether or not your email meets
+the regex check.  However, in order for users to get feedback and/or
+success/failure messages on data submissions to the EPHT it is imperative
+that the correct email be supplied.
 }
 \examples{
 check_submitter_email("myemail@email.com")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_data_content}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submission}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

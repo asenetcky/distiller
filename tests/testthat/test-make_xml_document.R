@@ -22,15 +22,15 @@ test_that("creates an xml document", {
   submitter_title <- "Submitter Title"
 
   expect_no_condition(
-  make_xml_document(
-    data,
-    content_group_id,
-    mcn,
-    jurisdiction_code,
-    state_fips_code,
-    submitter_email,
-    submitter_name,
-    submitter_title
+    make_xml_document(
+      data,
+      content_group_id,
+      mcn,
+      jurisdiction_code,
+      state_fips_code,
+      submitter_email,
+      submitter_name,
+      submitter_title
     )
   )
 

@@ -1,16 +1,16 @@
 Type: Package
 Package: distiller
 Title: Distill EPHT Data Down to XML
-Version: 0.3.3
+Version: 0.4.0
 Authors@R: 
-    person("Alexander", "Senetcky", , "asenetcky@gmail.com.com", role = c("aut", "cre", "cph"),
+    person("Alexander", "Senetcky", , "asenetcky@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0009-3730-5397"))
 Description: Centers for Disease Control and Prevention's (CDC) Environmental
     Public Health Tracking Network (EPHT) data 
     submission process has a lot documentation.  Much of it
     is buried and out of date, making it difficult for new users to
     decipher the exact specifications of the data submissions' XML.
-    `distiller` aims to make it easier to created the desired XML.
+    `distiller` makes it easier to create the intended XML data products.
 License: MIT + file LICENSE
 Imports: 
     dplyr (>= 1.1.0),

@@ -7,14 +7,31 @@
 check_submitter_name(submitter_name)
 }
 \arguments{
-\item{submitter_name}{First and last name of person submitting data}
+\item{submitter_name}{First and last name of person submitting data to EPHT.}
 }
 \value{
 list containing exit status code and success/failure message
 }
 \description{
-Check the validity of a submitter name
+Check that the provided value is a character string and can resonably be
+assumed to be a first and last name.  This is a simple, non-comprehensive
+check and is in no way meant to be the final say of whether or not your name
+meets the regex check.  However, in order for submissions to be attributed to
+the correct people it is imperative the users double check the name supplied.
 }
 \examples{
 check_submitter_name("Firstname Lastname")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_data_content}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submission}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

@@ -7,14 +7,23 @@
 parse_health_outcome_id(content_group_id)
 }
 \arguments{
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation.}
 }
 \value{
-Integer health outcome id
+Integer health outcome identifier
 }
 \description{
-Return the health outcome id based on the content group id
+The EPHT requires that each row node in the XML document have a health
+outcome identifier.
 }
 \examples{
 parse_health_outcome_id("AS-HOSP")
 }
+\seealso{
+Other helpers: 
+\code{\link{collapse_ethnicity}()},
+\code{\link{collapse_race}()},
+\code{\link{make_months_worse}()}
+}
+\concept{helpers}

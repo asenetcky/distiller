@@ -7,16 +7,31 @@
 check_data(data, content_group_id)
 }
 \arguments{
-\item{data}{dataframe}
+\item{data}{Pre-wrangled Dataframe.}
 
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation.}
 }
 \value{
 list containing exit status code and success/failure message
 }
 \description{
-Check the validity of the data structure
+Checks that the provided data is a dataframe and that it has all
+the expected columns based on the content group identifier
 }
 \examples{
 check_data(mtcars, "AS-HOSP")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data_content}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submission}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

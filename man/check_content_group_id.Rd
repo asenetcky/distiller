@@ -7,14 +7,62 @@
 check_content_group_id(content_group_id)
 }
 \arguments{
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation.}
 }
 \value{
 list containing exit status code and success/failure message
 }
 \description{
-Check the  validity of a Content Group Identifier
+\code{check_content_group_id} checks to see if the provided value belongs to
+one of nine currently accepted content group identifiers.
 }
+\section{Data}{
+Users are expected to wrangle, aggregate and otherwise implement the logic
+expected by EPHT themselves. \code{distiller} will not handle that step, though it
+does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \link{collapse_ethnicity}, and
+\link{make_months_worse}.
+
+In order for \code{distiller} to work properly there are some expectations about
+the data that must be met:
+\itemize{
+\item The data must be a dataframe or tibble
+\item For all \code{content_group_id} The data must have the following columns:
+(in any order):
+\itemize{
+\item month: character - acceptable values: "01", "02", "03" ... "12"
+\item agegroup: numeric - acceptable values: 1-19
+\item county: character - string length of 5, unless unknown, then county = "U"
+\item ethnicity: character - acceptable values: "H", "NH", "U"
+\item race: character - acceptable values: "W", "B", "O", "U"
+\item health_outcome_id: numeric - acceptable values: 1-5
+\item sex: character - acceptable values: "M", "F", "U"
+\item year: numeric - acceptable values: 2001-9999
+\item monthly_count: numeric - acceptable values: >0 and \emph{no} missing values
+}
+\item For \code{content_group_id} "CO-ED" and "CO-HOSP" the data must have the
+additional columns:
+\itemize{
+\item fire_count: numeric - acceptable values: >0 and \emph{no} missing values
+\item nonfire_count: numeric - acceptable values: >0 and \emph{no} missing values
+\item unknown_count: numeric - acceptable values: >0 and \emph{no} missing values
+}
+}
+}
+
 \examples{
 check_content_group_id("AS-HOSP")
 }
+\seealso{
+Other checks: 
+\code{\link{check_data}()},
+\code{\link{check_data_content}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submission}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}
