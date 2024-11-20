@@ -2,20 +2,30 @@
 % Please edit documentation in R/check_data_content.R
 \name{check_data_content}
 \alias{check_data_content}
-\title{Check the content of your data's variables}
+\title{Check the validity of data content}
 \usage{
 check_data_content(data, content_group_id)
 }
 \arguments{
-\item{data}{dataframe of wrangled data}
+\item{data}{Pre-wrangled Dataframe.}
 
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation}
 }
 \value{
 list of exit statuses for each variable
 }
 \description{
-Check the content of your data's variables
+There are a finite values that are allowable in any one of the
+variables that CDC want in a submission.  It is up to the user
+to implement the correct logic as defined in the data dictionaries
+and how-to-guides.
+
+However if your logic is sound \code{check_data_content} will shoulder some
+of the heavy lifting and provide users with its best guess about each
+variable's formatting as to whether it is correct or not.  This is
+a good way to quickly check your data before submitting it to the CDC.
+This is \emph{not} a replacement for the CDC's EPHT Test Submission portal.
 }
 \examples{
 data <-
