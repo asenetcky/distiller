@@ -16,28 +16,141 @@ check_submission(
 )
 }
 \arguments{
-\item{data}{dataframe to be converted to XML}
+\item{data}{Pre-wrangled Dataframe.}
 
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation.}
 
-\item{mcn}{Metadata Control Number provided by EPHT}
+\item{mcn}{Metadata Control Number provided by EPHT.}
 
-\item{jurisdiction_code}{Two-letter state abbreviation}
+\item{jurisdiction_code}{Two-letter state abbreviation for the submitter
+state.}
 
-\item{state_fips_code}{FIPS code of the state}
+\item{state_fips_code}{FIPS code of the submitter state.}
 
-\item{submitter_email}{Email of person submitting data to EPHT}
+\item{submitter_email}{Email of person submitting data to EPHT.}
 
-\item{submitter_name}{First and last name of person submitting data}
+\item{submitter_name}{First and last name of person submitting data to EPHT.}
 
-\item{submitter_title}{Title of person submitting data}
+\item{submitter_title}{Title of person submitting data to EPHT.}
 }
 \value{
-cli list in terminal of submission check results
+cli list in console of submission check results
 }
 \description{
-Check the validity of a submission
+Check the metadata, data structure and data content of a potential submission
+to the EPHT. \code{check_submission} is meant to be a tool to provide quick
+feedback before users spend a ton of time waiting on the submission portal
+results. Most checks are simple and non-comprehensive and meant to tip the
+user off to potential problems.  Where there are explicit allowable
+values provided by the cdc those has been included and the data content
+will be checked against them.
+
+Users can expect to find the results of \code{check_submission} in the console
+printed as a cli list. The results of each check will be one of 3 options
+Success, Warning, or Danger.  None of the checks are going to prevent users
+from moving forward with their submission.  They are merely reasonable
+guidelines and should be treated as such.
 }
+\section{Success}{
+This check passes. However, requirements can change over time and this
+package cannot be expected to catch everything up to the last minute.  This
+is a good sign, but users should expect the test submission portal to have
+the final say.
+}
+
+\section{Warning}{
+This check found something out of the ordinary.  Either the value wasn't in
+the expected format, the severity of the issue doesn't rise to the level of
+danger, or outside of increasing code complexity dramatically, this simple
+check just wasn't sure if the provided value conformed requirements. The
+test submission portal will have the final say.
+}
+
+\section{Danger}{
+Provided the package is up to date with EPHT requirements, this check
+has found something this is wrong, like a value outside of anything in
+the EPHT data dictionaries or the content of the value is not in a format
+that is not going to play nicely with \code{distiller} or the data submission
+portal. The test submission portal will have the final say.
+}
+
+\section{Data}{
+Users are expected to wrangle, aggregate and otherwise implement the logic
+expected by EPHT themselves. \code{distiller} will not handle that step, though it
+does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \link{collapse_ethnicity}, and
+\link{make_months_worse}.
+
+In order for \code{distiller} to work properly there are some expectations about
+the data that must be met:
+\itemize{
+\item The data must be a dataframe or tibble
+\item For all \code{content_group_id} The data must have the following columns:
+(in any order):
+\itemize{
+\item month: character - acceptable values: "01", "02", "03" ... "12"
+\item agegroup: numeric - acceptable values: 1-19
+\item county: character - string length of 5, unless unknown, then county = "U"
+\item ethnicity: character - acceptable values: "H", "NH", "U"
+\item race: character - acceptable values: "W", "B", "O", "U"
+\item health_outcome_id: numeric - acceptable values: 1-5
+\item sex: character - acceptable values: "M", "F", "U"
+\item year: numeric - acceptable values: 2001-9999
+\item monthly_count: numeric - acceptable values: >0 and \emph{no} missing values
+}
+\item For \code{content_group_id} "CO-ED" and "CO-HOSP" the data must have the
+additional columns:
+\itemize{
+\item fire_count: numeric - acceptable values: >0 and \emph{no} missing values
+\item nonfire_count: numeric - acceptable values: >0 and \emph{no} missing values
+\item unknown_count: numeric - acceptable values: >0 and \emph{no} missing values
+}
+}
+}
+
+\section{Content Group Identifier}{
+The Content Group Identifier is the ID expected to be used by EPHT. It is
+a combination of the the disease and facility type.  Details on which ID to
+use can be found in the how-to-guides provided by EPHT.
+
+\code{content_group_id} must belong to one of the following:
+\itemize{
+\item "AS-ED", "AS-HOSP"
+\item "MI-HOSP"
+\item "CO-ED", "CO-HOSP"
+\item "HEAT-ED", "HEAT-HOSP"
+\item "COPD-ED", "COPD-HOSP"
+}
+}
+
+\section{Metadata Control Number}{
+The Metadata control number (mcn) is provided by the EPHT and is used to identify
+the dataset and its content.  In order to submit data users will already
+have a set of these.
+}
+
+\section{Submission Check}{
+If users set \code{check_first} = \code{TRUE} in \code{\link[=make_xml_document]{make_xml_document()}} or runs
+\link{check_submission} or any of the other \code{check_* functions} then the a suite
+of checks is run against the metadata, data structure and data content.
+Please note that users do not need to run the whole suite of checks, they can
+run each function piecemeal on their data as it is being prepared.
+
+\link{check_submission} is called which is a wrapper around
+the following functions:
+\itemize{
+\item \link{check_content_group_id}
+\item \link{check_data}
+\item \link{check_data_content}
+\item \link{check_jurisdiction_code}
+\item \link{check_mcn}
+\item \link{check_state_fips_code}
+\item \link{check_submitter_email}
+\item \link{check_submitter_name}
+\item \link{check_submitter_title}
+}
+}
+
 \examples{
 data <-
   mtcars |>
@@ -53,6 +166,7 @@ data <-
     year = am
   ) |>
   dplyr::select(-c(gear, carb))
+
 content_group_id <- "AS-HOSP"
 mcn <- "1234-1234-1234-1234-1234"
 jurisdiction_code <- "two_letter_code"
@@ -60,6 +174,7 @@ state_fips_code <- "1234"
 submitter_email <- "submitter@email.com"
 submitter_name <- "Submitter Name"
 submitter_title <- "Submitter Title"
+
 check_submission(
   data,
   content_group_id,
@@ -71,3 +186,16 @@ check_submission(
   submitter_title
 )
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_data_content}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

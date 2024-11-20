@@ -26,6 +26,7 @@ Other checks:
 \code{\link{check_data_content}()},
 \code{\link{check_jurisdiction_code}()},
 \code{\link{check_mcn}()},
+\code{\link{check_submission}()},
 \code{\link{check_submitter_email}()},
 \code{\link{check_submitter_name}()},
 \code{\link{check_submitter_title}()}
