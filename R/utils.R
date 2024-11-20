@@ -1,4 +1,3 @@
-
 # grab the facility type from the content_group_id
 parse_content_group_id <- function(content_group_id) {
   # only allowable values so far
