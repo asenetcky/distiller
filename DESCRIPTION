@@ -1,7 +1,7 @@
 Type: Package
 Package: distiller
 Title: Distill EPHT Data Down to XML
-Version: 0.3.3
+Version: 0.4.0
 Authors@R: 
     person("Alexander", "Senetcky", , "asenetcky@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0009-3730-5397"))
