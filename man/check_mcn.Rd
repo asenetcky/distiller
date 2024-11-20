@@ -7,14 +7,30 @@
 check_mcn(mcn)
 }
 \arguments{
-\item{mcn}{Metadata Control Number provided by EPHT}
+\item{mcn}{Metadata Control Number provided by EPHT.}
 }
 \value{
 list containing exit status code and success/failure message
 }
 \description{
-Check validity of a Metadata Control Number
+Checks the format of the Metadata Control Number and warns the user if
+the provided value might not adhere to the expected format.  \code{check_mcn}
+has \emph{no} access to EPHT systems or APIs and \emph{cannot} check your mcn against
+any kind of list of accepted values. It checks if the value is a string,
+the length of the string and the pattern and \emph{nothing} else.
 }
 \examples{
 check_mcn("12345678-1234-1234-1234-123456789012")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_data_content}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

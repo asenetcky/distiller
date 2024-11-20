@@ -7,14 +7,28 @@
 check_jurisdiction_code(jurisdiction_code)
 }
 \arguments{
-\item{jurisdiction_code}{Two-letter state code}
+\item{jurisdiction_code}{Two-letter state abbreviation for the submitter
+state.}
 }
 \value{
 list containing exit status code and success/failure message
 }
 \description{
-Check the validity of a jurisdiction code
+Check that the provided value is a character string of capital letters with a
+length of 2.  There is \emph{no} connection to any kind of EPHT system or API.
 }
 \examples{
 check_jurisdiction_code("CA")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_data_content}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

@@ -27,6 +27,39 @@ variable's formatting as to whether it is correct or not.  This is
 a good way to quickly check your data before submitting it to the CDC.
 This is \emph{not} a replacement for the CDC's EPHT Test Submission portal.
 }
+\section{Data}{
+Users are expected to wrangle, aggregate and otherwise implement the logic
+expected by EPHT themselves. \code{distiller} will not handle that step, though it
+does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \link{collapse_ethnicity}, and
+\link{make_months_worse}.
+
+In order for \code{distiller} to work properly there are some expectations about
+the data that must be met:
+\itemize{
+\item The data must be a dataframe or tibble
+\item For all \code{content_group_id} The data must have the following columns:
+(in any order):
+\itemize{
+\item month: character - acceptable values: "01", "02", "03" ... "12"
+\item agegroup: numeric - acceptable values: 1-19
+\item county: character - string length of 5, unless unknown, then county = "U"
+\item ethnicity: character - acceptable values: "H", "NH", "U"
+\item race: character - acceptable values: "W", "B", "O", "U"
+\item health_outcome_id: numeric - acceptable values: 1-5
+\item sex: character - acceptable values: "M", "F", "U"
+\item year: numeric - acceptable values: 2001-9999
+\item monthly_count: numeric - acceptable values: >0 and \emph{no} missing values
+}
+\item For \code{content_group_id} "CO-ED" and "CO-HOSP" the data must have the
+additional columns:
+\itemize{
+\item fire_count: numeric - acceptable values: >0 and \emph{no} missing values
+\item nonfire_count: numeric - acceptable values: >0 and \emph{no} missing values
+\item unknown_count: numeric - acceptable values: >0 and \emph{no} missing values
+}
+}
+}
+
 \section{Submission Check}{
 If users set \code{check_first} = \code{TRUE} in \code{\link[=make_xml_document]{make_xml_document()}} or runs
 \link{check_submission} or any of the other \code{check_* functions} then the a suite
@@ -67,3 +100,15 @@ data <-
 
 check_data_content(data, "AS-HOSP")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

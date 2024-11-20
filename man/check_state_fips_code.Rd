@@ -7,14 +7,27 @@
 check_state_fips_code(state_fips_code)
 }
 \arguments{
-\item{state_fips_code}{FIPS code of the state}
+\item{state_fips_code}{FIPS code of the submitter state.}
 }
 \value{
 list containing exit status code and success/failure message
 }
 \description{
-Check the validity of a state FIPS code
+Check that the provided value is a character string, that numbers 0-9 and
+has a string length of 2.
 }
 \examples{
 check_state_fips_code("06")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_data_content}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()},
+\code{\link{check_submitter_title}()}
+}
+\concept{checks}

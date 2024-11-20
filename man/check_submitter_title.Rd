@@ -7,14 +7,27 @@
 check_submitter_title(submitter_title)
 }
 \arguments{
-\item{submitter_title}{Job title of person submitting data}
+\item{submitter_title}{Title of person submitting data to EPHT.}
 }
 \value{
 list containing exit status code and success/failure message
 }
 \description{
-Check the validity of a submitter title
+Check that the provided value is a character string and has a
+string length greater than 0.
 }
 \examples{
 check_submitter_title("Data Scientist")
 }
+\seealso{
+Other checks: 
+\code{\link{check_content_group_id}()},
+\code{\link{check_data}()},
+\code{\link{check_data_content}()},
+\code{\link{check_jurisdiction_code}()},
+\code{\link{check_mcn}()},
+\code{\link{check_state_fips_code}()},
+\code{\link{check_submitter_email}()},
+\code{\link{check_submitter_name}()}
+}
+\concept{checks}
