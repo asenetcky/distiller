@@ -1,16 +1,35 @@
-#' Create an XML document
+#' Create an XML document with user-provided data and submission metadata
 #'
-#' @param data Pre-wrangled dataframe
-#' @param content_group_id Code that identifies the content
-#' @param mcn Metadata Control Number provided by epht
-#' @param jurisdiction_code Two-letter state abbreviation
-#' @param state_fips_code FIPS code of the state
-#' @param submitter_email Email of person submitting data to epht
-#' @param submitter_name First and last name of person submitting data
-#' @param submitter_title Title of person submitting data
-#' @param check_first Quickly checks the validity of your submission
+#' @description
+#' This is the core function of `distiller`. It takes in a user-provided
+#' dataframe with the expected columns and a set of metadata about the
+#' submission. It then jumps through the XML hoops for the user and distills it
+#' all down to an XML document that can be submitted to the CDC's EPHT
+#' submission portal. Users should _always_ check the outputs with the EPHT test
+#' submission portal first.
 #'
-#' @return XML document
+#' Users have the option to check their submission at time of XML creation and
+#' get instant feedback on the possible validity of their submission. Users can
+#' further refine the returned xml document with their choice of package such as
+#' [xml2](https://cran.r-project.org/web/packages/xml2/index.html),
+#' [XML](https://cran.r-project.org/web/packages/XML/index.html) and friends.
+#' When satisfied with the data product users will need to print the XML
+#' document to a file and then submit to the CDC like they usually would.
+#'
+#'
+#' @param data Pre-wrangled Dataframe.
+#' @param content_group_id Code that identifies the content found in EPHT
+#'   documentation
+#' @param mcn Metadata Control Number provided by EPHT.
+#' @param jurisdiction_code Two-letter state abbreviation for the submitter
+#'   state.
+#' @param state_fips_code FIPS code of the submitter state.
+#' @param submitter_email Email of person submitting data to EPHT.
+#' @param submitter_name First and last name of person submitting data to EPHT.
+#' @param submitter_title Title of person submitting data to EPHT.
+#' @param check_first Check the validity of your EPHT submission.
+#'
+#' @return XML document object
 #' @export
 #'
 #' @examples
