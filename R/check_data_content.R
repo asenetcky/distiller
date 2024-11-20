@@ -12,9 +12,11 @@
 #' a good way to quickly check your data before submitting it to the CDC.
 #' This is _not_ a replacement for the CDC's EPHT Test Submission portal.
 #'
+#' @inheritSection make_xml_document Data
 #' @inheritSection make_xml_document Submission Check
 #'
 #' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list of exit statuses for each variable
 #' @export

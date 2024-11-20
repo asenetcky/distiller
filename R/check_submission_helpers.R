@@ -1,9 +1,10 @@
-#TODO add see also for check_submission
-
 #' Check the validity of the data structure
 #'
-#' @param data dataframe
-#' @param content_group_id Code that identifies the content
+#' Checks that the provided data is a dataframe and that it has all
+#' the expected columns based on the content group identifier
+#'
+#' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list containing exit status code and success/failure message
 #' @export
@@ -61,7 +62,13 @@ check_data <- function(data, content_group_id) {
 
 #' Check the  validity of a Content Group Identifier
 #'
-#' @param content_group_id Code that identifies the content
+#' `check_content_group_id` checks to see if the provided value belongs to
+#' one of nine currently accepted content group identifiers.
+#'
+#' @inheritParams make_xml_document
+#' @family checks
+#'
+#' @inheritSection make_xml_document Data
 #'
 #' @return list containing exit status code and success/failure message
 #' @export
@@ -106,7 +113,14 @@ check_content_group_id <- function(content_group_id) {
 
 #' Check validity of a Metadata Control Number
 #'
-#' @param mcn Metadata Control Number provided by EPHT
+#' Checks the format of the Metadata Control Number and warns the user if
+#' the provided value might not adhere to the expected format.  `check_mcn`
+#' has _no_ access to EPHT systems or APIs and _cannot_ check your mcn against
+#' any kind of list of accepted values. It checks if the value is a string,
+#' the length of the string and the pattern and _nothing_ else.
+#'
+#' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list containing exit status code and success/failure message
 #' @export
@@ -149,7 +163,11 @@ check_mcn <- function(mcn) {
 
 #' Check the validity of a jurisdiction code
 #'
-#' @param jurisdiction_code Two-letter state code
+#' Check that the provided value is a character string of capital letters with a
+#' length of 2.  There is _no_ connection to any kind of EPHT system or API.
+#'
+#' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list containing exit status code and success/failure message
 #' @export
@@ -190,7 +208,11 @@ check_jurisdiction_code <- function(jurisdiction_code) {
 
 #' Check the validity of a state FIPS code
 #'
-#' @param state_fips_code FIPS code of the state
+#' Check that the provided value is a character string, that numbers 0-9 and
+#' has a string length of 2.
+#'
+#' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list containing exit status code and success/failure message
 #' @export
@@ -231,7 +253,15 @@ check_state_fips_code <- function(state_fips_code) {
 
 #' Check the validity of a submitter email
 #'
-#' @param submitter_email email address string
+#' Check that the provided value is a character string and can reasonably
+#' be assumed to an email.  This is a simple, non-comprehensive check and is
+#' in no way meant to be the final say of whether or not your email meets
+#' the regex check.  However, in order for users to get feedback and/or
+#' success/failure messages on data submissions to the EPHT it is imperative
+#' that the correct email be supplied.
+#'
+#' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list containing exit status code and success/failure message
 #' @export
@@ -269,7 +299,14 @@ check_submitter_email <- function(submitter_email) {
 
 #' Check the validity of a submitter name
 #'
-#' @param submitter_name First and last name of person submitting data
+#' Check that the provided value is a character string and can resonably be
+#' assumed to be a first and last name.  This is a simple, non-comprehensive
+#' check and is in no way meant to be the final say of whether or not your name
+#' meets the regex check.  However, in order for submissions to be attributed to
+#' the correct people it is imperative the users double check the name supplied.
+#'
+#' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list containing exit status code and success/failure message
 #' @export
@@ -307,7 +344,11 @@ check_submitter_name <- function(submitter_name) {
 
 #' Check the validity of a submitter title
 #'
-#' @param submitter_title Job title of person submitting data
+#' Check that the provided value is a character string and has a
+#' string length greater than 0.
+#'
+#' @inheritParams make_xml_document
+#' @family checks
 #'
 #' @return list containing exit status code and success/failure message
 #' @export
