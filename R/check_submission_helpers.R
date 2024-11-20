@@ -1,3 +1,5 @@
+#TODO add see also for check_submission
+
 #' Check the validity of the data structure
 #'
 #' @param data dataframe

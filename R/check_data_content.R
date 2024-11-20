@@ -1,7 +1,7 @@
 #' Check the validity of data content
 #'
 #' @description
-#' There are a finite values that are allowable in any one of the
+#' There are finite values that are allowable in any one of the
 #' variables that CDC want in a submission.  It is up to the user
 #' to implement the correct logic as defined in the data dictionaries
 #' and how-to-guides.
