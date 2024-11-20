@@ -1,3 +1,4 @@
+# given an exit status list, send cli alert to console
 message_cli <- function(status_list) {
   checkmate::assert_list(status_list)
   checkmate::assert_subset(names(status_list), c("code", "message"))
@@ -15,6 +16,7 @@ message_cli <- function(status_list) {
   }
 }
 
+# given a named vectors with TRUE/FALSE results create an exit status list
 create_exit_status <- function(
     target_variable_name,
     warn_variables = NULL,
@@ -54,7 +56,6 @@ create_exit_status <- function(
     }
   }
 
-
   if (!is.null(danger_variables)) {
     danger <- any(!danger_variables)
     is_named <-
@@ -86,7 +87,7 @@ create_exit_status <- function(
   exit_status
 }
 
-# just create the name vector specifically beforehand
+# print the trouble maker variables
 list_troublemakers <- function(vars) {
   var_string <- ""
   vars <- which(!vars)
