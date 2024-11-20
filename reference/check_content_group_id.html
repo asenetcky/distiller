@@ -9,7 +9,7 @@ one of nine currently accepted content group identifiers."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">distiller</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@ one of nine currently accepted content group identifiers."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Check the validity of a Content Group Identifier</h1>
-      <small class="dont-index">Source: <a href="https://github.com/asenetcky/distiller/blob/v0.4.0/R/check_submission_helpers.R" class="external-link"><code>R/check_submission_helpers.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/asenetcky/distiller/blob/main/R/check_submission_helpers.R" class="external-link"><code>R/check_submission_helpers.R</code></a></small>
       <div class="d-none name"><code>check_content_group_id.Rd</code></div>
     </div>
 
@@ -62,8 +62,8 @@ documentation.</p></dd>
     <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
     <p>Users are expected to wrangle, aggregate and otherwise implement the logic
 expected by EPHT themselves. <code>distiller</code> will not handle that step, though it
-does provides some helpers: <code><a href="collapse_race.html">collapse_race()</a></code>, <a href="collapse_ethnicity.html">collapse_ethnicity</a>, and
-<a href="make_months_worse.html">make_months_worse</a>.</p>
+does provides some helpers: <code><a href="collapse_race.html">collapse_race()</a></code>, <code><a href="collapse_ethnicity.html">collapse_ethnicity()</a></code>, and
+<code><a href="make_months_worse.html">make_months_worse()</a></code>.</p>
 <p>In order for <code>distiller</code> to work properly there are some expectations about
 the data that must be met:</p><ul><li><p>The data must be a dataframe or tibble</p></li>
 <li><p>For all <code>content_group_id</code> The data must have the following columns:
