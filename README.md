@@ -48,7 +48,7 @@ Users just need to bring the data and now they can spend less time
 worrying about XML semantics and more time polishing their data
 products.
 
-`distiller` is **no** replacement for the CDC EPHPT Test Submission
+`disitller` is **no** replacement for the CDC EPHPT Test Submission
 portal, however, creating the XML, and shuffling files around and then
 dropping them into the portal and waiting an indeterminate amount of
 time for feedback eats up time and is a pain. `distiller` aims to
@@ -130,40 +130,40 @@ library(distiller)
 # Take you already-wrangled data
 # note the specific variable names
 data <-
-    mtcars |>
-    dplyr::rename(
-      month = mpg,
-      agegroup = cyl,
-      county = disp,
-      ethnicity = hp,
-      health_outcome_id = drat,
-      monthly_count = wt,
-      race = qsec,
-      sex = vs,
-      year = am
-    ) |>
-    dplyr::select(-c(gear, carb))
+  mtcars |>
+  dplyr::rename(
+    month = mpg,
+    agegroup = cyl,
+    county = disp,
+    ethnicity = hp,
+    health_outcome_id = drat,
+    monthly_count = wt,
+    race = qsec,
+    sex = vs,
+    year = am
+  ) |>
+  dplyr::select(-c(gear, carb))
 
 # And your metadata
-  content_group_id <- "AS-HOSP"
-  mcn <- "1234-1234-1234-1234-1234"
-  jurisdiction_code <- "two_letter_code"
-  state_fips_code <- "1234"
-  submitter_email <- "submitter@email.com"
-  submitter_name <- "Submitter Name"
-  submitter_title <- "Submitter Title"
-  
+content_group_id <- "AS-HOSP"
+mcn <- "1234-1234-1234-1234-1234"
+jurisdiction_code <- "two_letter_code"
+state_fips_code <- "1234"
+submitter_email <- "submitter@email.com"
+submitter_name <- "Submitter Name"
+submitter_title <- "Submitter Title"
+
 # Optionally check your submission data structure and metadata
-  check_submission(
-    data,
-    content_group_id,
-    mcn,
-    jurisdiction_code,
-    state_fips_code,
-    submitter_email,
-    submitter_name,
-    submitter_title
-    )
+check_submission(
+  data,
+  content_group_id,
+  mcn,
+  jurisdiction_code,
+  state_fips_code,
+  submitter_email,
+  submitter_name,
+  submitter_title
+)
 #> ℹ Checking submission metadata
 #> ✔ Success: content_group_id
 #> ! Warning: mcn may not have correct format
@@ -193,20 +193,23 @@ data <-
 #> ✖ Danger: race does not have allowable value/s
 #> Troublemakers: allowed_values
 #> ✔ Success: monthly_count
+```
+
+``` r
 # This can also be checked with `check_first = TRUE` in `make_xml_document()`
-  
+
 
 # And then make your xml document
 make_xml_document(
-    data,
-    content_group_id,
-    mcn,
-    jurisdiction_code,
-    state_fips_code,
-    submitter_email,
-    submitter_name,
-    submitter_title
-    )
+  data,
+  content_group_id,
+  mcn,
+  jurisdiction_code,
+  state_fips_code,
+  submitter_email,
+  submitter_name,
+  submitter_title
+)
 #> {xml_document}
 #> <HospitalizationData schemaLocation="http://www.ephtn.org/NCDM/PH/HospitalizationData ephtn-ph-HospitalizationData.xsd" xmlns="http://www.ephtn.org/NCDM/PH/HospitalizationData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 #> [1] <Header>\n  <MCN>1234-1234-1234-1234-1234</MCN>\n  <JurisdictionCode>two_ ...
