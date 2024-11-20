@@ -19,7 +19,7 @@ Check the content of your data's variables
 }
 \examples{
 data <-
- mtcars |>
+  mtcars |>
   dplyr::rename(
     month = mpg,
     agegroup = cyl,

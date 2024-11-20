@@ -19,7 +19,7 @@ Make dataset xml node
 }
 \examples{
 data_right_vars <-
-mtcars |>
+  mtcars |>
   dplyr::rename(
     month = mpg,
     agegroup = cyl,

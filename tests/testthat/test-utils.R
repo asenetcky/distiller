@@ -26,7 +26,7 @@ test_that("right health outcome id returned", {
     parse_health_outcome_id("CO-ED"),
     3
   )
- expect_equal(
+  expect_equal(
     parse_health_outcome_id("CO-HOSP"),
     3
   )

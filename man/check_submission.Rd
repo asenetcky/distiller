@@ -40,7 +40,7 @@ Check the validity of a submission
 }
 \examples{
 data <-
-mtcars |>
+  mtcars |>
   dplyr::rename(
     month = mpg,
     agegroup = cyl,
@@ -61,13 +61,13 @@ submitter_email <- "submitter@email.com"
 submitter_name <- "Submitter Name"
 submitter_title <- "Submitter Title"
 check_submission(
- data,
- content_group_id,
- mcn,
- jurisdiction_code,
- state_fips_code,
- submitter_email,
- submitter_name,
- submitter_title
+  data,
+  content_group_id,
+  mcn,
+  jurisdiction_code,
+  state_fips_code,
+  submitter_email,
+  submitter_name,
+  submitter_title
 )
 }

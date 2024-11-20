@@ -35,7 +35,6 @@ collapse_ethnicity <- function(ethnicity, na_is_unknown = TRUE) {
       .default = NA_character_
     )
   }
-
 }
 
 #' Collapse Race based on EPHT logic
@@ -61,54 +60,54 @@ collapse_race <- function(race, na_is_unknown = TRUE) {
     )
 
   if (na_is_unknown) {
-  dplyr::case_when(
-    std_race %in% c(
-      "white",
-      "caucasian"
-    ) ~ "W",
-    std_race %in% c(
-      "blackorafricanamerican",
-      "black",
-      "africanamerican"
+    dplyr::case_when(
+      std_race %in% c(
+        "white",
+        "caucasian"
+      ) ~ "W",
+      std_race %in% c(
+        "blackorafricanamerican",
+        "black",
+        "africanamerican"
       ) ~ "B",
-    std_race == "unknown" ~ "U",
-    std_race %in% c(
-      "americanindianoralaskanative",
-      "americanindian",
-      "alaskanative",
-      "asian",
-      "nativehawaiianorotherpacificislander",
-      "nativehawaiian",
-      "otherpacificislander",
-      "pacificislander",
-      "other"
-    ) ~ "O",
-    .default = "U"
-  )
+      std_race == "unknown" ~ "U",
+      std_race %in% c(
+        "americanindianoralaskanative",
+        "americanindian",
+        "alaskanative",
+        "asian",
+        "nativehawaiianorotherpacificislander",
+        "nativehawaiian",
+        "otherpacificislander",
+        "pacificislander",
+        "other"
+      ) ~ "O",
+      .default = "U"
+    )
   } else {
-  dplyr::case_when(
-    std_race %in% c(
-      "white",
-      "caucasian"
-    ) ~ "W",
-    std_race %in% c(
-      "blackorafricanamerican",
-      "black",
-      "africanamerican"
-    ) ~ "B",
-    std_race == "unknown" ~ "U",
-    std_race %in% c(
-      "americanindianoralaskanative",
-      "americanindian",
-      "alaskanative",
-      "asian",
-      "nativehawaiianorotherpacificislander",
-      "nativehawaiian",
-      "otherpacificislander",
-      "pacislander",
-      "other"
-    ) ~ "O",
-    .default = NA_character_
-  )
+    dplyr::case_when(
+      std_race %in% c(
+        "white",
+        "caucasian"
+      ) ~ "W",
+      std_race %in% c(
+        "blackorafricanamerican",
+        "black",
+        "africanamerican"
+      ) ~ "B",
+      std_race == "unknown" ~ "U",
+      std_race %in% c(
+        "americanindianoralaskanative",
+        "americanindian",
+        "alaskanative",
+        "asian",
+        "nativehawaiianorotherpacificislander",
+        "nativehawaiian",
+        "otherpacificislander",
+        "pacislander",
+        "other"
+      ) ~ "O",
+      .default = NA_character_
+    )
   }
 }

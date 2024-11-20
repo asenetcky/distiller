@@ -82,7 +82,8 @@ check_content_group_id <- function(content_group_id) {
 
   has_character <-
     checkmate::check_character(
-      content_group_id, null.ok = FALSE, any.missing = FALSE
+      content_group_id,
+      null.ok = FALSE, any.missing = FALSE
     ) |>
     is.logical() |>
     purrr::set_names("class")
@@ -113,7 +114,8 @@ check_content_group_id <- function(content_group_id) {
 check_mcn <- function(mcn) {
   has_character <-
     checkmate::check_character(
-      mcn, null.ok = FALSE, any.missing = FALSE
+      mcn,
+      null.ok = FALSE, any.missing = FALSE
     ) |>
     is.logical() |>
     purrr::set_names("class")
@@ -121,11 +123,10 @@ check_mcn <- function(mcn) {
   has_length <- FALSE
   has_format <- FALSE
   if (has_character) {
-
     # I don't know if this is always true
     has_length <-
       stringr::str_length(mcn) == 36 |>
-      purrr::set_names("length")
+        purrr::set_names("length")
 
     # I don't know if this is always true
     has_format <-
@@ -168,7 +169,7 @@ check_jurisdiction_code <- function(jurisdiction_code) {
   if (has_character) {
     has_length <-
       stringr::str_length(jurisdiction_code) == 2 |>
-      purrr::set_names("length")
+        purrr::set_names("length")
 
     has_format <-
       stringr::str_detect(
@@ -209,7 +210,7 @@ check_state_fips_code <- function(state_fips_code) {
   if (has_character) {
     has_length <-
       stringr::str_length(state_fips_code) == 2 |>
-      purrr::set_names("length")
+        purrr::set_names("length")
 
     has_format <-
       stringr::str_detect(
@@ -247,14 +248,14 @@ check_submitter_email <- function(submitter_email) {
 
   has_format <- FALSE
   if (has_character) {
-#this is a simple check, not meant to be exhaustive
-  has_format <-
-    stringr::str_detect(
-      string = submitter_email,
-      pattern =
-        "^\\S+@\\S+$"
+    # this is a simple check, not meant to be exhaustive
+    has_format <-
+      stringr::str_detect(
+        string = submitter_email,
+        pattern =
+          "^\\S+@\\S+$"
       ) |>
-    purrr::set_names("format")
+      purrr::set_names("format")
   }
 
   create_exit_status(
@@ -286,13 +287,13 @@ check_submitter_name <- function(submitter_name) {
 
   has_format <- FALSE
   if (has_character) {
-  #reasonably check if it is a first and last name
+    # reasonably check if it is a first and last name
     has_format <-
       stringr::str_detect(
         string = submitter_name,
         pattern = "^[A-Z][a-z]+ [A-Z][a-z]+$"
       ) |>
-    purrr::set_names("format")
+      purrr::set_names("format")
   }
 
   create_exit_status(
@@ -325,7 +326,7 @@ check_submitter_title <- function(submitter_title) {
   if (has_character) {
     has_length <-
       stringr::str_length(submitter_title) > 0 |>
-    purrr::set_names("length")
+        purrr::set_names("length")
   }
 
   create_exit_status(

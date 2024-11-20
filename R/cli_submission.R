@@ -1,4 +1,3 @@
-
 message_cli <- function(status_list) {
   checkmate::assert_list(status_list)
   checkmate::assert_subset(names(status_list), c("code", "message"))
@@ -20,7 +19,6 @@ create_exit_status <- function(
     target_variable_name,
     warn_variables = NULL,
     danger_variables = NULL) {
-
   exit_status <-
     dplyr::lst(
       code = 0,
@@ -54,7 +52,7 @@ create_exit_status <- function(
           )
       }
     }
-    }
+  }
 
 
   if (!is.null(danger_variables)) {
@@ -74,15 +72,14 @@ create_exit_status <- function(
                 Troublemakers: {troublemakers}"
             )
           )
-
       } else {
-       exit_status <-
-        dplyr::lst(
-          code = 1,
-          message = glue::glue(
-            "Danger: {target_variable_name} does not have allowable value/s"
+        exit_status <-
+          dplyr::lst(
+            code = 1,
+            message = glue::glue(
+              "Danger: {target_variable_name} does not have allowable value/s"
+            )
           )
-        )
       }
     }
   }

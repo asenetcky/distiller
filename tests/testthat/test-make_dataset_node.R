@@ -27,7 +27,7 @@ test_that("throws errors on improper arguments", {
 })
 
 test_that("returns XML node", {
-   data_right_vars <-
+  data_right_vars <-
     mtcars |>
     dplyr::rename(
       month = mpg,
@@ -83,11 +83,11 @@ test_that("right root element and variable order for the right content type", {
     xml2::as_list()
 
   expect_equal(
-    make_dataset_node(data = data_right_vars, content_group_id = "AS-HOSP") |>xml2::xml_name(),
+    make_dataset_node(data = data_right_vars, content_group_id = "AS-HOSP") |> xml2::xml_name(),
     "Dataset"
   )
   expect_equal(
-    make_dataset_node(data = data_right_vars, content_group_id = "AS-ED") |>  xml2::xml_name(),
+    make_dataset_node(data = data_right_vars, content_group_id = "AS-ED") |> xml2::xml_name(),
     "Dataset"
   )
 
@@ -126,8 +126,6 @@ test_that("right root element and variable order for the right content type", {
       )
     )
   )
-
-
 })
 
 test_that("Additional vars show up in the right order", {
@@ -197,8 +195,6 @@ test_that("Additional vars show up in the right order", {
       )
     )
   )
-
-
 })
 
 test_that("throws errors for missing vars", {
@@ -212,7 +208,7 @@ test_that("throws errors for missing vars", {
       health_outcome_id = drat,
       monthly_count = wt,
       race = qsec,
-    #missing sex
+      # missing sex
     )
   expect_error(
     make_dataset_node(data, "AS-HOSP"),

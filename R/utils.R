@@ -1,5 +1,5 @@
 parse_content_group_id <- function(content_group_id) {
-  #only allowable values so far
+  # only allowable values so far
   type <-
     dplyr::case_when(
       content_group_id == "MI-HOSP" ~ "hosp",
@@ -31,7 +31,7 @@ parse_content_group_id <- function(content_group_id) {
 #' @examples
 #' parse_health_outcome_id("AS-HOSP")
 parse_health_outcome_id <- function(content_group_id) {
-  #only allowable values so far
+  # only allowable values so far
   health_outcome_id <-
     dplyr::case_when(
       content_group_id == "AS-ED" ~ 1,

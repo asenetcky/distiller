@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' data <-
-#' mtcars |>
+#'   mtcars |>
 #'   dplyr::rename(
 #'     month = mpg,
 #'     agegroup = cyl,
@@ -35,15 +35,15 @@
 #' submitter_name <- "Submitter Name"
 #' submitter_title <- "Submitter Title"
 #' check_submission(
-#'  data,
-#'  content_group_id,
-#'  mcn,
-#'  jurisdiction_code,
-#'  state_fips_code,
-#'  submitter_email,
-#'  submitter_name,
-#'  submitter_title
-#')
+#'   data,
+#'   content_group_id,
+#'   mcn,
+#'   jurisdiction_code,
+#'   state_fips_code,
+#'   submitter_email,
+#'   submitter_name,
+#'   submitter_title
+#' )
 check_submission <-
   function(data,
            content_group_id,
@@ -53,7 +53,6 @@ check_submission <-
            submitter_email,
            submitter_name,
            submitter_title) {
-
     content_group_id_status <- check_content_group_id(content_group_id)
     data_status <- check_data(data, content_group_id)
     data_content_status <- check_data_content(data, content_group_id)

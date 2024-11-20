@@ -87,15 +87,15 @@ test_that("check_state_fips_code returns proper exit status", {
 })
 
 test_that("check_submitter_email returns proper exit status", {
- expect_equal(check_submitter_email("email@email.com")$code, 0)
- expect_equal(check_submitter_email("somethinglong123@email.com")$code, 0)
- expect_equal(check_submitter_email("a@email.com")$code, 0)
- expect_equal(check_submitter_email(1)$code, 1)
- expect_equal(check_submitter_email(NULL)$code, 1)
- expect_equal(check_submitter_email(NA)$code, 1)
- expect_equal(check_submitter_email(NA_character_)$code, 1)
- expect_equal(check_submitter_email("email.com")$code, 2)
- expect_equal(check_submitter_email("123")$code, 2)
+  expect_equal(check_submitter_email("email@email.com")$code, 0)
+  expect_equal(check_submitter_email("somethinglong123@email.com")$code, 0)
+  expect_equal(check_submitter_email("a@email.com")$code, 0)
+  expect_equal(check_submitter_email(1)$code, 1)
+  expect_equal(check_submitter_email(NULL)$code, 1)
+  expect_equal(check_submitter_email(NA)$code, 1)
+  expect_equal(check_submitter_email(NA_character_)$code, 1)
+  expect_equal(check_submitter_email("email.com")$code, 2)
+  expect_equal(check_submitter_email("123")$code, 2)
 })
 
 test_that("check_submitter_name returns proper exit status", {
@@ -144,12 +144,16 @@ test_that("check_* functions return a message", {
   submitter_name <- "Submitter Name"
   submitter_title <- "Submitter Title"
 
-  expect_equal(check_data(
-    data_min_vars, content_group_id)$message,
+  expect_equal(
+    check_data(
+      data_min_vars, content_group_id
+    )$message,
     "Success: dataframe_structure"
   )
-  expect_equal(check_content_group_id(
-    content_group_id)$message,
+  expect_equal(
+    check_content_group_id(
+      content_group_id
+    )$message,
     "Success: content_group_id"
   )
   expect_equal(

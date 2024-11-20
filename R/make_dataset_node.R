@@ -7,8 +7,8 @@
 #' @export
 #'
 #' @examples
-#'data_right_vars <-
-#' mtcars |>
+#' data_right_vars <-
+#'   mtcars |>
 #'   dplyr::rename(
 #'     month = mpg,
 #'     agegroup = cyl,
@@ -25,12 +25,11 @@
 #' make_dataset_node(data_right_vars, "AS-HOSP")
 #'
 make_dataset_node <- function(data, content_group_id) {
-
   type <- parse_content_group_id(content_group_id)
 
-  #adding this extra infrastructure in case there are other
-  #future edge cases with more/different vars
-  #otherwise I'd just if() off of content_group_id & type
+  # adding this extra infrastructure in case there are other
+  # future edge cases with more/different vars
+  # otherwise I'd just if() off of content_group_id & type
   additional_vars <-
     dplyr::if_else(
       content_group_id %in% c("CO-ED", "CO-HOSP"),
@@ -119,7 +118,7 @@ make_dataset_node <- function(data, content_group_id) {
     }
   }
 
-  if ( type == "ed_add_vars") {
+  if (type == "ed_add_vars") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 
@@ -145,7 +144,7 @@ make_dataset_node <- function(data, content_group_id) {
     }
   }
 
-  if ( type == "ed") {
+  if (type == "ed") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 

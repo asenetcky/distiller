@@ -37,11 +37,12 @@ Make Header node for XML Document
 }
 \examples{
 make_header_node(
- mcn = "12345678-1234-1234-1234-123456789012",
- jurisdiction_code = "CA",
- content_group_id = "XX-HOSP",
- submitter_email = "myname@email.com",
- submitter_name = "First Last",
- submitter_title = "Data Analyst",
- state_fips_code = "06")
+  mcn = "12345678-1234-1234-1234-123456789012",
+  jurisdiction_code = "CA",
+  content_group_id = "XX-HOSP",
+  submitter_email = "myname@email.com",
+  submitter_name = "First Last",
+  submitter_title = "Data Analyst",
+  state_fips_code = "06"
+)
 }
