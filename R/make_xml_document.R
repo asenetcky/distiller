@@ -151,7 +151,6 @@ make_xml_document <-
            submitter_name,
            submitter_title,
            check_first = FALSE) {
-
     # check metadata, data structure and data content
     if (check_first) {
       check_submission(
