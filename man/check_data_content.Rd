@@ -10,7 +10,7 @@ check_data_content(data, content_group_id)
 \item{data}{Pre-wrangled Dataframe.}
 
 \item{content_group_id}{Code that identifies the content found in EPHT
-documentation}
+documentation.}
 }
 \value{
 list of exit statuses for each variable
@@ -27,6 +27,28 @@ variable's formatting as to whether it is correct or not.  This is
 a good way to quickly check your data before submitting it to the CDC.
 This is \emph{not} a replacement for the CDC's EPHT Test Submission portal.
 }
+\section{Submission Check}{
+If users set \code{check_first} = \code{TRUE} in \code{\link[=make_xml_document]{make_xml_document()}} or runs
+\link{check_submission} or any of the other \code{check_* functions} then the a suite
+of checks is run against the metadata, data structure and data content.
+Please note that users do not need to run the whole suite of checks, they can
+run each function piecemeal on their data as it is being prepared.
+
+\link{check_submission} is called which is a wrapper around
+the following functions:
+\itemize{
+\item \link{check_content_group_id}
+\item \link{check_data}
+\item \link{check_data_content}
+\item \link{check_jurisdiction_code}
+\item \link{check_mcn}
+\item \link{check_state_fips_code}
+\item \link{check_submitter_email}
+\item \link{check_submitter_name}
+\item \link{check_submitter_title}
+}
+}
+
 \examples{
 data <-
   mtcars |>

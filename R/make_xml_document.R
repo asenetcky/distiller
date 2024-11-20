@@ -25,7 +25,7 @@
 #' When satisfied with the data product users will need to print the XML
 #' document to a file and then submit to the CDC like they usually would.
 #'
-#' @section Data:
+#' # Data
 #' Users are expected to wrangle, aggregate and otherwise implement the logic
 #' expected by EPHT themselves. `distiller` will not handle that step, though it
 #' does provides some helpers: [collapse_race()], [collapse_ethnicity], and
@@ -52,7 +52,7 @@
 #'   * nonfire_count: numeric - acceptable values: >0 and _no_ missing values
 #'   * unknown_count: numeric - acceptable values: >0 and _no_ missing values
 #'
-#' @section Content Group Identifier:
+#' # Content Group Identifier
 #' The Content Group Identifier is the ID expected to be used by EPHT. It is
 #' a combination of the the disease and facility type.  Details on which ID to
 #' use can be found in the how-to-guides provided by EPHT.
@@ -64,13 +64,13 @@
 #'  * "HEAT-ED", "HEAT-HOSP"
 #'  * "COPD-ED", "COPD-HOSP"
 #'
-#' @section Metadata Control Number (mcn):
-#' The Metadata control number is provided by the EPHT and is used to identify
+#' # Metadata Control Number
+#' The Metadata control number (mcn) is provided by the EPHT and is used to identify
 #' the dataset and its content.  In order to submit data users will already
 #' have a set of these.
 #'
-#' @section Submission Check:
-#' If users set `check_first` = `TRUE` in [make_xml_document()] or run
+#' # Submission Check
+#' If users set `check_first` = `TRUE` in [make_xml_document()] or runs
 #' [check_submission] or any of the other `check_* functions` then the a suite
 #' of checks is run against the metadata, data structure and data content.
 #' Please note that users do not need to run the whole suite of checks, they can
@@ -90,7 +90,7 @@
 #'
 #' @param data Pre-wrangled Dataframe.
 #' @param content_group_id Code that identifies the content found in EPHT
-#'   documentation
+#'   documentation.
 #' @param mcn Metadata Control Number provided by EPHT.
 #' @param jurisdiction_code Two-letter state abbreviation for the submitter
 #'   state.
@@ -120,6 +120,7 @@
 #'     year = am
 #'   ) |>
 #'   dplyr::select(-c(gear, carb))
+#'
 #' content_group_id <- "AS-HOSP"
 #' mcn <- "1234-1234-1234-1234-1234"
 #' jurisdiction_code <- "two_letter_code"
@@ -127,6 +128,7 @@
 #' submitter_email <- "submitter@email.com"
 #' submitter_name <- "Submitter Name"
 #' submitter_title <- "Submitter Title"
+#'
 #' doc <- make_xml_document(
 #'   data,
 #'   content_group_id,
@@ -137,6 +139,7 @@
 #'   submitter_name,
 #'   submitter_title
 #' )
+#'
 #' doc
 make_xml_document <-
   function(data,

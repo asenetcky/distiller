@@ -20,7 +20,7 @@ make_xml_document(
 \item{data}{Pre-wrangled Dataframe.}
 
 \item{content_group_id}{Code that identifies the content found in EPHT
-documentation}
+documentation.}
 
 \item{mcn}{Metadata Control Number provided by EPHT.}
 
@@ -68,7 +68,6 @@ When satisfied with the data product users will need to print the XML
 document to a file and then submit to the CDC like they usually would.
 }
 \section{Data}{
-
 Users are expected to wrangle, aggregate and otherwise implement the logic
 expected by EPHT themselves. \code{distiller} will not handle that step, though it
 does provides some helpers: \code{\link[=collapse_race]{collapse_race()}}, \link{collapse_ethnicity}, and
@@ -102,7 +101,6 @@ additional columns:
 }
 
 \section{Content Group Identifier}{
-
 The Content Group Identifier is the ID expected to be used by EPHT. It is
 a combination of the the disease and facility type.  Details on which ID to
 use can be found in the how-to-guides provided by EPHT.
@@ -117,16 +115,14 @@ use can be found in the how-to-guides provided by EPHT.
 }
 }
 
-\section{Metadata Control Number (mcn)}{
-
-The Metadata control number is provided by the EPHT and is used to identify
+\section{Metadata Control Number}{
+The Metadata control number (mcn) is provided by the EPHT and is used to identify
 the dataset and its content.  In order to submit data users will already
 have a set of these.
 }
 
 \section{Submission Check}{
-
-If users set \code{check_first} = \code{TRUE} in \code{\link[=make_xml_document]{make_xml_document()}} or run
+If users set \code{check_first} = \code{TRUE} in \code{\link[=make_xml_document]{make_xml_document()}} or runs
 \link{check_submission} or any of the other \code{check_* functions} then the a suite
 of checks is run against the metadata, data structure and data content.
 Please note that users do not need to run the whole suite of checks, they can
@@ -162,6 +158,7 @@ data <-
     year = am
   ) |>
   dplyr::select(-c(gear, carb))
+
 content_group_id <- "AS-HOSP"
 mcn <- "1234-1234-1234-1234-1234"
 jurisdiction_code <- "two_letter_code"
@@ -169,6 +166,7 @@ state_fips_code <- "1234"
 submitter_email <- "submitter@email.com"
 submitter_name <- "Submitter Name"
 submitter_title <- "Submitter Title"
+
 doc <- make_xml_document(
   data,
   content_group_id,
@@ -179,5 +177,6 @@ doc <- make_xml_document(
   submitter_name,
   submitter_title
 )
+
 doc
 }
