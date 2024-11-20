@@ -7,14 +7,23 @@
 make_root_element(content_group_id)
 }
 \arguments{
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation.}
 }
 \value{
 XML node
 }
 \description{
-Make the root element: HospitalizationData or EmergencyDepartmentData
+Create the root element of the XML document using the provided content group
+identifier.
 }
 \examples{
 make_root_element("MI-HOSP")
 }
+\seealso{
+Other xml: 
+\code{\link{make_dataset_node}()},
+\code{\link{make_header_node}()},
+\code{\link{make_xml_document}()}
+}
+\concept{xml}

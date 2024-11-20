@@ -180,3 +180,10 @@ doc <- make_xml_document(
 
 doc
 }
+\seealso{
+Other xml: 
+\code{\link{make_dataset_node}()},
+\code{\link{make_header_node}()},
+\code{\link{make_root_element}()}
+}
+\concept{xml}

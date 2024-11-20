@@ -15,25 +15,29 @@ make_header_node(
 )
 }
 \arguments{
-\item{mcn}{Metadata Control Number provided by epht}
+\item{mcn}{Metadata Control Number provided by EPHT.}
 
-\item{jurisdiction_code}{Two-letter state abbreviation}
+\item{jurisdiction_code}{Two-letter state abbreviation for the submitter
+state.}
 
-\item{content_group_id}{Code that identifies the content}
+\item{content_group_id}{Code that identifies the content found in EPHT
+documentation.}
 
-\item{submitter_email}{Email of person submitting data to epht}
+\item{submitter_email}{Email of person submitting data to EPHT.}
 
-\item{submitter_name}{First and last name of person submitting data}
+\item{submitter_name}{First and last name of person submitting data to EPHT.}
 
-\item{submitter_title}{Title of person submitting data}
+\item{submitter_title}{Title of person submitting data to EPHT.}
 
-\item{state_fips_code}{FIPS code of the state}
+\item{state_fips_code}{FIPS code of the submitter state.}
 }
 \value{
 XML node
 }
 \description{
-Make Header node for XML Document
+Create the Header Node of the XML document using the provided submission
+metadata and tailor the XML format to match the supplied content group
+identifier.
 }
 \examples{
 make_header_node(
@@ -46,3 +50,10 @@ make_header_node(
   state_fips_code = "06"
 )
 }
+\seealso{
+Other xml: 
+\code{\link{make_dataset_node}()},
+\code{\link{make_root_element}()},
+\code{\link{make_xml_document}()}
+}
+\concept{xml}

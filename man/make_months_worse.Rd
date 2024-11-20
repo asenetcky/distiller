@@ -18,3 +18,10 @@ Convert integer month to string month with leading zero
 \examples{
 make_months_worse(1)
 }
+\seealso{
+Other helpers: 
+\code{\link{collapse_ethnicity}()},
+\code{\link{collapse_race}()},
+\code{\link{parse_health_outcome_id}()}
+}
+\concept{helpers}

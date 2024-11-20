@@ -7,16 +7,45 @@
 collapse_race(race, na_is_unknown = TRUE)
 }
 \arguments{
-\item{race}{Race string}
+\item{race}{Character string of the race value}
 
-\item{na_is_unknown}{Convert NAs to "U" or leave as-is}
+\item{na_is_unknown}{Convert NAs to "U" or leave as-is, default is \code{TRUE}.}
 }
 \value{
 Race string or NA_character_
 }
 \description{
-Collapse Race based on EPHT logic
+Collapse race down to the EPHT's allowable values: "W", "B", "O", "U"
 }
+\details{
+If there are any other values, they will be converted to "U". \code{NULL} or
+\code{NA} values can be converted to "U" or left as `NA_character
+}
+\section{Race Values}{
+Character strings are converted to lowercase and stripped of any non-word
+characters. This is to ensure that the values are standardized before
+comparison.
+
+Common values that get converted are:
+\itemize{
+\item white, caucasian -> "W"
+\item blackorafricanamerican, black, africanamerican -> "B"
+\item americanindianoralaskanative, americanindian, alaskanative -> "O"
+\item asian -> "O"
+\item nativehawaiianorotherpacificislander, nativehawaiian, otherpacificislander,
+pacificislander -> "O"
+\item other -> "O"
+\item unknown, unk, u -> "U"
+}
+}
+
 \examples{
 collapse_race("Asian")
 }
+\seealso{
+Other helpers: 
+\code{\link{collapse_ethnicity}()},
+\code{\link{make_months_worse}()},
+\code{\link{parse_health_outcome_id}()}
+}
+\concept{helpers}
