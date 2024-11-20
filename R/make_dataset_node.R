@@ -1,5 +1,10 @@
 #' Make dataset xml node
 #'
+#' Create the Dataset Node of the XML document using the provided data and
+#' content group identifier.  The data variables are converted to row-based
+#' XML child nodes and the elements ordered and named according to the content
+#' group identifer.
+#'
 #'
 #' @inheritParams make_xml_document
 #'

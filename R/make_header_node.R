@@ -1,5 +1,9 @@
 #' Make Header node for XML Document
 #'
+#' Create the Header Node of the XML document using the provided submission
+#' metadata and tailor the XML format to match the supplied content group
+#' identifier.
+#'
 #' @inheritParams make_xml_document
 #'
 #' @family xml

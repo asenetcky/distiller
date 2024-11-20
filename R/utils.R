@@ -1,3 +1,5 @@
+
+# grab the facility type from the content_group_id
 parse_content_group_id <- function(content_group_id) {
   # only allowable values so far
   type <-
@@ -23,9 +25,13 @@ parse_content_group_id <- function(content_group_id) {
 
 #' Return the health outcome id based on the content group id
 #'
-#' @param content_group_id Code that identifies the content
+#' The EPHT requires that each row node in the XML document have a health
+#' outcome identifier.
 #'
-#' @return Integer health outcome id
+#' @inheritParams make_xml_document
+#'
+#' @family helpers
+#' @return Integer health outcome identifier
 #' @export
 #'
 #' @examples
@@ -57,6 +63,7 @@ parse_health_outcome_id <- function(content_group_id) {
 #'
 #' @param month_integer Integer month
 #'
+#' @family helpers
 #' @return String month with leading zero
 #' @export
 #'

@@ -1,5 +1,8 @@
 #' Make the root element: HospitalizationData or EmergencyDepartmentData
 #'
+#' Create the root element of the XML document using the provided content group
+#' identifier.
+#'
 #' @inheritParams make_xml_document
 #'
 #' @family xml
