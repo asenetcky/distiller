@@ -70,7 +70,7 @@ check_data <- function(data, content_group_id) {
 #'
 #' @inheritSection make_xml_document Data
 #'
-#' @return list containing exit status code and success/failure message
+#' @inherit check_data return
 #' @export
 #'
 #' @examples
@@ -122,7 +122,7 @@ check_content_group_id <- function(content_group_id) {
 #' @inheritParams make_xml_document
 #' @family checks
 #'
-#' @return list containing exit status code and success/failure message
+#' @inherit check_data return
 #' @export
 #'
 #' @examples
@@ -169,7 +169,7 @@ check_mcn <- function(mcn) {
 #' @inheritParams make_xml_document
 #' @family checks
 #'
-#' @return list containing exit status code and success/failure message
+#' @inherit check_data return
 #' @export
 #'
 #' @examples
@@ -214,7 +214,7 @@ check_jurisdiction_code <- function(jurisdiction_code) {
 #' @inheritParams make_xml_document
 #' @family checks
 #'
-#' @return list containing exit status code and success/failure message
+#' @inherit check_data return
 #' @export
 #'
 #' @examples
@@ -263,7 +263,7 @@ check_state_fips_code <- function(state_fips_code) {
 #' @inheritParams make_xml_document
 #' @family checks
 #'
-#' @return list containing exit status code and success/failure message
+#' @inherit check_data return
 #' @export
 #'
 #' @examples
@@ -308,7 +308,7 @@ check_submitter_email <- function(submitter_email) {
 #' @inheritParams make_xml_document
 #' @family checks
 #'
-#' @return list containing exit status code and success/failure message
+#' @inherit check_data return
 #' @export
 #'
 #' @examples
@@ -350,7 +350,7 @@ check_submitter_name <- function(submitter_name) {
 #' @inheritParams make_xml_document
 #' @family checks
 #'
-#' @return list containing exit status code and success/failure message
+#' @inherit check_data return
 #' @export
 #'
 #' @examples
