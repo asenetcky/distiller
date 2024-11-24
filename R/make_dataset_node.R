@@ -49,7 +49,6 @@ make_dataset_node <- function(data, content_group_id) {
 
   if (additional_vars) {
     type <- paste0(type, "_add_vars")
-
   }
 
   checkmate::assert_data_frame(data)
@@ -157,7 +156,7 @@ make_dataset_node <- function(data, content_group_id) {
     }
   }
 
-  #TODO see if you cna use common names like year, month etc..
+  # TODO see if you cna use common names like year, month etc..
   if (type == "pws") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
@@ -241,7 +240,7 @@ pick_var_set <- function(content_group_id) {
     )
 
   # drinkingwater-related
-  #these are the "for-now" names until I find good common ones that can be
+  # these are the "for-now" names until I find good common ones that can be
   # reused across the different datasets types
   ## water quality
   wql <-
@@ -314,8 +313,8 @@ pick_var_set <- function(content_group_id) {
 
 
 
-#xml names for
-#pws
+# xml names for
+# pws
 # "PWSIDNumber",
 # "Year",
 # "AnalyteCode",
