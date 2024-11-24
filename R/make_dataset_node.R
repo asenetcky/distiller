@@ -157,6 +157,58 @@ make_dataset_node <- function(data, content_group_id) {
     }
   }
 
+  #TODO see if you cna use common names like year, month etc..
+  if (type == "pws") {
+    # Create the data node
+    dataset_node <- xml2::read_xml("<Dataset></Dataset>")
+
+    # Add the data
+    for (i in seq_len(nrow(data))) {
+      row_node <- xml2::read_xml("<Row></Row>")
+
+      xml2::xml_add_child(row_node, "RowIdentifier", i)
+      xml2::xml_add_child(row_node, "PWSIDNumber", data$pwsid_number[i])
+      xml2::xml_add_child(row_node, "Year", data$year[i])
+      xml2::xml_add_child(row_node, "AnalyteCode", data$analyte_code[i])
+      xml2::xml_add_child(row_node, "DateSampled", data$date_sampled[i])
+      xml2::xml_add_child(row_node, "AggregationType", data$agg_type[i])
+      xml2::xml_add_child(row_node, "NumSamplingLocations", data$num_sampling_locations[i])
+      xml2::xml_add_child(row_node, "SummaryTimePeriod", data$summary_time_period[i])
+      xml2::xml_add_child(row_node, "NumSamples", data$num_samples[i])
+      xml2::xml_add_child(row_node, "NumNonDetects", data$num_non_detects[i])
+      xml2::xml_add_child(row_node, "ConcentrationUnits", data$concentration_units[i])
+      xml2::xml_add_child(row_node, "Concentration", data$concentration[i])
+
+      xml2::xml_add_child(dataset_node, row_node)
+    }
+  }
+
+  if (type == "wql") {
+    # Create the data node
+    dataset_node <- xml2::read_xml("<Dataset></Dataset>")
+
+    # Add the data
+    for (i in seq_len(nrow(data))) {
+      row_node <- xml2::read_xml("<Row></Row>")
+
+      xml2::xml_add_child(row_node, "RowIdentifier", i)
+      xml2::xml_add_child(row_node, "PWSIDNumber", data$pwsid_number[i])
+      xml2::xml_add_child(row_node, "YearAssociatedTo", data$year_associated_to[i])
+      xml2::xml_add_child(row_node, "YearPulled", data$year_pulled[i])
+      xml2::xml_add_child(row_node, "PWSName", data$pws_name[i])
+      xml2::xml_add_child(row_node, "PrincipalCountyServedFIPS", data$principal_county_served_fips[i])
+      xml2::xml_add_child(row_node, "PrincipalCityFeatureID", data$principal_city_feature_id[i])
+      xml2::xml_add_child(row_node, "TotalConnections", data$total_connections[i])
+      xml2::xml_add_child(row_node, "SystemPopulation", data$system_population[i])
+      xml2::xml_add_child(row_node, "PrimarySourceCode", data$primary_source_code[i])
+      xml2::xml_add_child(row_node, "Latitude", data$latitude[i])
+      xml2::xml_add_child(row_node, "Longitude", data$longitude[i])
+      xml2::xml_add_child(row_node, "LocationDerivationCode", data$location_derivation_code[i])
+
+      xml2::xml_add_child(dataset_node, row_node)
+    }
+  }
+
   dataset_node
 }
 
