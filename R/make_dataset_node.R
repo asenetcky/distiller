@@ -45,27 +45,11 @@ make_dataset_node <- function(data, content_group_id) {
     )
 
   expected_col_names <-
-    c(
-      "month",
-      "agegroup",
-      "county",
-      "ethnicity",
-      "health_outcome_id",
-      "monthly_count",
-      "race",
-      "sex",
-      "year"
-    )
+    pick_var_set(content_group_id)
 
   if (additional_vars) {
     type <- paste0(type, "_add_vars")
 
-    expected_col_names <- c(
-      expected_col_names,
-      "fire_count",
-      "nonfire_count",
-      "unknown_count"
-    )
   }
 
   checkmate::assert_data_frame(data)
@@ -175,3 +159,133 @@ make_dataset_node <- function(data, content_group_id) {
 
   dataset_node
 }
+
+# given a content group id, return the expected variables
+pick_var_set <- function(content_group_id) {
+  # expected user-provided variable sets
+
+  # hosp/ed
+  ## for most hosp/ed
+  standard_hosp_ed <-
+    c(
+      "month",
+      "agegroup",
+      "county",
+      "ethnicity",
+      "health_outcome_id",
+      "monthly_count",
+      "race",
+      "sex",
+      "year"
+    )
+
+  ## for the CO-related
+  expanded_hosp_ed <-
+    c(
+      standard_hosp_ed,
+      "fire_count",
+      "nonfire_count",
+      "unknown_count"
+    )
+
+  # drinkingwater-related
+  #these are the "for-now" names until I find good common ones that can be
+  # reused across the different datasets types
+  ## water quality
+  wql <-
+    c(
+      "pwsid_number",
+      "year",
+      "analyte_code",
+      "date_sampled",
+      "agg_type",
+      "num_sampling_locations",
+      "summary_time_period",
+      "num_samples",
+      "num_non_detects",
+      "concentration_units",
+      "concentration"
+    )
+
+  ## PWS? (find the definition of PWS)
+  pws <-
+    c(
+      "pwsid_number",
+      "year_associated_to",
+      "year_pulled",
+      "pws_name",
+      "principal_county_served_fips",
+      "principal_city_feature_id",
+      "total_connections",
+      "system_population",
+      "primary_source_code",
+      "latitude",
+      "longitude",
+      "location_derivation_code"
+    )
+
+
+  # return the right set of variables
+  var_set <- NULL
+
+  std_he_cgi <-
+    c(
+      "MI-HOSP",
+      "COPD-HOSP",
+      "HEAT-HOSP",
+      "AS-HOSP",
+      "AS-ED",
+      "COPD-ED",
+      "HEAT-ED"
+    )
+
+  if (content_group_id %in% c("CO-HOSP", "CO-ED")) {
+    var_set <- expanded_hosp_ed
+  }
+  if (content_group_id %in% std_he_cgi) {
+    var_set <- standard_hosp_ed
+  }
+  if (content_group_id == "WQL") {
+    var_set <- wql
+  }
+  if (content_group_id == "PWS") {
+    var_set <- pws
+  }
+
+  if (is.null(var_set)) {
+    stop("Unknown content_group_id")
+  } else {
+    var_set
+  }
+}
+
+
+
+
+#xml names for
+#pws
+# "PWSIDNumber",
+# "Year",
+# "AnalyteCode",
+# "DateSampled",
+# "AggregationType",
+# "NumSamplingLocations",
+# "SummaryTimePeriod",
+# "NumSamples",
+# "NumNonDetects",
+# "ConcentrationUnits",
+# "Concentration"
+
+# wql
+# "PWSIDNumber",
+# "YearAssociatedTo",
+# "YearPulled",
+# "PWSName",
+# "PrincipalCountyServedFIPS",
+# "PrincipalCityFeatureID",
+# "TotalConnections",
+# "SystemPopulation",
+# "PrimarySourceCode",
+# "Latitude",
+# "Longitude",
+# "LocationDerivationCode"
