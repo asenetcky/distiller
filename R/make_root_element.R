@@ -34,6 +34,25 @@ make_root_element <- function(content_group_id) {
           "</EmergencyDepartmentData>"
         )
       )
+  } else if (type == "pws") {
+    data_node <-
+      xml2::read_xml(
+        paste0(
+          "<PWSInventory ",
+          'xmlns="http://www.ephtn.org/NCDM/ENV/PWSInventory">',
+          "</PWSInventory>"
+        )
+      )
+  } else if (type == "wql") {
+    data_node <-
+      xml2::read_xml(
+        paste0(
+          '<WaterQualityLevels xsi:schemaLocation="http://www.ephtn.org/NCDM/ENV/WaterQualityLevels" ',
+          'xmlns="http://www.ephtn.org/NCDM/ENV/WaterQualityLevels" ',
+          'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">',
+          "</WaterQualityLevels>"
+        )
+      )
   } else {
     stop("Unknown content_group_id")
   }
