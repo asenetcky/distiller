@@ -1,4 +1,4 @@
-# grab the facility type from the content_group_id
+# grab the facility/data type from the content_group_id
 parse_content_group_id <- function(content_group_id) {
   # only allowable values so far
   type <-
@@ -12,6 +12,8 @@ parse_content_group_id <- function(content_group_id) {
       content_group_id == "CO-ED" ~ "ed",
       content_group_id == "COPD-ED" ~ "ed",
       content_group_id == "HEAT-ED" ~ "ed",
+      content_group_id == "PWSINVENTORY" ~ "pws",
+      content_group_id == "WQL" ~ "wql",
       .default = "Unknown"
     )
 
