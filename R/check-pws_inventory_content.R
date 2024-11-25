@@ -63,7 +63,7 @@ placeholder_example <- function(data) {
 }
 
 # given data check the class, format and length of data$pwsid_number
-check_pwisid_number_var <- function(data) {
+check_pwsid_number_var <- function(data) {
   pwsid_number <- NULL
 
   has_length <-
@@ -82,7 +82,7 @@ check_pwisid_number_var <- function(data) {
   if (has_character) {
     has_length <-
       all(
-        stringr::str_length(data$pwsidnumber) == 9
+        stringr::str_length(data$pwsid_number) == 9
       ) |>
       purrr::set_names("length")
 

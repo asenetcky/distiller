@@ -1,6 +1,4 @@
 # check state_fips_code
-# The following looks misspelled in the doco - better check the xml to see
-# that it's actually the same as the pws inventory
 # check pwsid_number
 # check year
 # check analyte code
