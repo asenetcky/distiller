@@ -181,3 +181,36 @@ check_principal_county_served_fips_var <- function(data) {
 
   check_county_var(data$principal_county_served_fips)
 }
+
+check_principal_city_feature_id_var <- function(data) {
+  principal_city_feature_id <- NULL
+
+  # I don't know if there are any leading zeros
+  # doesn't look like it from doco
+  has_numeric <-
+    checkmate::check_numeric(
+      data$principal_city_feature_id,
+      upper = 9999999999,
+      all.missing = FALSE,
+      any.missing = FALSE,
+      null.ok = FALSE
+      ) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+  # anything negative can only bee -888 or -999
+  has_allowed_values <-
+    all(
+      data$principal_city_feature_id >= 0 |
+      data$principal_city_feature_id == -888 |
+      data$principal_city_feature_id == -999
+    ) |>
+    purrr::set_names("allowed_values")
+
+  create_exit_status(
+    "principal_city_feature_id",
+    warn_variables = has_numeric,
+    danger_variables = has_allowed_values
+  )
+
+}
