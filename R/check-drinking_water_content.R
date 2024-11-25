@@ -120,6 +120,10 @@ check_pws_name_var <- function(data) {
     FALSE |>
     purrr::set_names("length")
 
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
+
   has_character <-
     checkmate::check_character(
       data$pws_name,
@@ -136,14 +140,38 @@ check_pws_name_var <- function(data) {
         stringr::str_length(data$pws_name) <= 40
       ) |>
       purrr::set_names("length")
-  }
 
-  # unknowns should be "U"
-  # Not Submitted should be "NS"
+  #unknowns should be "U"
+   has_proper_unknowns <-
+      stringr::string_detect(
+        stringr::str_to_lower(data$pws_name),
+        "unknown",
+        negate = TRUE
+      ) |>
+     all() |>
+     purrr::set_names("has_proper_unknowns")
+
+  #Not Submitted should be "NS"
+    has_proper_not_submitted <-
+      stringr::string_detect(
+        stringr::str_to_lower(data$pws_name),
+        "not submitted",
+        negate = TRUE
+      ) |>
+      all() |>
+      purrr::set_names("has_proper_not_submitted")
+
+        has_allowed_values <-
+          all(
+            has_proper_unknowns,
+            has_proper_not_submitted
+          ) |>
+          purrr::set_names("allowed_values")
+  }
 
   create_exit_status(
     "pws_name",
     warn_variables = has_character,
-    danger_variables = has_length
+    danger_variables = c(has_length, has_allowed_values)
   )
 }
