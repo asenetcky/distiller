@@ -236,15 +236,15 @@ check_primary_source_code_var <- function(data) {
     purrr::set_names("class")
 
 
-    if (has_character) {
-      has_allowed_values <-
-        checkmate::check_subset(
-          data$primary_source_code,
-          c("GU", "GUP", "GW", "GWP", "SW", "SWP", "U", "NS")
-        ) |>
-        is.logical() |>
-        purrr::set_names("allowed_values")
-    }
+  if (has_character) {
+    has_allowed_values <-
+      checkmate::check_subset(
+        data$primary_source_code,
+        c("GU", "GUP", "GW", "GWP", "SW", "SWP", "U", "NS")
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
 
   create_exit_status(
     "primary_source_code",
