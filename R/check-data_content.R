@@ -322,7 +322,7 @@ check_year_var <- function(data) {
 }
 
 
-check_count_var <- function(data, var_name) {
+check_count_var <- function(data, var_name, low_lim = 0) {
   has_allowed_values <-
     FALSE |>
     purrr::set_names("allowed_values")
@@ -339,7 +339,7 @@ check_count_var <- function(data, var_name) {
     has_allowed_values <-
       checkmate::check_numeric(
         count_var,
-        lower = 0,
+        lower = low_lim,
         any.missing = FALSE,
         all.missing = FALSE
       ) |>
