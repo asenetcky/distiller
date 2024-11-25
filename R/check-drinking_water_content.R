@@ -175,3 +175,9 @@ check_pws_name_var <- function(data) {
     danger_variables = c(has_length, has_allowed_values)
   )
 }
+
+check_principal_county_served_fips_var <- function(data) {
+  principal_county_served_fips <- NULL
+
+  check_county_var(data$principal_county_served_fips)
+}
