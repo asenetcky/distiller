@@ -141,17 +141,17 @@ check_pws_name_var <- function(data) {
       ) |>
       purrr::set_names("length")
 
-  #unknowns should be "U"
-   has_proper_unknowns <-
+    # unknowns should be "U"
+    has_proper_unknowns <-
       stringr::string_detect(
         stringr::str_to_lower(data$pws_name),
         "unknown",
         negate = TRUE
       ) |>
-     all() |>
-     purrr::set_names("has_proper_unknowns")
+      all() |>
+      purrr::set_names("has_proper_unknowns")
 
-  #Not Submitted should be "NS"
+    # Not Submitted should be "NS"
     has_proper_not_submitted <-
       stringr::string_detect(
         stringr::str_to_lower(data$pws_name),
@@ -161,12 +161,12 @@ check_pws_name_var <- function(data) {
       all() |>
       purrr::set_names("has_proper_not_submitted")
 
-        has_allowed_values <-
-          all(
-            has_proper_unknowns,
-            has_proper_not_submitted
-          ) |>
-          purrr::set_names("allowed_values")
+    has_allowed_values <-
+      all(
+        has_proper_unknowns,
+        has_proper_not_submitted
+      ) |>
+      purrr::set_names("allowed_values")
   }
 
   create_exit_status(
