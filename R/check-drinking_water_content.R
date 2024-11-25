@@ -100,19 +100,19 @@ check_pwisid_number_var <- function(data) {
   )
 }
 
-#given data, check the class and values ofdata$year_associated_to
+# given data, check the class and values ofdata$year_associated_to
 check_year_associated_to_var <- function(data) {
   year_associated_to <- NULL
   check_year_var(data$year_associated_to)
 }
 
-#given data, check the class and values of data$year_pulled
+# given data, check the class and values of data$year_pulled
 check_year_pulled_var <- function(data) {
   year_pulled <- NULL
   check_year_var(data$year_pulled)
 }
 
-#given data, check the class and length of data$pws_name
+# given data, check the class and length of data$pws_name
 check_pws_name_var <- function(data) {
   pws_name <- NULL
 
@@ -138,8 +138,8 @@ check_pws_name_var <- function(data) {
       purrr::set_names("length")
   }
 
-  #unknowns should be "U"
-  #Not Submitted should be "NS"
+  # unknowns should be "U"
+  # Not Submitted should be "NS"
 
   create_exit_status(
     "pws_name",
@@ -147,4 +147,3 @@ check_pws_name_var <- function(data) {
     danger_variables = has_length
   )
 }
-
