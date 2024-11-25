@@ -194,7 +194,7 @@ check_principal_city_feature_id_var <- function(data) {
       all.missing = FALSE,
       any.missing = FALSE,
       null.ok = FALSE
-      ) |>
+    ) |>
     is.logical() |>
     purrr::set_names("class")
 
@@ -202,8 +202,8 @@ check_principal_city_feature_id_var <- function(data) {
   has_allowed_values <-
     all(
       data$principal_city_feature_id >= 0 |
-      data$principal_city_feature_id == -888 |
-      data$principal_city_feature_id == -999
+        data$principal_city_feature_id == -888 |
+        data$principal_city_feature_id == -999
     ) |>
     purrr::set_names("allowed_values")
 
@@ -212,5 +212,4 @@ check_principal_city_feature_id_var <- function(data) {
     warn_variables = has_numeric,
     danger_variables = has_allowed_values
   )
-
 }
