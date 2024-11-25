@@ -308,9 +308,7 @@ check_year_var <- function(data) {
     has_allowed_values <-
       checkmate::check_numeric(
         data$year,
-        # EPHT founded in 2002
-        lower = 2001,
-        upper = 9999
+        lower = 1999 #seems the to the earliest possible data EPHT would accept
       ) |>
       is.logical() |>
       purrr::set_names("allowed_values")
