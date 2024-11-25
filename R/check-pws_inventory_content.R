@@ -256,21 +256,13 @@ check_primary_source_code_var <- function(data) {
 check_latitude_var <- function(data) {
   latitude <- NULL
 
-  #-99.99 is "Missing"
-  #-88.88 is "Not Submitted
-
-  data <-
-    data |>
-    dplyr::filter(
-      latitude != -99.99,
-      latitude != -88.88
-    )
+  has_format <-
+    FALSE |>
+    purrr::set_names("format")
 
   has_numeric <-
     checkmate::check_numeric(
       data$latitude,
-      lower = 0.0000000,
-      upper = 90.000000,
       all.missing = FALSE,
       any.missing = FALSE,
       null.ok = FALSE
@@ -278,14 +270,111 @@ check_latitude_var <- function(data) {
     is.logical() |>
     purrr::set_names("class")
 
+  #-99.99 is "Missing"
+  #-88.88 is "Not Submitted"
+
+  if (has_numeric) {
+    data <-
+      data |>
+      dplyr::filter(
+        latitude != -99.99,
+        latitude != -88.88
+      )
+
+    has_format <-
+      checkmate::check_numeric(
+        data$latitude,
+        lower = 0.0000000,
+        upper = 90.000000,
+        all.missing = FALSE,
+        any.missing = FALSE,
+        null.ok = FALSE
+      ) |>
+      is.logical() |>
+      purrr::set_names("format")
+  }
+
   create_exit_status(
     "latitude",
-    danger_variables = has_numeric
+    warn_variables = has_numeric,
+    danger_variables = has_format
+  )
+}
+
+check_longitude_var <- function(data) {
+  longitude <- NULL
+
+  has_format <-
+    FALSE |>
+    purrr::set_names("format")
+
+  #-999 is "Missing"
+  #-888 is "Not Submitted"
+
+  has_numeric <-
+    checkmate::check_numeric(
+      data$longitude,
+      all.missing = FALSE,
+      any.missing = FALSE,
+      null.ok = FALSE
+    ) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+  if (has_numeric) {
+    data <-
+      data |>
+      dplyr::filter(
+        longitude != -999.99,
+        longitude != -888.88
+      )
+
+    has_format <-
+      checkmate::check_numeric(
+        data$longitude,
+        lower = -180.000000,
+        upper = 180.000000,
+        all.missing = FALSE,
+        any.missing = FALSE,
+        null.ok = FALSE
+      ) |>
+      is.logical() |>
+      purrr::set_names("format")
+  }
+
+  create_exit_status(
+    "longitude",
+    warn_variables = has_numeric,
+    danger_variables = has_format
   )
 }
 
 
+check_location_derivation_code_var <- function(data) {
+  location_derivation_code <- NULL
 
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
 
-# check longitude
-# check location_derivation_code
+  has_character <-
+    checkmate::check_character(data$location_derivation_code) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+  if (has_character) {
+    has_allowed_values <-
+      checkmate::check_subset(
+        data$location_derivation_code,
+        c("SA", "MFL", "PCS", "GSH", "PNS", "O", "-999", "-888"),
+      ) |>
+      is.logical() |>
+      purrr::set_names("allowed_values")
+  }
+
+  create_exit_status(
+    "location_derivation_code",
+    warn_variables = has_character,
+    danger_variables = has_allowed_values
+  )
+}
