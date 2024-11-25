@@ -215,9 +215,9 @@ check_principal_city_feature_id_var <- function(data) {
 }
 
 
-#check total_connections
-#check system_population
-#check primary_source_code
-#check latitude
-#check longitude
-#check location_derivation_code
+# check total_connections
+# check system_population
+# check primary_source_code
+# check latitude
+# check longitude
+# check location_derivation_code
