@@ -157,7 +157,7 @@ make_dataset_node <- function(data, content_group_id) {
   }
 
   # TODO see if you cna use common names like year, month etc..
-  if (type == "pws") {
+  if (type == "wql") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 
@@ -182,7 +182,7 @@ make_dataset_node <- function(data, content_group_id) {
     }
   }
 
-  if (type == "wql") {
+  if (type == "pws") {
     # Create the data node
     dataset_node <- xml2::read_xml("<Dataset></Dataset>")
 
@@ -200,8 +200,22 @@ make_dataset_node <- function(data, content_group_id) {
       xml2::xml_add_child(row_node, "TotalConnections", data$total_connections[i])
       xml2::xml_add_child(row_node, "SystemPopulation", data$system_population[i])
       xml2::xml_add_child(row_node, "PrimarySourceCode", data$primary_source_code[i])
-      xml2::xml_add_child(row_node, "Latitude", data$latitude[i])
-      xml2::xml_add_child(row_node, "Longitude", data$longitude[i])
+
+      # this shows up in data, I don't know if it's required or not
+      # I also don't know if this shows up in everyone's data or if they
+      # have different inner nodes...
+
+      # useless node within another node
+      latitude_node <- xml2::read_xml("<Latitude></Latitude>")
+      latitude_node <- xml2::xml_add_child(latitude_node, "LatitudeRange", data$latitude[i])
+
+      # useless node within another node
+      longitude_node <- xml2::read_xml("<Longitude></Longitude>")
+      longitude_node <- xml2::xml_add_child(longitude_node, "LongitudeRange", data$longitude[i])
+
+      xml2::xml_add_child(row_node, latitude_node)
+      xml2::xml_add_child(row_node, longitude_node)
+
       xml2::xml_add_child(row_node, "LocationDerivationCode", data$location_derivation_code[i])
 
       xml2::xml_add_child(dataset_node, row_node)
