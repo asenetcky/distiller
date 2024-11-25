@@ -143,7 +143,7 @@ check_pws_name_var <- function(data) {
 
     # unknowns should be "U"
     has_proper_unknowns <-
-      stringr::string_detect(
+      stringr::str_detect(
         stringr::str_to_lower(data$pws_name),
         "unknown",
         negate = TRUE
@@ -153,7 +153,7 @@ check_pws_name_var <- function(data) {
 
     # Not Submitted should be "NS"
     has_proper_not_submitted <-
-      stringr::string_detect(
+      stringr::str_detect(
         stringr::str_to_lower(data$pws_name),
         "not submitted",
         negate = TRUE
@@ -215,8 +215,43 @@ check_principal_city_feature_id_var <- function(data) {
 }
 
 
-# check total_connections
-# check system_population
+check_total_connections_var <- function(data) {
+  check_count_var(data, "total_connections", low_lim = 1)
+}
+
+check_system_population_var <- function(data) {
+  check_count_var(data, "system_population", low_lim = 10)
+}
+
+check_primary_source_code_var <- function(data) {
+  primary_source_code <- NULL
+
+  has_allowed_values <-
+    FALSE |>
+    purrr::set_names("allowed_values")
+
+  has_character <-
+    checkmate::check_character(data$primary_source_code) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+
+    if (has_character) {
+      has_allowed_values <-
+        checkmate::check_subset(
+          data$primary_source_code,
+          c("GU", "GUP", "GW", "GWP", "SW", "SWP", "U", "NS")
+        ) |>
+        is.logical() |>
+        purrr::set_names("allowed_values")
+    }
+
+  create_exit_status(
+    "primary_source_code",
+    warn_variables = has_character,
+    danger_variables = has_allowed_values
+  )
+}
 # check primary_source_code
 # check latitude
 # check longitude
