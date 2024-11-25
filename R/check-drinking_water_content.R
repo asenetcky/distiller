@@ -62,7 +62,8 @@ placeholder_example <- function(data) {
   )
 }
 
-check_pwisid_number <- function(data) {
+# given data check the class, format and length of data$pwsid_number
+check_pwisid_number_var <- function(data) {
   pwsid_number <- NULL
 
   has_length <-
@@ -98,3 +99,52 @@ check_pwisid_number <- function(data) {
     danger_variables = c(has_length, has_format)
   )
 }
+
+#given data, check the class and values ofdata$year_associated_to
+check_year_associated_to_var <- function(data) {
+  year_associated_to <- NULL
+  check_year_var(data$year_associated_to)
+}
+
+#given data, check the class and values of data$year_pulled
+check_year_pulled_var <- function(data) {
+  year_pulled <- NULL
+  check_year_var(data$year_pulled)
+}
+
+#given data, check the class and length of data$pws_name
+check_pws_name_var <- function(data) {
+  pws_name <- NULL
+
+  has_length <-
+    FALSE |>
+    purrr::set_names("length")
+
+  has_character <-
+    checkmate::check_character(
+      data$pws_name,
+      any.missing = FALSE,
+      all.missing = FALSE,
+      null.ok = FALSE
+    ) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+  if (has_character) {
+    has_length <-
+      all(
+        stringr::str_length(data$pws_name) <= 40
+      ) |>
+      purrr::set_names("length")
+  }
+
+  #unknowns should be "U"
+  #Not Submitted should be "NS"
+
+  create_exit_status(
+    "pws_name",
+    warn_variables = has_character,
+    danger_variables = has_length
+  )
+}
+
