@@ -252,7 +252,40 @@ check_primary_source_code_var <- function(data) {
     danger_variables = has_allowed_values
   )
 }
-# check primary_source_code
-# check latitude
+
+check_latitude_var <- function(data) {
+  latitude <- NULL
+
+  #-99.99 is "Missing"
+  #-88.88 is "Not Submitted
+
+  data <-
+    data |>
+    dplyr::filter(
+      latitude != -99.99,
+      latitude != -88.88
+    )
+
+  has_numeric <-
+    checkmate::check_numeric(
+      data$latitude,
+      lower = 0.0000000,
+      upper = 90.000000,
+      all.missing = FALSE,
+      any.missing = FALSE,
+      null.ok = FALSE
+    ) |>
+    is.logical() |>
+    purrr::set_names("class")
+
+  create_exit_status(
+    "latitude",
+    danger_variables = has_numeric
+  )
+}
+
+
+
+
 # check longitude
 # check location_derivation_code
