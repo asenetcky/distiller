@@ -55,7 +55,7 @@ make_dataset_node <- function(data, content_group_id) {
   checkmate::assert_set_equal(names(data), expected_col_names, ordered = FALSE)
   checkmate::assert_choice(
     type,
-    c("hosp", "ed", "hosp_add_vars", "ed_add_vars")
+    c("hosp", "ed", "hosp_add_vars", "ed_add_vars", "wql", "pws")
   )
 
   if (type == "hosp") {
