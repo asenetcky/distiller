@@ -12,8 +12,8 @@ parse_content_group_id <- function(content_group_id) {
       content_group_id == "CO-ED" ~ "ed",
       content_group_id == "COPD-ED" ~ "ed",
       content_group_id == "HEAT-ED" ~ "ed",
-      content_group_id == "PWSINVENTORY" ~ "pws",
-      content_group_id == "WQL" ~ "wql",
+      content_group_id %in% c("PWSINVENTORY", "pwsinventory", "PWS", "pws") ~ "pws",
+      content_group_id %in% c("WQL", "wql") ~ "wql",
       .default = "Unknown"
     )
 
