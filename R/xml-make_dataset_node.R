@@ -310,10 +310,10 @@ pick_var_set <- function(content_group_id) {
   if (content_group_id %in% std_he_cgi) {
     var_set <- standard_hosp_ed
   }
-  if (content_group_id == "WQL") {
+  if (stringr::str_to_lower(content_group_id) == "wql") {
     var_set <- wql
   }
-  if (content_group_id == "PWS") {
+  if (stringr::str_to_lower(content_group_id) %in% c("pws", "pwsinventory")) {
     var_set <- pws
   }
 
