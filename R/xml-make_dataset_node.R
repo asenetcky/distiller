@@ -323,34 +323,3 @@ pick_var_set <- function(content_group_id) {
     var_set
   }
 }
-
-
-
-
-# xml names for
-# pws
-# "PWSIDNumber",
-# "Year",
-# "AnalyteCode",
-# "DateSampled",
-# "AggregationType",
-# "NumSamplingLocations",
-# "SummaryTimePeriod",
-# "NumSamples",
-# "NumNonDetects",
-# "ConcentrationUnits",
-# "Concentration"
-
-# wql
-# "PWSIDNumber",
-# "YearAssociatedTo",
-# "YearPulled",
-# "PWSName",
-# "PrincipalCountyServedFIPS",
-# "PrincipalCityFeatureID",
-# "TotalConnections",
-# "SystemPopulation",
-# "PrimarySourceCode",
-# "Latitude",
-# "Longitude",
-# "LocationDerivationCode"
