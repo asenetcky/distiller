@@ -272,7 +272,7 @@ pick_var_set <- function(content_group_id) {
       "concentration"
     )
 
-  ## PWS? (find the definition of PWS)
+  ## PWS
   pws <-
     c(
       "pwsid_number",
