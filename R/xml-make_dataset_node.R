@@ -207,11 +207,11 @@ make_dataset_node <- function(data, content_group_id) {
 
       # useless node within another node
       latitude_node <- xml2::read_xml("<Latitude></Latitude>")
-      latitude_node <- xml2::xml_add_child(latitude_node, "LatitudeRange", data$latitude[i])
+      xml2::xml_add_child(latitude_node, "LatitudeRange", data$latitude[i])
 
       # useless node within another node
       longitude_node <- xml2::read_xml("<Longitude></Longitude>")
-      longitude_node <- xml2::xml_add_child(longitude_node, "LongitudeRange", data$longitude[i])
+      xml2::xml_add_child(longitude_node, "LongitudeRange", data$longitude[i])
 
       xml2::xml_add_child(row_node, latitude_node)
       xml2::xml_add_child(row_node, longitude_node)

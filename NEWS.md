@@ -1,4 +1,10 @@
-# distiller 0.4.1
+# distiller 0.4.2
+
+## Features
+
+- Add XML creationg for EPHT Drinking water
+  
+  - PWS and WQL content group ids added for xml creation logic
 
 # distiller 0.4.0
 
