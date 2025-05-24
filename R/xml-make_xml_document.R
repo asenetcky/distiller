@@ -20,8 +20,8 @@
 #' Users have the option to check their submission at time of XML creation and
 #' get instant feedback on the possible validity of their submission. Users can
 #' further refine the returned xml document with their choice of package such as
-#' [xml2](https://cran.r-project.org/web/packages/xml2/index.html),
-#' [XML](https://cran.r-project.org/web/packages/XML/index.html) and friends.
+#' [xml2](https://CRAN.R-project.org/package=xml2),
+#' [XML](https://CRAN.R-project.org/package=XML) and friends.
 #' When satisfied with the data product users will need to print the XML
 #' document to a file and then submit to the CDC like they usually would.
 #'

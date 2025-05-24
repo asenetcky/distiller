@@ -131,7 +131,7 @@ Here is a basic example of how to use it:
 ```{r example}
 library(distiller)
 
-# Take you already-wrangled data
+# Take your already-wrangled data
 # note the specific variable names
 data <-
   mtcars |>

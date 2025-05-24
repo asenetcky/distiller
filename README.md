@@ -127,7 +127,7 @@ Here is a basic example of how to use it:
 ``` r
 library(distiller)
 
-# Take you already-wrangled data
+# Take your already-wrangled data
 # note the specific variable names
 data <-
   mtcars |>
@@ -193,9 +193,6 @@ check_submission(
 #> ✖ Danger: race does not have allowable value/s
 #> Troublemakers: allowed_values
 #> ✔ Success: monthly_count
-```
-
-``` r
 # This can also be checked with `check_first = TRUE` in `make_xml_document()`
 
 

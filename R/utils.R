@@ -1,4 +1,4 @@
-# grab the facility type from the content_group_id
+# grab the facility/data type from the content_group_id
 parse_content_group_id <- function(content_group_id) {
   # only allowable values so far
   type <-
@@ -12,11 +12,13 @@ parse_content_group_id <- function(content_group_id) {
       content_group_id == "CO-ED" ~ "ed",
       content_group_id == "COPD-ED" ~ "ed",
       content_group_id == "HEAT-ED" ~ "ed",
+      stringr::str_to_lower(content_group_id) %in% c("pwsinventory", "pws") ~ "pws",
+      stringr::str_to_lower(content_group_id) == "wql" ~ "wql",
       .default = "Unknown"
     )
 
   if (type == "Unknown") {
-    stop("Unknown content_group_id")
+    rlang::abort("Unknown content_group_id")
   } else {
     type
   }
@@ -52,7 +54,7 @@ parse_health_outcome_id <- function(content_group_id) {
     )
 
   if (is.na(health_outcome_id)) {
-    stop(paste("Unknown content_group_id: ", content_group_id))
+    rlang::abort(paste("Unknown content_group_id: ", content_group_id))
   } else {
     health_outcome_id
   }
